@@ -50,7 +50,8 @@ class MemberMod extends CI_Model {
                     'url_pic' => $v->url_pic,
                     'url'     => $v->url,
                     'active'  => $v->active,
-                    'verification' => $v->verification
+                    'verification' => $v->verification,
+                    'id_club' => $v->id_club
                 );
            $this->session->member   = $sess;
 
@@ -182,5 +183,16 @@ class MemberMod extends CI_Model {
 			$arr = array('xCss'=> 'boxfailed','xMsg'=> 'Submit Data Gagal.','xAlert'=> true);
 		}
 		$this->tools->__flashMessage($arr);
+    }
+	
+	function __infoklub()
+    {
+		$query = array('id_club' => $this->session->userdata('id_club'), 'detail' => true);
+		$data['klubdetail'] = $this->excurl->remoteCall($this->__xurl() . 'profile-club', $this->__xkey(), $query);
+		
+		$html = $this->load->view($this->__theme().'member/ajax/info_klub', $data, true);
+		
+		$data = array('xClass' => 'reqinfoklub', 'xHtml' => $html);
+		$this->tools->__flashMessage($data);
     }
 }

@@ -20,6 +20,7 @@
     <a href="<?= base_url(); ?>eyeme"><img src="<?php echo SUBCDN."assets/$folder"; ?>img/ic-eyeme.png" alt="">Eye Me</a>
     <a href="<?= base_url(); ?>eyemarket"><img src="<?php echo SUBCDN."assets/$folder"; ?>img/ic_eyemarket.png" alt="">Eye Market</a>
     <a href="<?= base_url(); ?>eyevent"><img src="<?php echo SUBCDN."assets/$folder"; ?>img/ic_eyevent.png" alt="">Eye Vent</a>
+    <a href="<?= base_url(); ?>member/logout">Keluar</a>
     
     <?php
 	switch($kanal)
