@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  *
  */
 
-$xurl = 'http://api.eyesoccer.id:8080/v1/';
+$xurl = 'http://api.eyesoccer.id:3000/v1/';
 $xurlback = 'http://api.eyesoccer.id:3000/v1/';
 
 $config['xurl'] = $xurl;
