@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="http://localhost/mob.eyesoccer.id/assets/themes/v1/css/style.css">
     <link rel="stylesheet" href="http://localhost/mob.eyesoccer.id/assets/themes/v1/css/dashboard.css">
     <link rel="stylesheet" href="http://localhost/mob.eyesoccer.id/assets/css/font-awesome/css/fontawesome-all.css">
+    <script src="http://localhost/mob.eyesoccer.id/assets/js/jquery-2.0.2.min.js"></script>
 </head>
 
 <body class="m-pd-t-100 body-responsive">
@@ -126,36 +127,167 @@
     <!-- NOTIFICATION -->
     <div class="container dash-notif" id="notifications" style="display: none;">
         <div class="panah-notif2"></div>
-        <div class="title-notif">
+        <div class="container title-notif">
             <span class="container">Notifikasi</span>
+            <div class="ikon">
+                <div class="container">
+                    <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/ic_eyeprofile.png" id="notifProfil" class="tabs active" active="true" alt="Eyeprofile">
+                    <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/ic_eyetube.png" id="notifEyetube" class="tabs" alt="Eyetube">
+                    <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/ic_eyenews.png" id="notifEyenews" class="tabs" alt="Eyenews">
+                    <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/ic-eyeme.png" id="notifEyeme" class="tabs" alt="Eyeme">
+                    <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/ic_eyemarket.png" id="notifEyemarket" class="tabs" alt="Eyemarket">
+                    <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/ic_eyevent.png" id="notifEyevent" class="tabs" alt="Eyevent">
+                </div>
+            </div>
         </div>
         <div class="notific">
-            <a href="" class="container inbox-dashboard">
-                <div class="container img-inbox-dashboard">
-                    <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+            <div class="h-a">
+                <div class="notifProfil">
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>Rika Aulia</span>
+                            <span>melihat profil kamu</span>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>Rika Aulia</span>
+                            <span>melihat profil kamu</span>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
                 </div>
-                <div class="text-inbox2">
-                    <span>Rika Aulia</span>
-                    <span>melihat profil kamu</span>
+                <div class="notifEyetube" style="display:none;">
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>Rika Aulia</span>
+                            <span>berkomentar : video inspiratif</span>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>Rika Aulia</span>
+                            <span>menyukai video kamu</span>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
                 </div>
-                <div class="bb2g"></div>
-            </a>
-            <!-- <a href="" class="container inbox-dashboard">
-                <div class="container img-inbox-dashboard">
-                    <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                <div class="notifEyenews" style="display:none;">
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>Rika Aulia</span>
+                            <span>berkomentar : artikel inspiratif</span>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>Rika Aulia</span>
+                            <span>menyukai artikel kamu</span>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
                 </div>
-                <div class="text-inbox2">
-                    <span>Rika Aulia</span>
-                    <span>melihat profil kamu</span>
+                <div class="notifEyeme" style="display:none;">
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>Rika Aulia</span>
+                            <span>mulai mengikuti anda</span>
+                            <button>Ikuti</button>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>Rika Aulia</span>
+                            <span>menyukai postingan kamu</span>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>Rika Aulia</span>
+                            <span>berkomentar : amazing!</span>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
                 </div>
-                <div class="bb2g"></div>
-            </a> -->
+                <div class="notifEyemarket" style="display:none;">
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>Rika Aulia</span>
+                            <span>berkomentar : barang ready bos?</span>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>eyesoccer</span>
+                            <span>pembelian <b>Jersey Persib Murah</b> telah dibayar. Klik disini untuk melihat proses pemesanan.</span>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
+                </div>
+                <div class="notifEyevent" style="display:none;">
+                    <a href="" class="container inbox-dashboard">
+                        <div class="container img-inbox-dashboard">
+                            <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                        </div>
+                        <div class="text-inbox2">
+                            <span>eyesoccer</span>
+                            <span>NOBAR <b>MU</b> VS <b>Juventus</b> GRATIS bersama JOKOWI di...</span>
+                        </div>
+                        <div class="bb2g"></div>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
+        var x = document.getElementById("menuDashboard");
+        var y = document.getElementById("welcome");
+        var a = document.getElementById("notifications");
+        var b = document.getElementById("notifInbox");
+        var c = document.getElementById("isiContent");
+        var d = document.getElementById("signNotifInbox");
+        var e = document.getElementById("signNotification");
         function myFunction() {
-            var x = document.getElementById("menuDashboard");
             if (x.style.display == "none") {
                 x.style.display = "block";
             } else {
@@ -163,42 +295,49 @@
             }
         }
         function closeFunction() {
-            var y = document.getElementById("welcome");
             if (y.style.display == "block") {
                 y.style.display = "none";
             }
         }
         function functionNotifInbox() {
-            var y = document.getElementById("notifInbox");
-            var p = document.getElementById("isiContent");
-            var q = document.getElementById("signNotifInbox");
-            var a = document.getElementById("notifications");
-            if (y.style.display == "none") {
-                y.style.display = "block";
-                q.style.display = "none";
-                p.style.filter = "blur(20px)";
+            if (b.style.display == "none") {
+                b.style.display = "block";
+                d.style.display = "none";
+                c.style.filter = "blur(20px)";
                 a.style.display = "none";
                 
             } else {
-                y.style.display = "none";
-                p.style.filter = "unset";
+                b.style.display = "none";
+                c.style.filter = "unset";
             }
         }
         function functionNotification() {
-            var a = document.getElementById("notifications");
-            var b = document.getElementById("isiContent");
-            var c = document.getElementById("signNotification");
-            var y = document.getElementById("notifInbox");
             if (a.style.display == "none") {
                 a.style.display = "block";
-                c.style.display = "none";
-                b.style.filter = "blur(20px)";
-                y.style.display = "none";
+                e.style.display = "none";
+                c.style.filter = "blur(20px)";
+                b.style.display = "none";
             } else {
                 a.style.display = "none";
-                b.style.filter = "unset";
+                c.style.filter = "unset";
             }
         }
+        $(document).ready(function(){
+            $(document).on('click','.tabs',function(){
+                var id = $(this).attr('id');
+                $('.ikon .tabs').each(function(){
+                    if($(this).attr('active')){
+                        $(this).removeAttr('active');
+                        var idx = $(this).attr('id');
+                        $('.'+idx).hide();
+                        $(this).removeClass('active');
+                    }
+                })
+                $('.'+id).fadeIn('fast');
+                $('#'+id).attr('active', true);
+                $('#'+id).addClass('active');
+            })
+        });
     </script>
 </body>
 
