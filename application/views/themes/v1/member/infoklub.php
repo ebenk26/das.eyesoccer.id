@@ -12,8 +12,8 @@
 				<img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/d.jpg" alt="Logo Klub">
 			</div>
 		</div>
-		<div id="reqinfoklub" class='loadtrend' action="member" loading="off" clean="clsinfoklub">
-			<div id='clstrend'>
+		<div id="reqinfoklub" class='loadinfoklub' action="member" loading="off" clean="clsinfoklub">
+			<div id='clsinfoklub'>
 				<script>
 					$(document).ready(function(){
 						$(window).on('load',function(){

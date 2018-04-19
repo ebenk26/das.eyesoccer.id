@@ -141,8 +141,8 @@ class Member extends CI_Controller {
 
     }
 	
-	function info_klub(){
-    	$content = 'member/info_klub';
+	function infoklub(){
+    	$content = 'member/infoklub';
     	$data['content'] = $content;
     	$data['title']   = $this->config->item('meta_title');
     	$data['kanal']   = 'member';

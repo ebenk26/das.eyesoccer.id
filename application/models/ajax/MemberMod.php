@@ -5,6 +5,8 @@ class MemberMod extends CI_Model {
 
     private function __xurl() { return $this->config->item('xurl'); }
     private function __xkey() { return $this->config->item('xkey'); }
+	private function __xurlback() { return $this->config->item('xurlback'); }
+    private function __xkeyback() { return $this->config->item('xkeyback'); }
     private function __theme() { return $this->config->item('themes'); }
 
     function __construct()
@@ -186,10 +188,19 @@ class MemberMod extends CI_Model {
 	
 	function __infoklub()
     {
-		$query = array('id_club' => $this->session->userdata('id_club'), 'detail' => true);
-		$data['klubdetail'] = $this->excurl->remoteCall($this->__xurl() . 'profile-club', $this->__xkey(), $query);
+		$param = array('id_member'=> $this->session->member['id'], 'detail'=>true, 'md5'=>true);
+		$res   = $this->excurl->remoteCall($this->__xurlback().'me', $this->__xkeyback(), $param);
+        $res   = json_decode($res);
+		$v = $res->data;
 		
-		$html = $this->load->view($this->__theme().'member/ajax/info_klub', $data, true);
+		$query = array('id_club' => ($v[0]->id_club == 0 ? 1128 : $v[0]->id_club), 'detail' => true);
+		$data['klubdetail'] = $this->excurl->remoteCall($this->__xurl() . 'profile-club', $this->__xkey(), $query);
+		/* $dt = json_decode($data['klubdetail']);
+		$val = $dt->data;
+		$queryprov = array('IDProvinsi' => $val[0]->id_provinsi);
+		$data['provinsi'] = $this->excurl->remoteCall($this->__xurl() . 'provinsi', $this->__xkey(), $queryprov); */
+		
+		$html = $this->load->view($this->__theme().'member/ajax/infoklub', $data, true);
 		
 		$data = array('xClass' => 'reqinfoklub', 'xHtml' => $html);
 		$this->tools->__flashMessage($data);
