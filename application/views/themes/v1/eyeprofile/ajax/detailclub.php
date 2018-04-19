@@ -4,6 +4,10 @@
 		$detailclub = json_decode($detailclub);
 		$dt = $detailclub->data;
 ?>
+<style>
+div.user-data{background-color:#00000005}
+div.user-data:hover{background-color:#ff990026}
+</style>
 		<div class="head">
 			<div class="img-radius">
 				<img src="<?php echo $dt->url_logo;?>"
@@ -54,19 +58,36 @@
 					<div class="img-radius">
 						<img src="<?php echo $players->url_pic;?>" alt="<?php echo $players->name;?>">
 					</div>
-					<b># <?php echo $players->number;?></b>
 					<h3><?php echo $players->name;?></h3>
-					<span><?php echo $players->club;?></span>
+					<b>#<?php echo $players->back_number;?></b> <?php echo $players->club;?>
 				</div>
 				<table>
-					<tr>
-						<td>Posisi 1</td>
-						<td><?php echo $players->position_a;?></td>
-					</tr>
-					<tr>
-						<td>Posisi 2</td>
-						<td><?php echo $players->position_b;?></td>
-					</tr>
+					<?php
+						$pos1=$players->position_a;
+						$pos2=$players->position_b;
+						if(empty($pos2)){
+						$L_pos1="Posisi";
+						echo	
+							"<tr>
+								<td>".$L_pos1."</td>
+								<td>".$pos1."</td>
+							</tr>
+							<tr>";
+						}
+						else{
+						$L_pos1="Posisi 1";
+						$L_pos2="Posisi 2";
+						echo	
+							"<tr>
+								<td>".$L_pos1."</td>
+								<td>".$pos1."></td>
+							</tr>
+							<tr>
+								<td>".$L_pos2."</td>
+								<td>".$pos2."</td>
+							</tr>";
+						}	
+					?>
 				</table>
 				<a href="<?php echo base_url();?>eyeprofile/pemain_detail/<?php echo $players->slug;?>">lihat detail pemain</a>
 			</div>

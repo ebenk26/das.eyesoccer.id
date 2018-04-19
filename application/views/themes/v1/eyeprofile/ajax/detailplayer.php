@@ -6,22 +6,76 @@
 
 		if($dt->position_b==NULL)
 		{
-			$dt->display_p_b='style="display: none"';
+			$dt->display_position_b='style="display: none"';
 		}
 		else 
 		{
-			$dt->display_p_b='style="display: yes"';
+			$dt->display_position_b='style="display: yes"';
 		}
 		if($dt->birth_date==NULL)
 		{
-			$dt->display_t_l='style="display: none"';
+			$dt->display_birth_date='style="display: none"';
 		}
 		else 
 		{
-			$dt->display_t_l='style="display: yes"';
+			$dt->display_birth_date='style="display: yes"';
 		}
-
-
+		if($dt->birth_place==NULL)
+		{
+			$dt->display_birth_place='style="display: none"';
+		}
+		else 
+		{
+			$dt->display_birth_place='style="display: yes"';
+		}
+		if($dt->height==NULL)
+		{
+			$dt->display_height='style="display: none"';
+		}
+		else 
+		{
+			$dt->display_height='style="display: yes"';
+		}
+		if($dt->weight==NULL)
+		{
+			$dt->display_weight='style="display: none"';
+		}
+		else 
+		{
+			$dt->display_weight='style="display: yes"';
+		}
+		if($dt->level==NULL)
+		{
+			$dt->display_level='style="display: none"';
+		}
+		else 
+		{
+			$dt->display_level='style="display: yes"';
+		}
+		if($dt->nickname==NULL)
+		{
+			$dt->display_nickname='style="display: none"';
+		}
+		else 
+		{
+			$dt->display_nickname='style="display: yes"';
+		}
+		if($dt->foot==NULL)
+		{
+			$dt->display_foot='style="display: none"';
+		}
+		else 
+		{
+			$dt->display_foot='style="display: yes"';
+		}
+		if($dt->position_a==NULL)
+		{
+			$dt->display_position_a='style="display: none"';
+		}
+		else 
+		{
+			$dt->display_position_a='style="display: yes"';
+		}
 ?>
 		<div class="head">
 			<div class="img-radius">
@@ -41,43 +95,43 @@
 					<td>Kewarganegaraan</td>
 					<td><?php echo $dt->nationality;?></td>
 				</tr>
-				<tr>
+				<tr <?php echo $dt->display_birth_place; ?>>
 					<td>Tempat Lahir</td>
 					<td><?php echo $dt->birth_place;?></td>
 				</tr>
-				<tr <?php echo $dt->display_t_l; ?>>
+				<tr <?php echo $dt->display_birth_date; ?>>
 					<td>Tanggal Lahir</td>
 					<td><?php echo $dt->birth_date;?></td>
 				</tr>
-				<tr>
+				<tr <?php echo $dt->display_level;?>>
 					<td>Kategori Pemain</td>
-					<td><?php echo $dt->status;?></td>
+					<td><?php echo $dt->level;?></td>
 				</tr>
-				<tr>
+				<tr <?php echo $dt->display_height;?>>
 					<td>Tinggi</td>
 					<td><?php echo $dt->height;?> cm</td>
 				</tr>
-				<tr>
+				<tr <?php echo $dt->display_weight;?>>
 					<td>Berat</td>
 					<td><?php echo $dt->weight;?> kg</td>
 				</tr>
-				<tr>
+				<tr <?php echo $dt->back_number;?>>
 					<td>No. Punggung</td>
-					<td><?php echo $dt->number;?></td>
+					<td><?php echo $dt->back_number;?></td>
 				</tr>
-				<tr>
+				<tr <?php echo $dt->display_nickname;?>>
 					<td>Nama Panggilan</td>
-					<td><?php echo $dt->call_name;?></td>
+					<td><?php echo $dt->nickname;?></td>
 				</tr>
-				<tr>
+				<tr <?php echo $dt->display_foot;?>>
 					<td>Kemampuan Kaki</td>
 					<td><?php echo $dt->foot;?></td>
 				</tr>
-				<tr>
+				<tr <?php echo $dt->display_position_a;?>>
 					<td>Posisi Utama</td>
 					<td><?php echo $dt->position_a;?></td>
 				</tr>
-				<tr <?php echo $dt->display_p_b;?> >
+				<tr <?php echo $dt->display_position_b;?> >
 					<td>Posisi Lainnya</td>
 					<td><?php echo $dt->position_b;?></td>
 				</tr>
