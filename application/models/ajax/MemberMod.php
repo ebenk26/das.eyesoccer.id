@@ -200,8 +200,35 @@ class MemberMod extends CI_Model {
         $name = $this->input->post('name');
         $namealias = $this->input->post('namealias');
 
-        $query = array('name'=> $name, 'namealias'=> $namealias);
+        $sesi = $this->session->userdata('member');
+
+        $query = array('uid' => $sesi['id'], 'name' => $name, 'namealias' => $namealias);
         $res   = $this->excurl->reqCurlapp('register-club', $query, array('legal_pt','legal_kemenham','legal_npwp','legal_dirut'));
-        var_dump($res);exit();
+
+        if($res AND is_array($res->data))
+        {
+            if($res->status == 'Error')
+            {
+                if($res->message == 'Validation')
+                {
+                    $arr = array_merge($arr, array('xSplit' => true, 'xData' => array()));
+                    foreach ($res->data as $key => $value) {
+                        $arr['xData'] = array_merge($arr['xData'], array('msg'.$value->param => $value->msg));
+                    }
+                    
+                } else {
+                    $arr = array('xCss'=> 'boxfailed','xMsg'=> $res->message,'xAlert'=> true);
+                }
+            }
+        }
+
+        if($res->status == 'Success')
+        {
+            $message = "Registrasi Club Berhasil. Silahkan Cek Email Anda";
+
+            $arr = array('xDirect'=> base_url().'member','xCss'=> 'boxsuccess','xMsg'=> $message,'xAlert'=> true);
+        }
+            
+        $this->tools->__flashMessage($arr);
     }
 }
