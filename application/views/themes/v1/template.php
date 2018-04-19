@@ -10,7 +10,7 @@
 	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 	})(window,document,'script','dataLayer','GTM-P7HQLCC');</script>
 	<!-- End Google Tag Manager -->
-    <!-- <title><?php // echo $title; ?></title>
+    <!--
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Copyright" content="Eyesoccer Indonesia">
@@ -24,6 +24,8 @@
     <meta name="webcrawlers" content="all">
     <meta name="rating" content="general">
     <meta name="spiders" content="all"> -->
+
+    <title><?php echo $title; ?></title>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -94,18 +96,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
-    <?php
-        if ($kanal == "eyevent-jadwal")
-        {
-    ?>
-            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <?php        
-        }
-    ?>
-    
     
     <script src='<?php echo SUBCDN."assets/$folder/js/main.js"; ?>'></script>
     
