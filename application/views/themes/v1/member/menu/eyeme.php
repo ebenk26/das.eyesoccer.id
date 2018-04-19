@@ -1,6 +1,6 @@
 	<?php
         $data['active'] = 'eyeme';
-        $this->load->view($folder.'widget/header_member', $data);
+        $this->load->view($folder.'member/header', $data);
 	?>
     <div class="container wlc">
         <div class="bg-eyeme">

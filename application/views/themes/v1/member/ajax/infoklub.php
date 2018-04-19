@@ -1,7 +1,6 @@
 <?php
 if ($klubdetail){
-	$dt = json_decode($klubdetail);
-	$v = $dt->data;
+	$v = $klubdetail->data;
 ?>
 <style>
 	.btn-blue{
@@ -71,7 +70,7 @@ if ($klubdetail){
 								</script>
 							</div>
 							<input type='hidden' name='fn' value='provinsi' class='cinput'>
-							<input type='hidden' name='name' value='<?php echo ?>' class='cinput'>
+							<input type='hidden' name='name' value='<?php echo $provinsi->id?>' class='cinput'>
 							<input type="text" name="" value="">
 						</div>
 					</div>
@@ -93,7 +92,7 @@ if ($klubdetail){
 			<tr>
 				<td>No. Telp</td>
 				<td>
-					<input type="text" name="phone" value="<?php echo $v[0]->phone;?>">
+					<input type="number" name="phone" value="<?php echo $v[0]->phone;?>">
 					<span class='err msgphone'></span>
 				</td>
 			</tr>

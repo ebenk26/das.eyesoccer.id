@@ -189,20 +189,17 @@ class MemberMod extends CI_Model {
 	function __infoklub()
     {
 		$param = array('id_member'=> $this->session->member['id'], 'detail'=>true, 'md5'=>true);
-		$res   = $this->excurl->remoteCall($this->__xurlback().'me', $this->__xkeyback(), $param);
-        $res   = json_decode($res);
+		$res   = $this->excurl->reqCurlback('me', $param);
 		$v = $res->data;
 		
 		$query = array('id_club' => ($v[0]->id_club == 0 ? 1128 : $v[0]->id_club), 'detail' => true);
-		$data['klubdetail'] = $this->excurl->remoteCall($this->__xurlback() . 'profile-club', $this->__xkeyback(), $query);
-		
-		$dt = json_decode($data['klubdetail']);
-		$val = $dt->data;
+		$data['klubdetail'] = $this->excurl->reqCurlback('profile-club', $query);
+		$val = $data['klubdetail']->data;
 		// print_r($val[0]);exit();
 		$queryprov = array('IDProvinsi' => ($val[0]->id_provinsi == 0 ? 25823 : $val[0]->id_provinsi));
-		$data['provinsi'] = $this->excurl->remoteCall($this->__xurl() . 'provinsi', $this->__xkey(), $queryprov);
-		$dt = json_decode($data['provinsi']);
-		$val = $dt->data;
+		$data['provinsilist'] = $this->excurl->reqCurlapp('provinsi', $queryprov);
+		$val = $data['provinsilist']->data;
+		$data['provinsi'] = $val[0];
 		// print_r($val[0]->nama);exit();
 		
 		$html = $this->load->view($this->__theme().'member/ajax/infoklub', $data, true);
