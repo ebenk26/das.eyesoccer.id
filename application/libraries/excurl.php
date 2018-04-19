@@ -20,7 +20,7 @@ class Excurl {
         $this->ci = &get_instance();
     }
 
-    function reqCurl($url, $query = array(), $upload = '')
+    function reqCurlapp($url, $query = array(), $upload = '')
     {
         $data = $this->remoteCall($this->__xurl().$url, $this->__xkey(), $query, $upload);
         if (json_decode($data) == NULL) {
@@ -30,9 +30,9 @@ class Excurl {
         }
     }
 
-    function reqAction($url, $query = array(), $upload = '')
+    function reqCurlback($url, $query = array(), $upload = '')
     {
-        $data = $this->remoteCall($this->__xurlback().$url, $this->__xkeyback(), $query, $upload);
+        $data = $this->remoteCall($this->__xurl().$url, $this->__xkeyback(), $query, $upload);
         if (json_decode($data) == NULL) {
             print_r($data);
         } else {
