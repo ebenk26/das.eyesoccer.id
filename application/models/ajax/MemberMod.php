@@ -50,8 +50,7 @@ class MemberMod extends CI_Model {
                     'url_pic' => $v->url_pic,
                     'url'     => $v->url,
                     'active'  => $v->active,
-                    'verification' => $v->verification,
-                    'id_club' => $v->id_club
+                    'verification' => $v->verification
                 );
            $this->session->member   = $sess;
 
