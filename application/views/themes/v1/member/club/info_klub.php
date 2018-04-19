@@ -1,11 +1,11 @@
     <?php
         $data['active'] = 'klub';
-        $this->load->view($folder.'widget/header_member', $data);
+        $this->load->view($folder.'member/header', $data);
 	?>
     <div class="responsif-add-100px">
 		<?php
 			$data['active'] = 'info_klub';
-			$this->load->view($folder.'widget/sub_header_member', $data);
+			$this->load->view($folder.'member/club/header', $data);
 		?>
 		<div class="container mt20">
 			<div class="pp-profil">

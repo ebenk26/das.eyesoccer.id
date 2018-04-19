@@ -1,6 +1,6 @@
 	<?php
         $data['active'] = 'analytics';
-        $this->load->view($folder.'widget/header_member', $data);
+        $this->load->view($folder.'member/header', $data);
 	?>
     <div class="menu-dashboard bg243">
         <div class="container tx-c graph">

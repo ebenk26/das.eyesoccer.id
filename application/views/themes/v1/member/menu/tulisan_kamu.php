@@ -1,6 +1,6 @@
 	<?php
         $data['active'] = 'tulisan_kamu';
-        $this->load->view($folder.'widget/header_member', $data);
+        $this->load->view($folder.'member/header', $data);
 	?>
     <!-- <div class="menu-dashboard"> -->
         <div class="container">
