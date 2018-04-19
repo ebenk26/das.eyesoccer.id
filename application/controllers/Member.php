@@ -143,18 +143,18 @@ class Member extends CI_Controller
 
         $this->load->view($this->__theme() . 'member/template', $data);
     }
-
-    function info_klub()
-    {
-        $content = 'member/club/info_klub';
-        $data['content'] = $content;
-        $data['title'] = $this->config->item('meta_title');
-        $data['kanal'] = 'member';
-        $data['meta_desc'] = $this->config->item('meta_desc');
-        $data['meta_keyword'] = $this->config->item('meta_keyword');
-
-        $this->load->view($this->__theme() . 'member/template', $data);
-    }
+	
+	function klub()
+	{
+    	$content = 'member/club/info_klub';
+    	$data['content'] = $content;
+    	$data['title']   = $this->config->item('meta_title');
+    	$data['kanal']   = 'member';
+    	$data['meta_desc'] = $this->config->item('meta_desc');
+	    $data['meta_keyword'] = $this->config->item('meta_keyword');
+	    
+	    $this->load->view($this->__theme().'member/template', $data);
+	}
 
     function regis_klub()
     {
