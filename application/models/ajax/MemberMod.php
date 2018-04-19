@@ -202,7 +202,7 @@ class MemberMod extends CI_Model {
 		$data['provinsi'] = $val[0];
 		// print_r($val[0]->nama);exit();
 		
-		$html = $this->load->view($this->__theme().'member/ajax/infoklub', $data, true);
+		$html = $this->load->view($this->__theme().'member/club/ajax/infoklub', $data, true);
 		
 		$data = array('xClass' => 'reqinfoklub', 'xHtml' => $html);
 		$this->tools->__flashMessage($data);
