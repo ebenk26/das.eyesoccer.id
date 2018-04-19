@@ -7,22 +7,22 @@
 			$data['active'] = 'info_klub';
 			$this->load->view($folder.'widget/sub_header_member', $data);
 		?>
+	<div id="reqinfoklub" class='loadinfoklub' action="member" loading="off" clean="clsinfoklub">
+		<div id='clsinfoklub'>
+			<script>
+				$(document).ready(function(){
+					$(window).on('load',function(){
+						ajaxOnLoad('loadinfoklub');
+					});
+				});
+			</script>
+		</div>
+		<input type='hidden' name='fn' value='infoklub' class='cinput'>
 		<div class="container mt20">
 			<div class="pp-profil">
-				<img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/d.jpg" alt="Logo Klub">
+				<img src="<?php echo base_url();?>assets/themes/v1/img/fav.png" alt="Logo Klub">
 			</div>
 		</div>
-		<div id="reqinfoklub" class='loadinfoklub' action="member" loading="off" clean="clsinfoklub">
-			<div id='clsinfoklub'>
-				<script>
-					$(document).ready(function(){
-						$(window).on('load',function(){
-							ajaxOnLoad('loadinfoklub');
-						});
-					});
-				</script>
-			</div>
-			<input type='hidden' name='fn' value='infoklub' class='cinput'>
 			<div class="container data-profil mt20">
 				<table>
 					<tr>

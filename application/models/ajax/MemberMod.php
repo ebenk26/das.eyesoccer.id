@@ -194,11 +194,16 @@ class MemberMod extends CI_Model {
 		$v = $res->data;
 		
 		$query = array('id_club' => ($v[0]->id_club == 0 ? 1128 : $v[0]->id_club), 'detail' => true);
-		$data['klubdetail'] = $this->excurl->remoteCall($this->__xurl() . 'profile-club', $this->__xkey(), $query);
-		/* $dt = json_decode($data['klubdetail']);
+		$data['klubdetail'] = $this->excurl->remoteCall($this->__xurlback() . 'profile-club', $this->__xkeyback(), $query);
+		
+		$dt = json_decode($data['klubdetail']);
 		$val = $dt->data;
-		$queryprov = array('IDProvinsi' => $val[0]->id_provinsi);
-		$data['provinsi'] = $this->excurl->remoteCall($this->__xurl() . 'provinsi', $this->__xkey(), $queryprov); */
+		// print_r($val[0]);exit();
+		$queryprov = array('IDProvinsi' => ($val[0]->id_provinsi == 0 ? 25823 : $val[0]->id_provinsi));
+		$data['provinsi'] = $this->excurl->remoteCall($this->__xurl() . 'provinsi', $this->__xkey(), $queryprov);
+		$dt = json_decode($data['provinsi']);
+		$val = $dt->data;
+		// print_r($val[0]->nama);exit();
 		
 		$html = $this->load->view($this->__theme().'member/ajax/infoklub', $data, true);
 		
@@ -236,6 +241,42 @@ class MemberMod extends CI_Model {
         if($res->status == 'Success')
         {
             $message = "Registrasi Club Berhasil. Silahkan Cek Email Anda";
+
+            $arr = array('xDirect'=> base_url().'member','xCss'=> 'boxsuccess','xMsg'=> $message,'xAlert'=> true);
+        }
+            
+        $this->tools->__flashMessage($arr);
+    }
+	
+	function __editclub()
+    {
+		$id_club  = $this->input->post('id_club');
+		$name  = $this->input->post('name');
+		$nickname  = $this->input->post('nickname');
+		$address  = $this->input->post('address');
+        $query = array('id_club' => $id_club, 'name' => $name, 'nickname' => $nickname, 'address' => $address);
+        $res   = $this->excurl->reqCurlapp('edit-club', $query, array('logo','legal_pt'));
+print_r($res);exit;
+        if($res AND is_array($res->data))
+        {
+            if($res->status == 'Error')
+            {
+                if($res->message == 'Validation')
+                {
+                    $arr = array_merge($arr, array('xSplit' => true, 'xData' => array()));
+                    foreach ($res->data as $key => $value) {
+                        $arr['xData'] = array_merge($arr['xData'], array('msg'.$value->param => $value->msg));
+                    }
+                    
+                } else {
+                    $arr = array('xCss'=> 'boxfailed','xMsg'=> $res->message,'xAlert'=> true);
+                }
+            }
+        }
+
+        if($res->status == 'Success')
+        {
+            $message = "Data berhasil disimpan.";
 
             $arr = array('xDirect'=> base_url().'member','xCss'=> 'boxsuccess','xMsg'=> $message,'xAlert'=> true);
         }
