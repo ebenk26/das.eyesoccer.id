@@ -202,7 +202,7 @@ class MemberMod extends CI_Model {
         $namealias = $this->input->post('namealias');
 
         $query = array('name'=> $name, 'namealias'=> $namealias);
-        $res   = $this->excurl->reqAction('register-club', $query, array('legal_pt','legal_kemenham','legal_npwp','legal_dirut'));
+        $res   = $this->excurl->reqCurlapp('register-club', $query, array('legal_pt','legal_kemenham','legal_npwp','legal_dirut'));
         var_dump($res);exit();
     }
 }
