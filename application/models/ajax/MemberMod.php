@@ -194,4 +194,14 @@ class MemberMod extends CI_Model {
 		$data = array('xClass' => 'reqinfoklub', 'xHtml' => $html);
 		$this->tools->__flashMessage($data);
     }
+
+    function __regclub()
+    {
+        $name = $this->input->post('name');
+        $namealias = $this->input->post('namealias');
+
+        $query = array('name'=> $name, 'namealias'=> $namealias);
+        $res   = $this->excurl->reqAction('register-club', $query, array('legal_pt','legal_kemenham','legal_npwp','legal_dirut'));
+        var_dump($res);exit();
+    }
 }
