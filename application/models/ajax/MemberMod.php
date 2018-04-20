@@ -238,4 +238,20 @@ class MemberMod extends CI_Model
         $data = array('xClass' => 'reqplayer', 'xHtml' => $html, 'xUrlhash' => base_url() . 'member/player/' . $this->session->userdata('pageplayer'));
         $this->tools->__flashMessage($data);
     }
+
+    function __playerinfo()
+    {
+        $query = array('id_player' => $this->input->post('uid'), 'detail' => true, 'md5' => true);
+        $data['player'] = $this->excurl->reqCurlback('profile',  $query);
+        $data['foot'] = $this->excurl->reqCurlback('player-foot');
+        $data['level'] = $this->excurl->reqCurlback('player-level');
+        $data['position'] = $this->excurl->reqCurlback('player-position');
+
+        $data['folder'] = $this->config->item('themes');
+        $html = $this->load->view($this->__theme() . 'member/player/ajax/playerinfo', $data, true);
+
+        $data = array('xClass' => 'reqplayerinfo', 'xHtml' => $html);
+        $this->tools->__flashMessage($data);
+
+    }
 }

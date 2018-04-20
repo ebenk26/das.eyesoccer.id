@@ -89,18 +89,40 @@ class Member extends CI_Controller
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlback('me', $query);
         $member = ($member) ? $member->data[0] : '';
-        if ($member->id_player > 0) {
-            redirect('member/player_info');
-        } else {
-            if ($member->id_club == 0) {
-                redirect('member');
+
+        if (isset($_GET['tab'])) {
+            switch ($_GET['tab']) {
+                case 'profil':
+                    $content = 'member/player/playerinfo';
+                    break;
+                case 'karir':
+                    $content = 'member/player/karir';
+                    if (isset($_GET['act'])) $content = 'member/player/karirform';
+                    break;
+                case 'penghargaan':
+                    $content = 'member/player/penghargaan';
+                    if (isset($_GET['act'])) $content = 'member/player/penghargaanform';
+                    break;
+                case 'galeri':
+                    $content = 'member/player/galeri';
+                    if (isset($_GET['act'])) $content = 'member/player/galeriform';
+                    break;
             }
+        } else {
+            if ($member->id_player > 0) {
+                redirect('member/player_info');
+            } else {
+                if ($member->id_club == 0) {
+                    redirect('member');
+                }
+            }
+
+            $this->library->backnext('pageplayer');
+            if ($page > 1) $this->session->set_userdata(array('pageplayer' => $page));
+
+            $content = 'member/player/player';
         }
 
-        $this->library->backnext('pageplayer');
-        if ($page > 1) $this->session->set_userdata(array('pageplayer' => $page));
-
-        $content = 'member/player/player';
         $data['content'] = $content;
         $data['title'] = $this->config->item('meta_title');
         $data['kanal'] = 'member';
