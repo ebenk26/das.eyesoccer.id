@@ -51,32 +51,32 @@ if ($klubdetail){
 			<tr>
 				<td>Deskripsi Klub</td>
 				<td>
-					<input type="text" name="description" value="<?php echo $v[0]->description;?>">
+					<input type="text" name="description" value="<?php echo strip_tags($v[0]->description);?>">
 					<span class='err msgdescription'></span>
 				</td>
 			</tr>
 			<tr>
-				<td>Provinsi <?php echo $v[0]->id_provinsi?></td>
+				<td>Provinsi</td>
 				<td>
 					<div class="container" style="font-size: .8em;">
 					<?php
 						if($provinsi)
 						{
 					?>
-							<select name="id_provinsi" selected="true" class="slc-musim">
+							<select name="id_provinsi" selected="true" class="slc-musim form_change" action="member" fn="get_kabupaten" loading="off" dest="opt-kabupaten">
 								<option value>--Pilih Provinsi--</option>
 					<?php
 							foreach($provinsi as $dt) 
 							{
-								if(md5($v[0]->id_provinsi) == $dt->id){
+								if($v[0]->id_provinsi == $dt->IDProvinsi){
 					?>
-									<option value="<?php echo $dt->id?>" selected> 
+									<option value="<?php echo $dt->IDProvinsi?>" selected> 
 										<?php echo $dt->nama;?> 
 									</option>
 					<?php
 								}else{
 					?>
-									<option value="<?php echo $dt->id?>"> 
+									<option value="<?php echo $dt->IDProvinsi?>"> 
 										<?php echo $dt->nama;?> 
 									</option>
 					<?php
@@ -93,13 +93,15 @@ if ($klubdetail){
 			<tr>
 				<td>Kabupaten</td>
 				<td>
-					<input type="text" name="">
+					<div class="container opt-kabupaten" style="font-size: .8em;">
+					
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td>Tanggal didirikan</td>
 				<td>
-					<input type="text" name="establish_date" value="<?php echo $v[0]->establish_date;?>">
+					<input type="text" name="establish_date" value="<?php echo date('d-m-Y',strtotime($v[0]->establish_date));?>" id="birthdate">
 					<span class='err msgestablish_date'></span>
 				</td>
 			</tr>
@@ -215,5 +217,11 @@ if ($klubdetail){
 		$("#file_pic").change(function(){
 			readURL(this);
 		});
+		
+		$('#birthdate').datepicker({
+             dateFormat: 'dd-mm-yy',
+             changeMonth: true,
+             changeYear: true
+         });
 	});
 </script>

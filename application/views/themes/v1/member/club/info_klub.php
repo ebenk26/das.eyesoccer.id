@@ -20,7 +20,7 @@
 		<input type='hidden' name='fn' value='infoklub' class='cinput'>
 		<div class="container mt20">
 			<div class="pp-profil">
-				<img src="<?php echo base_url();?>assets/themes/v1/img/fav.png" alt="Logo Klub">
+				<img src="<?php echo SUBCDN;?>assets/themes/v1/img/fav.png" alt="Logo Klub">
 			</div>
 		</div>
 			<div class="container data-profil mt20">
