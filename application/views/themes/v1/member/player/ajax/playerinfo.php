@@ -16,7 +16,7 @@
 </div>
 <div class="container data-profil mt20">
     <form class='form_multi' action="<?php echo base_url('member'); ?>" enctype="multipart/form-data">
-        <input type="hidden" name="fn" class="cinput" value="playerinfo">
+        <input type="hidden" name="fn" class="cinput" value="playeract">
         <input type="hidden" name="act" class="cinput" value="<?php echo ($player) ? 1 : 0; ?>">
         <table>
             <tr>
