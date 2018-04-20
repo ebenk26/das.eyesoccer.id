@@ -87,7 +87,7 @@ class Member extends CI_Controller
     function player($page = 1)
     {
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
-        $member = $this->excurl->reqCurlback('me', $query);
+        $member = $this->excurl->reqCurlapp('me', $query);
         $member = ($member) ? $member->data[0] : '';
 
         if (isset($_GET['tab'])) {

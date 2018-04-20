@@ -29,7 +29,7 @@
             </script>
         </div>
         <input type='hidden' name='fn' value='playerinfo' class='cinput'>
-        <input type='hidden' name='uid' value='<?php echo $_GET['uid']; ?>' class='cinput'>
+        <input type='hidden' name='uid' value='<?php echo isset($_GET['uid']) ? $_GET['uid'] : ''; ?>' class='cinput'>
         <div class="container mt20">
             <div class="pp-profil">
                 <img src="<?php echo SUBCDN . "assets/themes/v1/img/fav.png"; ?>" alt="Player">
@@ -68,13 +68,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Phone</td>
+                    <td>Telepon</td>
                     <td>
                         <input type="text">
                     </td>
                 </tr>
                 <tr>
-                    <td>Mobile</td>
+                    <td>No. Hp</td>
                     <td>
                         <input type="text">
                     </td>
@@ -86,13 +86,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Height</td>
+                    <td>Tinggi</td>
                     <td>
                         <input type="text">
                     </td>
                 </tr>
                 <tr>
-                    <td>Weight</td>
+                    <td>Berat</td>
                     <td>
                         <input type="text">
                     </td>
@@ -152,7 +152,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Gaji</td>
+                    <td>Kisaran Gaji</td>
                     <td>
                         <input type="text">
                     </td>
