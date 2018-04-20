@@ -167,11 +167,11 @@ class MemberMod extends CI_Model
         $data['klubdetail'] = $this->excurl->reqCurlback('profile-club', $query);
         $val = $data['klubdetail']->data;
         // print_r($val[0]);exit();
-        $queryprov = array('IDProvinsi' => ($val[0]->id_provinsi == 0 ? 25823 : $val[0]->id_provinsi));
+        $queryprov = array();
         $data['provinsilist'] = $this->excurl->reqCurlapp('provinsi', $queryprov);
         $val = $data['provinsilist']->data;
-        $data['provinsi'] = $val[0];
-        // print_r($val[0]->nama);exit();
+        $data['provinsi'] = $val;
+        // print_r($data['provinsi']);exit();
 
         $html = $this->load->view($this->__theme() . 'member/club/ajax/infoklub', $data, true);
 

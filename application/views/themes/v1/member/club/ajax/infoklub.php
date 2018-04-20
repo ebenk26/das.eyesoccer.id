@@ -56,23 +56,37 @@ if ($klubdetail){
 				</td>
 			</tr>
 			<tr>
-				<td>Provinsi</td>
+				<td>Provinsi <?php echo $v[0]->id_provinsi?></td>
 				<td>
 					<div class="container" style="font-size: .8em;">
-						<div id="reqprovinsi" class='loadprovinsi' action="member" loading="off" clean="clsprovinsi">
-							<div id='clsprovinsi'>
-								<script>
-									$(document).ready(function(){
-										$(window).on('load',function(){
-											ajaxOnLoad('loadprovinsi');
-										});
-									});
-								</script>
-							</div>
-							<input type='hidden' name='fn' value='provinsi' class='cinput'>
-							<input type='hidden' name='name' value='<?php echo $provinsi->id?>' class='cinput'>
-							<input type="text" name="" value="">
-						</div>
+					<?php
+						if($provinsi)
+						{
+					?>
+							<select name="id_provinsi" selected="true" class="slc-musim">
+								<option value>--Pilih Provinsi--</option>
+					<?php
+							foreach($provinsi as $dt) 
+							{
+								if(md5($v[0]->id_provinsi) == $dt->id){
+					?>
+									<option value="<?php echo $dt->id?>" selected> 
+										<?php echo $dt->nama;?> 
+									</option>
+					<?php
+								}else{
+					?>
+									<option value="<?php echo $dt->id?>"> 
+										<?php echo $dt->nama;?> 
+									</option>
+					<?php
+								}
+							}
+					?>
+							</select>
+					<?php
+						}
+					?>
 					</div>
 				</td>
 			</tr>
