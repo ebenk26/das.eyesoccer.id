@@ -51,7 +51,7 @@ if ($klubdetail){
 			<tr>
 				<td>Deskripsi Klub</td>
 				<td>
-					<input type="text" name="description" value="<?php echo $v[0]->description;?>">
+					<input type="text" name="description" value="<?php echo strip_tags($v[0]->description);?>">
 					<span class='err msgdescription'></span>
 				</td>
 			</tr>
@@ -59,33 +59,49 @@ if ($klubdetail){
 				<td>Provinsi</td>
 				<td>
 					<div class="container" style="font-size: .8em;">
-						<div id="reqprovinsi" class='loadprovinsi' action="member" loading="off" clean="clsprovinsi">
-							<div id='clsprovinsi'>
-								<script>
-									$(document).ready(function(){
-										$(window).on('load',function(){
-											ajaxOnLoad('loadprovinsi');
-										});
-									});
-								</script>
-							</div>
-							<input type='hidden' name='fn' value='provinsi' class='cinput'>
-							<input type='hidden' name='name' value='<?php echo $provinsi->id?>' class='cinput'>
-							<input type="text" name="" value="">
-						</div>
+					<?php
+						if($provinsi)
+						{
+					?>
+							<select name="id_provinsi" selected="true" class="slc-musim form_change" action="member" fn="get_kabupaten" loading="off" dest="opt-kabupaten">
+								<option value>--Pilih Provinsi--</option>
+					<?php
+							foreach($provinsi as $dt) 
+							{
+								if($v[0]->id_provinsi == $dt->IDProvinsi){
+					?>
+									<option value="<?php echo $dt->IDProvinsi?>" selected> 
+										<?php echo $dt->nama;?> 
+									</option>
+					<?php
+								}else{
+					?>
+									<option value="<?php echo $dt->IDProvinsi?>"> 
+										<?php echo $dt->nama;?> 
+									</option>
+					<?php
+								}
+							}
+					?>
+							</select>
+					<?php
+						}
+					?>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td>Kabupaten</td>
 				<td>
-					<input type="text" name="">
+					<div class="container opt-kabupaten" style="font-size: .8em;">
+					
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td>Tanggal didirikan</td>
 				<td>
-					<input type="text" name="establish_date" value="<?php echo $v[0]->establish_date;?>">
+					<input type="text" name="establish_date" value="<?php echo date('d-m-Y',strtotime($v[0]->establish_date));?>" id="birthdate">
 					<span class='err msgestablish_date'></span>
 				</td>
 			</tr>
@@ -201,5 +217,11 @@ if ($klubdetail){
 		$("#file_pic").change(function(){
 			readURL(this);
 		});
+		
+		$('#birthdate').datepicker({
+             dateFormat: 'dd-mm-yy',
+             changeMonth: true,
+             changeYear: true
+         });
 	});
 </script>
