@@ -17,18 +17,21 @@
 <div class="container data-profil mt20">
     <form class='form_multi' action="<?php echo base_url('member'); ?>" enctype="multipart/form-data">
         <input type="hidden" name="fn" class="cinput" value="playeract">
+        <input type="hidden" name="uid" class="cinput" value="<?php echo ($player) ? $player->slug : ''; ?>">
         <input type="hidden" name="act" class="cinput" value="<?php echo ($player) ? 1 : 0; ?>">
         <table>
             <tr>
                 <td>Nama</td>
                 <td>
                     <input type="text" name="name" value="<?php echo ($player) ? $player->name : ''; ?>">
+                    <span class="err msgname"></span>
                 </td>
             </tr>
             <tr>
                 <td>Nama Panggilan</td>
                 <td>
                     <input type="text" name="nickname" value="<?php echo ($player) ? $player->nickname : ''; ?>">
+                    <span class="err msgnickname"></span>
                 </td>
             </tr>
             <tr>
@@ -37,48 +40,76 @@
                     <textarea name="description" rows="5">
                          <?php echo ($player) ? $player->description : ''; ?>
                     </textarea>
+                    <span class="err msgdescription"></span>
                 </td>
             </tr>
             <tr>
                 <td>Tempat Lahir</td>
                 <td>
                     <input type="text" name="birth_place" value="<?php echo ($player) ? $player->birth_place : ''; ?>">
+                    <span class="err msgbirth_place"></span>
                 </td>
             </tr>
             <tr>
                 <td>Tanggal Lahir</td>
                 <td>
                     <input type="text" name="birth_date" id="birthdate" value="<?php echo ($player) ? $player->birth_date : ''; ?>">
+                    <span class="err msgbirth_date"></span>
                 </td>
             </tr>
             <tr>
                 <td>Telepon</td>
                 <td>
                     <input type="text" name="phone" value="<?php echo ($player) ? $player->phone : ''; ?>">
+                    <span class="err msgphone"></span>
                 </td>
             </tr>
             <tr>
                 <td>No. Hp</td>
                 <td>
                     <input type="text" name="mobile" value="<?php echo ($player) ? $player->mobile : ''; ?>">
+                    <span class="err msgmobile"></span>
                 </td>
             </tr>
             <tr>
                 <td>Email</td>
                 <td>
                     <input type="text" name="email" value="<?php echo ($player) ? $player->email : ''; ?>">
+                    <span class="err msgemail"></span>
                 </td>
             </tr>
+            <?php
+                if (empty($player)) {
+                    ?>
+                    <tr>
+                        <td>Username</td>
+                        <td>
+                            <input type="text" name="username" value="<?php echo ($player) ? $player->username : ''; ?>">
+                            <span class="err msgusername"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>
+                            <input type="text" name="password" value="<?php echo ($player) ? $player->password : ''; ?>">
+                            <span class="err msgpassword"></span>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            ?>
             <tr>
                 <td>Height</td>
                 <td>
                     <input type="text" name="height" value="<?php echo ($player) ? $player->height : ''; ?>">
+                    <span class="err msgheight"></span>
                 </td>
             </tr>
             <tr>
                 <td>Weight</td>
                 <td>
                     <input type="text" name="weight" value="<?php echo ($player) ? $player->weight : ''; ?>">
+                    <span class="err msgweight"></span>
                 </td>
             </tr>
             <tr>
@@ -96,12 +127,14 @@
                         }
                         ?>
                     </select>
+                    <span class="err msggender"></span>
                 </td>
             </tr>
             <tr>
                 <td>Negara</td>
                 <td>
                     <input type="text" name="nationality" value="<?php echo ($player) ? $player->nationality : ''; ?>">
+                    <span class="err msgnationality"></span>
                 </td>
             </tr>
             <tr>
@@ -120,6 +153,7 @@
                         }
                         ?>
                     </select>
+                    <span class="err msgposition_a"></span>
                 </td>
             </tr>
             <tr>
@@ -138,12 +172,14 @@
                         }
                         ?>
                     </select>
+                    <span class="err msgposition_b"></span>
                 </td>
             </tr>
             <tr>
                 <td>Nomor Punggung</td>
                 <td>
                     <input type="text" name="back_number" value="<?php echo ($player) ? $player->back_number : ''; ?>">
+                    <span class="err msgback_number"></span>
                 </td>
             </tr>
             <tr>
@@ -162,48 +198,56 @@
                         }
                         ?>
                     </select>
+                    <span class="err msgfoot"></span>
                 </td>
             </tr>
             <tr>
                 <td>Favorit Klub</td>
                 <td>
                     <input type="text" name="fav_club" value="<?php echo ($player) ? $player->fav_club : ''; ?>">
+                    <span class="err msgfav_club"></span>
                 </td>
             </tr>
             <tr>
                 <td>Favorit Pemain</td>
                 <td>
                     <input type="text" name="fav_player" value="<?php echo ($player) ? $player->fav_player : ''; ?>">
+                    <span class="err msgfav_player"></span>
                 </td>
             </tr>
             <tr>
                 <td>Favorit Pelatih</td>
                 <td>
                     <input type="text" name="fav_coach" value="<?php echo ($player) ? $player->fav_coach : ''; ?>">
+                    <span class="err msgfav_coach"></span>
                 </td>
             </tr>
             <tr>
                 <td>Kisaran Gaji</td>
                 <td>
                     <input type="text" name="contract_start" value="<?php echo ($player) ? $player->contract_start : ''; ?>" placeholder="Start">
+                    <span class="err msgcontract_start"></span>
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
                     <input type="text" name="contract_end" value="<?php echo ($player) ? $player->contract_end : ''; ?>" placeholder="End">
+                    <span class="err msgcontract_end"></span>
                 </td>
             </tr>
             <tr>
                 <td>Nama Bapak</td>
                 <td>
                     <input type="text" name="father" value="<?php echo ($player) ? $player->father : ''; ?>">
+                    <span class="err msgfather"></span>
                 </td>
             </tr>
             <tr>
                 <td>Nama Ibu</td>
                 <td>
                     <input type="text" name="mother" value="<?php echo ($player) ? $player->mother : ''; ?>">
+                    <span class="err msgmother"></span>
                 </td>
             </tr>
             <tr>

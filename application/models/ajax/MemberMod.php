@@ -270,14 +270,23 @@ class MemberMod extends CI_Model
                     'contract_end' => $this->input->post('contract_end'), 'father' => $this->input->post('father'), 'mother' => $this->input->post('mother'));
 
         if ($this->input->post('act') > 0) {
-            if ($member AND $member->id_club > 0) {
-                $query = array('id_player' => $member->id_player);
-                $player = $this->excurl->reqCurlback('profile',  $query);
-                $player = ($player) ? $player->data[0] : '';
+            if ($member AND $member->id_player > 0 OR $member->id_club > 0) {
+                if ($member->id_club > 0) {
+                    $slug = $this->input->post('uid');
+                } else {
+                    $query = array('id_player' => $member->id_player);
+                    $player = $this->excurl->reqCurlback('profile',  $query);
+                    $player = ($player) ? $player->data[0] : '';
+                    $slug = $player->slug;
+                }
 
-                $dt = array_merge($dt, ['slug' => $player->slug]);
+                $dt = array_merge($dt, ['slug' => $slug]);
                 $res = $this->excurl->reqCurlapp('edit-player', $dt, ['photo']);
                 $arr = $this->library->errorMessage($res);
+
+                if ($res->status == 'Success') {
+                    $arr = array('xDirect' => base_url('member/player'), 'xCss' => 'boxsuccess', 'xMsg' => 'Data berhasil disimpan', 'xAlert' => true);
+                }
             } else {
                 $arr = array('xDirect' => base_url('member'));
             }
@@ -287,7 +296,7 @@ class MemberMod extends CI_Model
                 $club = $this->excurl->reqCurlback('profile-club',  $query);
                 $club = ($club) ? $club->data[0] : '';
 
-                $dt = array_merge($dt, ['slug' => $club->slug]);
+                $dt = array_merge($dt, ['slug' => $club->slug, 'level' => 2, 'username' => $this->input->post('username'), 'password' => $this->input->post('password')]);
                 $res = $this->excurl->reqCurlapp('add-player', $dt, ['photo']);
                 $arr = $this->library->errorMessage($res);
 
