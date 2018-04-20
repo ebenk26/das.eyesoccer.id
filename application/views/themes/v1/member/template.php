@@ -9,8 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="<?php echo SUBCDN."assets/$folder/img/fav.png" ?>" />
 
-    <link rel="stylesheet" href="<?php echo SUBCDN."assets/themes/v1/css/style.css"; ?>">
-    <link rel="stylesheet" href="<?php echo SUBCDN."assets/themes/v1/css/dashboard.css"; ?>">
+    <link rel="stylesheet" href="<?php echo SUBCDN."assets/$folder/css/dev.css"; ?>">
+    <link rel="stylesheet" href="<?php echo SUBCDN."assets/$folder/css/style.css"; ?>">
+    <link rel="stylesheet" href="<?php echo SUBCDN."assets/$folder/css/dashboard.css"; ?>">
     <link rel="stylesheet" href="<?php echo SUBCDN."assets/css/font-awesome/css/fontawesome-all.css"; ?>">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

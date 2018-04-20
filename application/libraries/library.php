@@ -379,4 +379,83 @@ class Library
         return str_replace('https://beta.eyesoccer.id/img/eyemarket/product', 'http://static.eyesoccer.id/v1/cache/images', $url);
     }
 
+    function backnext($pageses = '', $totalses = '', $data = '', $action = '', $fn = '', $limit = 10, $opt = array())
+    {
+        if ($pageses && $totalses) {
+            if ($data) {
+                $totaldata = $data->data;
+                $pagetotal = ceil($totaldata[0]->cc / $limit);
+                $this->ci->session->set_userdata(array($totalses => $pagetotal));
+                if ($pagetotal > 1) {
+                    if ($this->ci->session->userdata($pageses) > 1) {
+                        ?>
+                        <a href='javascript:void(0)' id='reqback' class='form_post' action='<?php echo $action; ?>'>
+                            <input type='hidden' name='fn' value='<?php echo $fn; ?>' class='cinput'>
+                            <input type='hidden' name='paging' value='back' class='cinput'>
+                            <?php
+                            if (isset($opt['slug'])) {
+                                ?> <input type='hidden' name='slug' value='<?php echo $opt['slug']; ?>' class='cinput'> <?php
+                            }
+                            $class = (isset($opt['class'])) ? $opt['class'] : "pagination-green-btn";
+                            $name = (isset($opt['name'])) ? $opt['name'] : "Sebelumnya";
+                            ?>
+                            <span><button class="<?php echo $class; ?>" style="float: left;"><?php echo $name; ?></button></span>
+                        </a>
+                        <?php
+                    }
+                    if ($pagetotal > $this->ci->session->userdata($pageses)) {
+                        ?>
+                        <a href='javascript:void(0)' id='reqnext' class='form_post' action='<?php echo $action; ?>'>
+                            <input type='hidden' name='fn' value='<?php echo $fn; ?>' class='cinput'>
+                            <input type='hidden' name='paging' value='next' class='cinput'>
+                            <?php
+                            if (isset($opt['slug'])) {
+                                ?> <input type='hidden' name='slug' value='<?php echo $opt['slug']; ?>' class='cinput'> <?php
+                            }
+                            $class = (isset($opt['class'])) ? $opt['class'] : "pagination-green-btn";
+                            $name = (isset($opt['name'])) ? $opt['name'] : "Selanjutnya";
+                            ?>
+                            <span><button class="<?php echo $class; ?>" style="float: right;"><?php echo $name; ?></button></span>
+                        </a>
+                        <?php
+                    }
+                }
+            } else {
+                $page = ($this->ci->session->userdata($pageses)) ? $this->ci->session->userdata($pageses) : 1;
+                if ($this->ci->input->post('paging') == 'next') {
+                    if ($this->ci->session->userdata($totalses) > $this->ci->session->userdata($pageses)) {
+                        $page += 1;
+                    }
+                } else {
+                    if ($this->ci->input->post('paging') == 'back' AND $this->ci->session->userdata($pageses) >= 2) {
+                        $page -= 1;
+                    }
+                }
+                $this->ci->session->set_userdata(array($pageses => $page));
+            }
+        } else {
+            $this->ci->session->set_userdata(array($pageses => 1));
+        }
+    }
+
+    function errorMessage($res)
+    {
+        $arr = [];
+        if ($res AND is_array($res->data)) {
+            if ($res->status == 'Error') {
+                if ($res->message == 'Validation') {
+                    $arr = array_merge($arr, array('xSplit' => true, 'xData' => array()));
+                    foreach ($res->data as $key => $value) {
+                        $arr['xData'] = array_merge($arr['xData'], array('msg' . $value->param => $value->msg));
+                    }
+
+                } else {
+                    $arr = array('xCss' => 'boxfailed', 'xMsg' => $res->message, 'xAlert' => true);
+                }
+            }
+        }
+
+        return $arr;
+    }
+
 }

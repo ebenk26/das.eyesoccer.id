@@ -84,8 +84,22 @@ class Member extends CI_Controller
         $this->MemberMod->submit_data_member($_POST);
     }
 
-    function player()
+    function player($page = 1)
     {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlback('me', $query);
+        $member = ($member) ? $member->data[0] : '';
+        if ($member->id_player > 0) {
+            redirect('member/player_info');
+        } else {
+            if ($member->id_club == 0) {
+                redirect('member');
+            }
+        }
+
+        $this->library->backnext('pageplayer');
+        if ($page > 1) $this->session->set_userdata(array('pageplayer' => $page));
+
         $content = 'member/player/player';
         $data['content'] = $content;
         $data['title'] = $this->config->item('meta_title');
