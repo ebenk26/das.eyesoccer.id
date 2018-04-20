@@ -242,7 +242,7 @@ class MemberMod extends CI_Model
     function __playerinfo()
     {
         $query = array('id_player' => $this->input->post('uid'), 'detail' => true, 'md5' => true);
-        $data['player'] = $this->excurl->reqCurlback('profile',  $query);
+        $data['player'] = ($this->input->post('uid') != '') ? $this->excurl->reqCurlback('profile',  $query) : '';
         $data['foot'] = $this->excurl->reqCurlback('player-foot');
         $data['level'] = $this->excurl->reqCurlback('player-level');
         $data['position'] = $this->excurl->reqCurlback('player-position');
@@ -252,6 +252,5 @@ class MemberMod extends CI_Model
 
         $data = array('xClass' => 'reqplayerinfo', 'xHtml' => $html);
         $this->tools->__flashMessage($data);
-
     }
 }

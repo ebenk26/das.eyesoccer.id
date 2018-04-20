@@ -1,3 +1,5 @@
+<a href="<?php echo base_url('member/player/?tab=profil'); ?>" class="klik-dsn mg-t10 mg-b10">Tambah</a>
+
 <?php
     if ($player) {
         foreach ($player->data as $p) {
