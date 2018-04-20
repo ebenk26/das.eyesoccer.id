@@ -20,6 +20,8 @@
 
     <script src='<?php echo SUBCDN."assets/$folder/js/main.js"; ?>'></script>
 
+
+
     <!-- Zoom -->
     <script src="<?php echo SUBCDN."assets/js/zoom/jquery.elevatezoom.js"; ?>"></script>
 

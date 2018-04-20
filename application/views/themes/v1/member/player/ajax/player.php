@@ -3,7 +3,7 @@
         foreach ($player->data as $p) {
             ?>
             <div class="x-form-daftar-pemain row">
-                <i class="far fa-edit" style="float:right; font-size:.9em;"></i>
+                <a href="<?php echo base_url('member/player/?tab=profil&uid='.$p->id); ?>"><i class="far fa-edit" style="float:right; font-size:.9em;"></i></a>
                 <div class="col-xs-4 edits">
                     <div class="img-round">
                         <img src="<?php echo $p->url_pic; ?>" alt="">
