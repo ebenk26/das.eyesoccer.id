@@ -444,11 +444,10 @@ class Library
         if ($res AND is_array($res->data)) {
             if ($res->status == 'Error') {
                 if ($res->message == 'Validation') {
-                    $arr = array_merge($arr, array('xSplit' => true, 'xData' => array()));
+                    $arr = array_merge($arr, array('xSplit' => true, 'xData' => array(), 'xMsg' => 'Inputan belum diisi atau tidak sesuai formatnya', 'xAlert' => true));
                     foreach ($res->data as $key => $value) {
                         $arr['xData'] = array_merge($arr['xData'], array('msg' . $value->param => $value->msg));
                     }
-
                 } else {
                     $arr = array('xCss' => 'boxfailed', 'xMsg' => $res->message, 'xAlert' => true);
                 }

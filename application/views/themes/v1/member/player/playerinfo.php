@@ -15,8 +15,10 @@
 
 <div class="responsif-add-100px">
     <?php
-        $data['active'] = 'info_klub';
-        $this->load->view($folder . 'member/player/header', $data);
+        if ($member->id_club > 0) {
+            $data['active'] = 'pemain';
+            $this->load->view($folder.'member/club/header', $data);
+        }
     ?>
     <div id="reqplayerinfo" class='loadplayerinfo' action="member" loading="off" clean="clsplayerinfo">
         <div id='clsplayerinfo'>
@@ -35,6 +37,12 @@
                 <img src="<?php echo SUBCDN . "assets/themes/v1/img/fav.png"; ?>" alt="Player">
             </div>
         </div>
+        <?php
+            if (isset($_GET['uid'])) {
+                $data['active'] = 'profil';
+                $this->load->view($folder . 'member/player/header', $data);
+            }
+        ?>
         <div class="container data-profil mt20">
             <table>
                 <tr>

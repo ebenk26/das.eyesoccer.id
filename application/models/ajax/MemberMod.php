@@ -276,21 +276,27 @@ class MemberMod extends CI_Model
                     'height' => $this->input->post('height'), 'weight' => $this->input->post('weight'), 'gender' => $this->input->post('gender'),
                     'nationality' => $this->input->post('nationality'), 'position_a' => $this->input->post('position_a'), 'position_b' => $this->input->post('position_b'),
                     'back_number' => $this->input->post('back_number'), 'foot' => $this->input->post('foot'), 'fav_club' => $this->input->post('fav_club'),
-                    'fav_player' => $this->input->post('back_number'), 'fav_coach' => $this->input->post('foot'), 'contract_start' => $this->input->post('contract_start'),
-                    'contract_end' => $this->input->post('contract_end'), 'father' => $this->input->post('father'), 'mother' => $this->input->post('mother'));
+                    'fav_player' => $this->input->post('back_number'), 'fav_coach' => $this->input->post('foot'),
+                    'father' => $this->input->post('father'), 'mother' => $this->input->post('mother'));
 
         if ($this->input->post('act') > 0) {
             if ($member AND $member->id_player > 0 OR $member->id_club > 0) {
                 if ($member->id_club > 0) {
                     $slug = $this->input->post('uid');
+                    $query = array('url' => $slug, 'detail' => true);
+                    $player = $this->excurl->reqCurlback('profile',  $query);
+                    $player = ($player) ? $player->data[0] : '';
                 } else {
-                    $query = array('id_player' => $member->id_player);
+                    $query = array('id_player' => $member->id_player, 'detail' => true);
                     $player = $this->excurl->reqCurlback('profile',  $query);
                     $player = ($player) ? $player->data[0] : '';
                     $slug = $player->slug;
                 }
 
-                $dt = array_merge($dt, ['slug' => $slug]);
+                $dt = array_merge($dt, ['slug' => $slug, 'level' => ($this->input->post('level') != '') ? $this->input->post('level') : $player->id_level,
+                                        'contract_start' => ($this->input->post('contract_start') != '') ? $this->input->post('contract_start') : $player->contract_start,
+                                        'contract_end' => ($this->input->post('contract_end') != '') ? $this->input->post('contract_end') : $player->contract_end]);
+
                 $res = $this->excurl->reqCurlapp('edit-player', $dt, ['photo']);
                 $arr = $this->library->errorMessage($res);
 
@@ -306,7 +312,14 @@ class MemberMod extends CI_Model
                 $club = $this->excurl->reqCurlback('profile-club',  $query);
                 $club = ($club) ? $club->data[0] : '';
 
-                $dt = array_merge($dt, ['slug' => $club->slug, 'level' => 2, 'username' => $this->input->post('username'), 'password' => $this->input->post('password')]);
+                $dt = array_merge($dt, ['slug' => $club->slug, 'level' => $this->input->post('level'),
+                                        'contract_start' => $this->input->post('contract_start'),
+                                        'contract_end' => $this->input->post('contract_end')]);
+
+                if ($this->input->post('username') != '' AND $this->input->post('password') != '') {
+                    $dt = array_merge($dt, ['register' => true, 'username' => $this->input->post('username'), 'password' => $this->input->post('password')]);
+                }
+
                 $res = $this->excurl->reqCurlapp('add-player', $dt, ['photo']);
                 $arr = $this->library->errorMessage($res);
 

@@ -47,14 +47,6 @@ class Member extends CI_Controller
         }
     }
 
-    function login()
-    {
-        $email = $this->input->post('email');
-        $pass = $this->input->post('password');
-        $arr = array('email' => $email, 'xHtml' => $pass);
-        echo json_encode($arr);
-    }
-
     function forgot()
     {
         $content = 'member/forgot';
@@ -65,7 +57,6 @@ class Member extends CI_Controller
         $data['meta_keyword'] = $this->config->item('meta_keyword');
 
         $this->load->view($this->__theme() . 'template', $data);
-
     }
 
     function logout()
@@ -88,9 +79,19 @@ class Member extends CI_Controller
     {
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
-        $member = ($member) ? $member->data[0] : '';
+        $data['member'] = ($member) ? $member->data[0] : '';
 
         if (isset($_GET['tab'])) {
+            if ($data['member']->id_player == 0) {
+                if ($data['member']->id_club == 0) {
+                    redirect('member');
+                }
+            } else {
+                if ($data['member']->id_player > 0) {
+                    $_POST['uid'] = md5($data['member']->id_player);
+                }
+            }
+
             switch ($_GET['tab']) {
                 case 'profil':
                     $content = 'member/player/playerinfo';
@@ -109,10 +110,10 @@ class Member extends CI_Controller
                     break;
             }
         } else {
-            if ($member->id_player > 0) {
-                redirect('member/player_info');
+            if ($data['member']->id_player > 0) {
+                redirect('member/player/?tab=profil&uid='.md5($data['member']->id_player));
             } else {
-                if ($member->id_club == 0) {
+                if ($data['member']->id_club == 0) {
                     redirect('member');
                 }
             }
@@ -182,6 +183,10 @@ class Member extends CI_Controller
 	
 	function klub()
 	{
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+
     	$content = 'member/club/info_klub';
     	$data['content'] = $content;
     	$data['title']   = $this->config->item('meta_title');
@@ -194,6 +199,10 @@ class Member extends CI_Controller
 
     function regis_klub()
     {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+
         $content = 'member/club/regis_klub';
         $data['content'] = $content;
         $data['title'] = $this->config->item('meta_title');

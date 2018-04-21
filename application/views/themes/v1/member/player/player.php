@@ -1,11 +1,13 @@
 <?php
-    $data['active'] = 'player';
+    $data['active'] = ($member->id_player > 0) ? 'pemain' : 'klub';
     $this->load->view($folder.'member/header', $data);
 ?>
 <div class="responsif-add-100px">
     <?php
-        $data['active'] = 'pemain';
-        $this->load->view($folder.'member/club/header', $data);
+        if ($member->id_club > 0) {
+            $data['active'] = 'pemain';
+            $this->load->view($folder.'member/club/header', $data);
+        }
     ?>
     <div class="container">
         <div id="reqplayer" class='loadplayer' action="member" loading="off" clean="clsplayer">
