@@ -4,9 +4,19 @@
 			<a href="<?php echo base_url("member"); ?>"><li class="<?php echo ($active=='home' ? 'active' : '')?>">Home</li></a>
             <?php
                 if ($member->id_player > 0) {
-                    ?> <a href="<?php echo base_url("member/player/?tab=profil&uid=".md5($member->id_player)); ?>"><li class="<?php echo ($active=='pemain' ? 'active' : '')?>">Pemain</li></a> <?php
+                    ?>
+                    <a href="<?php echo base_url("member/player/?tab=profil&uid=".md5($member->id_player)); ?>">
+                        <li class="<?php echo ($active=='pemain' ? 'active' : '')?>">Pemain</li>
+                    </a>
+                    <?php
                 } else {
-                    ?> <a href="<?php echo base_url("member/klub"); ?>"><li class="<?php echo ($active=='klub' ? 'active' : '')?>">Klub</li></a> <?php
+                    if ($member->id_club > 0) {
+                        ?>
+                        <a href="<?php echo base_url("member/klub"); ?>">
+                            <li class="<?php echo($active == 'klub' ? 'active' : '') ?>">Klub</li>
+                        </a>
+                        <?php
+                    }
                 }
             ?>
 

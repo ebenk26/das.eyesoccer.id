@@ -30,6 +30,10 @@ class Member extends CI_Controller
             $content = ($this->session->member ? 'member/home' : 'member/login');
 
             if ($this->session->member) {
+                $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+                $member = $this->excurl->reqCurlapp('me', $query);
+                $data['member'] = ($member) ? $member->data[0] : '';
+
                 $data['id'] = $this->HomeMod->get_id('id_member', 'tbl_member', $this->session->member['id']);
                 $data['detail'] = $this->MemberMod->member_detail($data['id']);
             }
@@ -202,6 +206,10 @@ class Member extends CI_Controller
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $data['member'] = ($member) ? $member->data[0] : '';
+
+        if ($data['member']->id_club > 0) {
+            redirect('member/klub');
+        }
 
         $content = 'member/club/regis_klub';
         $data['content'] = $content;
