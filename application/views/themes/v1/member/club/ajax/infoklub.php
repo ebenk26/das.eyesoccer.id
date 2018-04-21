@@ -21,6 +21,7 @@ if ($klubdetail){
 <form class='form_multi' action="<?= base_url('member'); ?>" enctype="multipart/form-data">
 	<input type="hidden" name="fn" class="cinput" value="editclub">
 	<input type="hidden" name="id_club" value="<?php echo $v[0]->id_club;?>">
+	<input type="hidden" name="slug" value="<?php echo $v[0]->slug;?>">
 	<div class="container mt20">
 		<div class="pp-profil">
 			<img src="<?php echo (!empty($v[0]->url_logo) ? $v[0]->url_logo : base_url()."assets/themes/v1/img/fav.png")?>" alt="Logo Klub" class="viewimg">
