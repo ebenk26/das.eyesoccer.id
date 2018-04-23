@@ -1,4 +1,4 @@
-<select id="kabupaten" name="id_kabupaten" class="form-control">
+<select id="kabupaten" name="kabupaten" class="form-control">
 			<option value="">Pilih Kabupaten</option>
 	<?php 
 		foreach ($kabupatenlist->data as $value)
