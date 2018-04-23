@@ -238,7 +238,7 @@ class MemberMod extends CI_Model
         $member = $this->excurl->reqCurlapp('me', $query);
         $member = ($member) ? $member->data[0] : '';
 
-        $query = array('page' => $this->session->userdata('pageplayer'), 'limit' => 10, 'id_club' => $member->id_club,
+        $query = array('page' => $this->session->userdata('pageplayer'), 'limit' => 20, 'id_club' => $member->id_club,
                        'sorby' => 'a.id_player', 'sortdir' => 'desc');
 
         $data['player'] = $this->excurl->reqCurlapp('profile', $query);
@@ -271,14 +271,17 @@ class MemberMod extends CI_Model
         $member = $this->excurl->reqCurlapp('me', $query);
         $member = ($member) ? $member->data[0] : '';
 
-        $dt = array('name' => $this->input->post('name'), 'nickname' => $this->input->post('nickname'), 'description' => $this->input->post('description'),
-                    'birth_place' => $this->input->post('birth_place'), 'birth_date' => date('Y-m-d', strtotime($this->input->post('birth_date'))),
-                    'phone' => $this->input->post('phone'), 'mobile' => $this->input->post('mobile'), 'email' => $this->input->post('email'),
-                    'height' => $this->input->post('height'), 'weight' => $this->input->post('weight'), 'gender' => $this->input->post('gender'),
-                    'nationality' => $this->input->post('nationality'), 'position_a' => $this->input->post('position_a'), 'position_b' => $this->input->post('position_b'),
-                    'back_number' => $this->input->post('back_number'), 'foot' => $this->input->post('foot'), 'fav_club' => $this->input->post('fav_club'),
-                    'fav_player' => $this->input->post('back_number'), 'fav_coach' => $this->input->post('foot'),
-                    'father' => $this->input->post('father'), 'mother' => $this->input->post('mother'));
+        $dt = [];
+        if ($this->input->post('act') < 2) {
+            $dt = array('name' => $this->input->post('name'), 'nickname' => $this->input->post('nickname'), 'description' => $this->input->post('description'),
+                        'birth_place' => $this->input->post('birth_place'), 'birth_date' => date('Y-m-d', strtotime($this->input->post('birth_date'))),
+                        'phone' => $this->input->post('phone'), 'mobile' => $this->input->post('mobile'), 'email' => $this->input->post('email'),
+                        'height' => $this->input->post('height'), 'weight' => $this->input->post('weight'), 'gender' => $this->input->post('gender'),
+                        'nationality' => $this->input->post('nationality'), 'position_a' => $this->input->post('position_a'), 'position_b' => $this->input->post('position_b'),
+                        'back_number' => $this->input->post('back_number'), 'foot' => $this->input->post('foot'), 'fav_club' => $this->input->post('fav_club'),
+                        'fav_player' => $this->input->post('back_number'), 'fav_coach' => $this->input->post('foot'),
+                        'father' => $this->input->post('father'), 'mother' => $this->input->post('mother'));
+        }
 
         if ($this->input->post('act') > 0) {
             if ($member AND $member->id_player > 0 OR $member->id_club > 0) {
@@ -294,15 +297,23 @@ class MemberMod extends CI_Model
                     $slug = $player->slug;
                 }
 
-                $dt = array_merge($dt, ['slug' => $slug, 'level' => ($this->input->post('level') != '') ? $this->input->post('level') : $player->id_level,
-                                        'contract_start' => ($this->input->post('contract_start') != '') ? $this->input->post('contract_start') : $player->contract_start,
-                                        'contract_end' => ($this->input->post('contract_end') != '') ? $this->input->post('contract_end') : $player->contract_end]);
+                if ($this->input->post('act') < 2) {
+                    $dt = array_merge($dt, ['slug' => $slug, 'level' => ($this->input->post('level') != '') ? $this->input->post('level') : $player->id_level,
+                                            'contract_start' => ($this->input->post('contract_start') != '') ? $this->input->post('contract_start') : $player->contract_start,
+                                            'contract_end' => ($this->input->post('contract_end') != '') ? $this->input->post('contract_end') : $player->contract_end]);
 
-                $res = $this->excurl->reqCurlapp('edit-player', $dt, ['photo']);
+                    $res = $this->excurl->reqCurlapp('edit-player', $dt, ['photo']);
+                    $msg = 'Data berhasil disimpan';
+                } else {
+                    $dt = array_merge($dt, ['slug' => $slug]);
+                    $res = $this->excurl->reqCurlapp('del-player', $dt);
+                    $msg = 'Data berhasil dihapus';
+                }
+
                 $arr = $this->library->errorMessage($res);
 
                 if ($res->status == 'Success') {
-                    $arr = array('xDirect' => base_url('member/player'), 'xCss' => 'boxsuccess', 'xMsg' => 'Data berhasil disimpan', 'xAlert' => true);
+                    $arr = array('xDirect' => base_url('member/player'), 'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
                 }
             } else {
                 $arr = array('xDirect' => base_url('member'));
@@ -334,7 +345,202 @@ class MemberMod extends CI_Model
 
         $this->tools->__flashMessage($arr);
     }
-	
+
+    function __playerkarir()
+    {
+        $this->library->backnext('pageplayerkarir', 'pagetotalplayerkarir');
+
+        $query = array('id_player' => $this->input->post('uid'), 'md5' => true);
+        $player = $this->excurl->reqCurlback('profile', $query);
+        $data['player'] = ($player) ? $player->data[0] : '';
+
+        $query = array('page' => $this->session->userdata('pageplayerkarir'), 'limit' => 20, 'id_player' => $data['player']->id_player,
+                       'sorby' => 'a.id_career', 'sortdir' => 'desc');
+
+        $data['career'] = $this->excurl->reqCurlback('player-career', $query);
+        $data['careercount'] = $this->excurl->reqCurlapp('player-career', array_merge($query, ['count' => true]));
+
+        $data['folder'] = $this->config->item('themes');
+        $html = $this->load->view($this->__theme() . 'member/player/ajax/karir', $data, true);
+
+        $data = array('xClass' => 'reqplayerkarir', 'xHtml' => $html,
+                      'xUrlhash' => base_url() . 'member/player/' . $this->session->userdata('pageplayerkarir') . '/?tab=karir&uid=' . $this->input->post('uid'));
+        $this->tools->__flashMessage($data);
+    }
+
+    function __playerkarirform()
+    {
+        $query = array('id_player' => $this->input->post('uid'), 'md5' => true);
+        $player = $this->excurl->reqCurlback('profile', $query);
+        $data['player'] = ($player) ? $player->data[0] : '';
+
+        $query = array('id_career' => $this->input->post('act'), 'detail' => true);
+        $data['career'] = ($this->input->post('act') != 'add') ? $this->excurl->reqCurlback('player-career', $query) : '';
+
+        $data['folder'] = $this->config->item('themes');
+        $html = $this->load->view($this->__theme() . 'member/player/ajax/karirform', $data, true);
+
+        $data = array('xClass' => 'reqplayerkarirform', 'xHtml' => $html);
+        $this->tools->__flashMessage($data);
+    }
+
+    function __playerkariract()
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $member = ($member) ? $member->data[0] : '';
+
+        if ($member->id_club > 0) {
+            $slug = $this->input->post('uid');
+        } else {
+            $query = array('id_player' => $member->id_player, 'detail' => true);
+            $player = $this->excurl->reqCurlback('profile',  $query);
+            $player = ($player) ? $player->data[0] : '';
+            $slug = $player->slug;
+        }
+
+        $dt = [];
+        if ($this->input->post('act') < 2) {
+            $dt = array('slug' => $slug, 'month' => $this->input->post('month'), 'year' => $this->input->post('year'), 'club' => $this->input->post('club'),
+                        'tournament' => $this->input->post('tournament'), 'country' => $this->input->post('country'), 'number_of_play' => $this->input->post('number_of_play'),
+                        'back_number' => $this->input->post('back_number'), 'coach' => $this->input->post('coach'), 'timnas' => $this->input->post('timnas'));
+        }
+
+        if ($this->input->post('act') > 0) {
+            if ($member AND $member->id_player > 0 OR $member->id_club > 0) {
+                $dt = array_merge($dt, ['id' => $this->input->post('id')]);
+
+                if ($this->input->post('act') < 2) {
+                    $res = $this->excurl->reqCurlapp('edit-career-player', $dt);
+                    $msg = 'Data berhasil disimpan';
+                } else {
+                    $dt = array_merge($dt, ['slug' => $slug]);
+                    $res = $this->excurl->reqCurlapp('del-career-player', $dt);
+                    $msg = 'Data berhasil dihapus';
+                }
+                $arr = $this->library->errorMessage($res);
+
+                if ($res->status == 'Success') {
+                    $arr = array('xDirect' => base_url('member/player/?tab=karir&uid=' . $this->input->post('xid')),
+                                 'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
+                }
+            } else {
+                $arr = array('xDirect' => base_url('member'));
+            }
+        } else {
+            if ($member AND $member->id_club > 0) {
+                $res = $this->excurl->reqCurlapp('add-career-player', $dt);
+                $arr = $this->library->errorMessage($res);
+
+                if ($res->status == 'Success') {
+                    $arr = array('xDirect' => base_url('member/player/?tab=karir&uid=' . $this->input->post('xid')),
+                                 'xCss' => 'boxsuccess', 'xMsg' => 'Data berhasil disimpan', 'xAlert' => true);
+                }
+            } else {
+                $arr = array('xDirect' => base_url('member'));
+            }
+        }
+
+        $this->tools->__flashMessage($arr);
+    }
+
+    function __playerachive()
+    {
+        $this->library->backnext('pageplayerachive', 'pagetotalplayerachive');
+
+        $query = array('id_player' => $this->input->post('uid'), 'md5' => true);
+        $player = $this->excurl->reqCurlback('profile', $query);
+        $data['player'] = ($player) ? $player->data[0] : '';
+
+        $query = array('page' => $this->session->userdata('pageplayerachive'), 'limit' => 20, 'id_player' => $data['player']->id_player,
+                       'sorby' => 'a.id_achievement', 'sortdir' => 'desc');
+
+        $data['achive'] = $this->excurl->reqCurlback('player-achievement', $query);
+        $data['achivecount'] = $this->excurl->reqCurlapp('player-achievement', array_merge($query, ['count' => true]));
+
+        $data['folder'] = $this->config->item('themes');
+        $html = $this->load->view($this->__theme() . 'member/player/ajax/penghargaan', $data, true);
+
+        $data = array('xClass' => 'reqplayerachive', 'xHtml' => $html,
+                      'xUrlhash' => base_url() . 'member/player/' . $this->session->userdata('pageplayerachive') . '/?tab=penghargaan&uid=' . $this->input->post('uid'));
+        $this->tools->__flashMessage($data);
+    }
+
+    function __playerachiveform()
+    {
+        $query = array('id_player' => $this->input->post('uid'), 'md5' => true);
+        $player = $this->excurl->reqCurlback('profile', $query);
+        $data['player'] = ($player) ? $player->data[0] : '';
+
+        $query = array('id_achievement' => $this->input->post('act'), 'detail' => true);
+        $data['achive'] = ($this->input->post('act') != 'add') ? $this->excurl->reqCurlback('player-achievement', $query) : '';
+
+        $data['folder'] = $this->config->item('themes');
+        $html = $this->load->view($this->__theme() . 'member/player/ajax/penghargaanform', $data, true);
+
+        $data = array('xClass' => 'reqplayerachiveform', 'xHtml' => $html);
+        $this->tools->__flashMessage($data);
+    }
+
+    function __playerachiveact()
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $member = ($member) ? $member->data[0] : '';
+
+        if ($member->id_club > 0) {
+            $slug = $this->input->post('uid');
+        } else {
+            $query = array('id_player' => $member->id_player, 'detail' => true);
+            $player = $this->excurl->reqCurlback('profile',  $query);
+            $player = ($player) ? $player->data[0] : '';
+            $slug = $player->slug;
+        }
+
+        $dt = [];
+        if ($this->input->post('act') < 2) {
+            $dt = array('slug' => $slug, 'year' => $this->input->post('year'), 'tournament' => $this->input->post('tournament'),
+                        'country' => $this->input->post('country'), 'rank' => $this->input->post('rank'), 'appreciation' => $this->input->post('appreciation'));
+        }
+
+        if ($this->input->post('act') > 0) {
+            if ($member AND $member->id_player > 0 OR $member->id_club > 0) {
+                $dt = array_merge($dt, ['id' => $this->input->post('id')]);
+
+                if ($this->input->post('act') < 2) {
+                    $res = $this->excurl->reqCurlapp('edit-achieve-player', $dt);
+                    $msg = 'Data berhasil disimpan';
+                } else {
+                    $dt = array_merge($dt, ['slug' => $slug]);
+                    $res = $this->excurl->reqCurlapp('del-achieve-player', $dt);
+                    $msg = 'Data berhasil dihapus';
+                }
+                $arr = $this->library->errorMessage($res);
+
+                if ($res->status == 'Success') {
+                    $arr = array('xDirect' => base_url('member/player/?tab=penghargaan&uid=' . $this->input->post('xid')),
+                        'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
+                }
+            } else {
+                $arr = array('xDirect' => base_url('member'));
+            }
+        } else {
+            if ($member AND $member->id_club > 0) {
+                $res = $this->excurl->reqCurlapp('add-achieve-player', $dt);
+                $arr = $this->library->errorMessage($res);
+
+                if ($res->status == 'Success') {
+                    $arr = array('xDirect' => base_url('member/player/?tab=penghargaan&uid=' . $this->input->post('xid')),
+                        'xCss' => 'boxsuccess', 'xMsg' => 'Data berhasil disimpan', 'xAlert' => true);
+                }
+            } else {
+                $arr = array('xDirect' => base_url('member'));
+            }
+        }
+
+        $this->tools->__flashMessage($arr);
+    }
+
 	function __get_kabupaten()
     { 
 		$querykab = array('provinsi'=>$this->input->post('id_provinsi'));

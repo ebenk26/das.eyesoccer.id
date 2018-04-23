@@ -23,30 +23,15 @@
     });
 </script>
 
-<style>
-    .btn-blue {
-        display: block;
-        background-color: #4FC3F7;
-        margin: 8px;
-        padding: 8px 10px;
-        color: white;
-        font-size: .9em;
-        text-align: center;
-        border: 0px;
-        box-sizing: border-box;
-        border-radius: 5px;
-    }
-</style>
-
 <?php $player = ($player) ? $player->data[0] : ''; ?>
 
 <form class='form_multi' action="<?php echo base_url('member'); ?>" enctype="multipart/form-data">
     <div class="container mt20">
         <div class="pp-profil">
-            <img src="<?php echo ($player) ? $player->url_pic : SUBCDN . "assets/themes/v1/img/fav.png"; ?>" alt="Player" class="viewimg">
+            <img src="<?php echo ($player AND $player->url_pic) ? $player->url_pic : SUBCDN . "assets/themes/v1/img/fav.png"; ?>" alt="Player" class="viewimg">
         </div>
         <div class="full-width">
-            <label class="btn-blue">
+            <label class="btn-blue disp-block mg-b10 mg-b15">
                 Upload Photo
                 <input type="file" name="photo" id="filepic" style="display: none;" accept="image/*">
             </label>
@@ -59,7 +44,7 @@
             $this->load->view($folder . 'member/player/header', $data);
         }
     ?>
-    <div class="container data-profil mt20">
+    <div class="container data-profil">
         <input type="hidden" name="fn" class="cinput" value="playeract">
         <input type="hidden" name="uid" class="cinput" value="<?php echo ($player) ? $player->slug : ''; ?>">
         <input type="hidden" name="act" class="cinput" value="<?php echo ($player) ? 1 : 0; ?>">
@@ -162,7 +147,6 @@
                         <?php
                         $gender = array('1' => 'Laki-laki', '2' => 'Perempuan');
                         foreach ($gender as $n => $v) {
-                            echo $n.'/'.$player->gender;
                             if ($player AND $n == $player->gender) {
                                 echo "<option value='$n' selected>$v</option>";
                             } else {

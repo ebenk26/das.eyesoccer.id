@@ -9,7 +9,7 @@
 </script>
 
 <?php
-    $data['active'] = 'klub';
+    $data['active'] = ($member->id_player > 0) ? 'pemain' : 'klub';
     $this->load->view($folder . 'member/header', $data);
 ?>
 
@@ -32,7 +32,7 @@
         </div>
         <input type='hidden' name='fn' value='playerinfo' class='cinput'>
         <input type='hidden' name='uid' value='<?php echo isset($_GET['uid']) ? $_GET['uid'] : ''; ?>' class='cinput'>
-        <div class="container mt20">
+        <div class="container mg-tb15">
             <div class="pp-profil">
                 <img src="<?php echo SUBCDN . "assets/themes/v1/img/fav.png"; ?>" alt="Player">
             </div>
@@ -43,7 +43,7 @@
                 $this->load->view($folder . 'member/player/header', $data);
             }
         ?>
-        <div class="container data-profil mt20">
+        <div class="container data-profil">
             <table>
                 <tr>
                     <td>Nama</td>

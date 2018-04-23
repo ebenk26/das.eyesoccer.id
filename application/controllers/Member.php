@@ -102,11 +102,25 @@ class Member extends CI_Controller
                     break;
                 case 'karir':
                     $content = 'member/player/karir';
-                    if (isset($_GET['act'])) $content = 'member/player/karirform';
+
+                    if (isset($_GET['act'])) {
+                        $content = 'member/player/karirform';
+                    } else {
+                        $this->library->backnext('pageplayerkarir');
+                        if ($page > 1) $this->session->set_userdata(array('pageplayerkarir' => $page));
+                    }
+
                     break;
                 case 'penghargaan':
                     $content = 'member/player/penghargaan';
-                    if (isset($_GET['act'])) $content = 'member/player/penghargaanform';
+
+                    if (isset($_GET['act'])) {
+                        $content = 'member/player/penghargaanform';
+                    } else {
+                        $this->library->backnext('pageplayerachive');
+                        if ($page > 1) $this->session->set_userdata(array('pageplayerachive' => $page));
+                    }
+
                     break;
                 case 'galeri':
                     $content = 'member/player/galeri';
