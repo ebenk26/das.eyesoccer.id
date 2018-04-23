@@ -17,7 +17,7 @@
                 <input type="text">
                 <div class="edit-foto">
                     <div class="ed-foto">
-                        <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/d.jpg" alt="">
+                        <img src="<?php echo base_url();?>assets/themes/v1/img/d.jpg" alt="">
                     </div>
                     <a href=""><span>Edit Foto Penulis</span></a>
                 </div>

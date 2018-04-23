@@ -30,6 +30,10 @@ class Member extends CI_Controller
             $content = ($this->session->member ? 'member/home' : 'member/login');
 
             if ($this->session->member) {
+                $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+                $member = $this->excurl->reqCurlapp('me', $query);
+                $data['member'] = ($member) ? $member->data[0] : '';
+
                 $data['id'] = $this->HomeMod->get_id('id_member', 'tbl_member', $this->session->member['id']);
                 $data['detail'] = $this->MemberMod->member_detail($data['id']);
             }
@@ -47,14 +51,6 @@ class Member extends CI_Controller
         }
     }
 
-    function login()
-    {
-        $email = $this->input->post('email');
-        $pass = $this->input->post('password');
-        $arr = array('email' => $email, 'xHtml' => $pass);
-        echo json_encode($arr);
-    }
-
     function forgot()
     {
         $content = 'member/forgot';
@@ -65,7 +61,6 @@ class Member extends CI_Controller
         $data['meta_keyword'] = $this->config->item('meta_keyword');
 
         $this->load->view($this->__theme() . 'template', $data);
-
     }
 
     function logout()
@@ -87,32 +82,63 @@ class Member extends CI_Controller
     function player($page = 1)
     {
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
-        $member = $this->excurl->reqCurlback('me', $query);
-        $member = ($member) ? $member->data[0] : '';
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
 
         if (isset($_GET['tab'])) {
+            if ($data['member']->id_player == 0) {
+                if ($data['member']->id_club == 0) {
+                    redirect('member');
+                }
+            } else {
+                if ($data['member']->id_player > 0) {
+                    $_POST['uid'] = md5($data['member']->id_player);
+                }
+            }
+
             switch ($_GET['tab']) {
                 case 'profil':
                     $content = 'member/player/playerinfo';
                     break;
                 case 'karir':
                     $content = 'member/player/karir';
-                    if (isset($_GET['act'])) $content = 'member/player/karirform';
+
+                    if (isset($_GET['act'])) {
+                        $content = 'member/player/karirform';
+                    } else {
+                        $this->library->backnext('pageplayerkarir');
+                        if ($page > 1) $this->session->set_userdata(array('pageplayerkarir' => $page));
+                    }
+
                     break;
                 case 'penghargaan':
                     $content = 'member/player/penghargaan';
-                    if (isset($_GET['act'])) $content = 'member/player/penghargaanform';
+
+                    if (isset($_GET['act'])) {
+                        $content = 'member/player/penghargaanform';
+                    } else {
+                        $this->library->backnext('pageplayerachive');
+                        if ($page > 1) $this->session->set_userdata(array('pageplayerachive' => $page));
+                    }
+
                     break;
                 case 'galeri':
                     $content = 'member/player/galeri';
-                    if (isset($_GET['act'])) $content = 'member/player/galeriform';
+
+                    if (isset($_GET['act'])) {
+                        $content = 'member/player/galeriform';
+                    } else {
+                        $this->library->backnext('pageplayergallery');
+                        if ($page > 1) $this->session->set_userdata(array('pageplayergallery' => $page));
+                    }
+
                     break;
             }
         } else {
-            if ($member->id_player > 0) {
-                redirect('member/player_info');
+            if ($data['member']->id_player > 0) {
+                redirect('member/player/?tab=profil&uid='.md5($data['member']->id_player));
             } else {
-                if ($member->id_club == 0) {
+                if ($data['member']->id_club == 0) {
                     redirect('member');
                 }
             }
@@ -182,6 +208,10 @@ class Member extends CI_Controller
 	
 	function klub()
 	{
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+
     	$content = 'member/club/info_klub';
     	$data['content'] = $content;
     	$data['title']   = $this->config->item('meta_title');
@@ -194,6 +224,14 @@ class Member extends CI_Controller
 
     function regis_klub()
     {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+
+        if ($data['member']->id_club > 0) {
+            redirect('member/klub');
+        }
+
         $content = 'member/club/regis_klub';
         $data['content'] = $content;
         $data['title'] = $this->config->item('meta_title');

@@ -393,9 +393,10 @@ class Library
                             <input type='hidden' name='fn' value='<?php echo $fn; ?>' class='cinput'>
                             <input type='hidden' name='paging' value='back' class='cinput'>
                             <?php
-                            if (isset($opt['slug'])) {
-                                ?> <input type='hidden' name='slug' value='<?php echo $opt['slug']; ?>' class='cinput'> <?php
+                            foreach ($opt as $n => $v) {
+                                ?> <input type='hidden' name='<?php echo $n; ?>' value='<?php echo $v; ?>' class='cinput'> <?php
                             }
+
                             $class = (isset($opt['class'])) ? $opt['class'] : "pagination-green-btn";
                             $name = (isset($opt['name'])) ? $opt['name'] : "Sebelumnya";
                             ?>
@@ -409,9 +410,10 @@ class Library
                             <input type='hidden' name='fn' value='<?php echo $fn; ?>' class='cinput'>
                             <input type='hidden' name='paging' value='next' class='cinput'>
                             <?php
-                            if (isset($opt['slug'])) {
-                                ?> <input type='hidden' name='slug' value='<?php echo $opt['slug']; ?>' class='cinput'> <?php
+                            foreach ($opt as $n => $v) {
+                                ?> <input type='hidden' name='<?php echo $n; ?>' value='<?php echo $v; ?>' class='cinput'> <?php
                             }
+
                             $class = (isset($opt['class'])) ? $opt['class'] : "pagination-green-btn";
                             $name = (isset($opt['name'])) ? $opt['name'] : "Selanjutnya";
                             ?>
@@ -444,11 +446,10 @@ class Library
         if ($res AND is_array($res->data)) {
             if ($res->status == 'Error') {
                 if ($res->message == 'Validation') {
-                    $arr = array_merge($arr, array('xSplit' => true, 'xData' => array()));
+                    $arr = array_merge($arr, array('xSplit' => true, 'xData' => array(), 'xMsg' => 'Inputan belum diisi atau tidak sesuai formatnya', 'xAlert' => true));
                     foreach ($res->data as $key => $value) {
                         $arr['xData'] = array_merge($arr['xData'], array('msg' . $value->param => $value->msg));
                     }
-
                 } else {
                     $arr = array('xCss' => 'boxfailed', 'xMsg' => $res->message, 'xAlert' => true);
                 }
@@ -456,6 +457,65 @@ class Library
         }
 
         return $arr;
+    }
+
+    function monthDate()
+    {
+        return ['januari','februari','maret','april','mei','juni','juli','agustus','september','oktober','november','desember'];
+    }
+
+    function monthFixed($month)
+    {
+        switch ($month) {
+            case 'januari':
+            case 'january':
+                return 'januari';
+                break;
+            case 'februari':
+            case 'february':
+                return 'februari';
+                break;
+            case 'maret':
+            case 'march':
+                return 'maret';
+                break;
+            case 'april':
+            //case 'april':
+                return 'april';
+                break;
+            case 'mei':
+            case 'may':
+                return 'mei';
+                break;
+            case 'juni':
+            case 'june':
+                return 'juni';
+                break;
+            case 'juli':
+            case 'july':
+                return 'juli';
+                break;
+            case 'agustus':
+            case 'august':
+                return 'agustus';
+                break;
+            case 'september':
+            //case 'september':
+                return 'september';
+                break;
+            case 'oktober':
+            case 'october':
+                return 'oktober';
+                break;
+            case 'november':
+            //case 'november':
+                return 'november';
+                break;
+            case 'desember':
+            case 'december':
+                return 'desember';
+                break;
+        }
     }
 
 }

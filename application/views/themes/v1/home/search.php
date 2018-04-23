@@ -28,7 +28,7 @@ if(isset($_GET['q']))
 					<div class="v-etube">
 						<img src="http://static.eyesoccer.id/v1/cache/images/1519793206557_logo_login.png/small" alt="3 Nama yang Cocok Menggantikan Arsene Wenger">
 						<div class="btn-play">
-							<img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/btn-play.png" alt="">
+							<img src="<?php echo base_url();?>assets/themes/v1/img/btn-play.png" alt="">
 						</div>                    
 					</div>
 					<h1>Lorem Ipsum</h1>

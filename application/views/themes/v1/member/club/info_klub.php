@@ -20,7 +20,7 @@
 		<input type='hidden' name='fn' value='infoklub' class='cinput'>
 		<div class="container mt20">
 			<div class="pp-profil">
-				<img src="<?php echo base_url();?>assets/themes/v1/img/fav.png" alt="Logo Klub">
+				<img src="<?php echo SUBCDN;?>assets/themes/v1/img/fav.png" alt="Logo Klub">
 			</div>
 		</div>
 			<div class="container data-profil mt20">
@@ -148,7 +148,7 @@
         <div class="notific">
             <a href="" class="container inbox-dashboard">
                 <div class="container img-inbox-dashboard">
-                    <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                    <img src="<?php echo base_url();?>assets/img/eyeme/user-discover.png" alt="">
                 </div>
                 <div class="text-inbox2">
                     <span>Rika Aulia</span>

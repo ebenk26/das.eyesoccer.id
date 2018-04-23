@@ -1,22 +1,10 @@
 <?php
     $data['active'] = 'home';
-    $this->load->view($folder.'widget/header_member', $data);
+    $this->load->view($folder.'member/header', $data);
 ?>
 <div class="responsif-add-100px">
     <form class='form_multi' action="<?= base_url('member'); ?>" enctype="multipart/form-data">
         <input type="hidden" name="fn" class="cinput" value="regclub">
-        <div class="container submenu">
-            <div class="submenus">
-                <ul>
-                    <li>info klub</li>
-                    <li>pemain</li>
-                    <li>ofisial</li>
-                    <li>galeri</li>
-                    <li>verifikasi</li>
-                    <li>daftar liga</li>
-                </ul>
-            </div>
-        </div>
         <div class="container mt20">
             <div class="pp-profil">
                 <img src="<?php echo SUBCDN ?>assets/themes/v1/img/d.jpg" alt="Logo Klub">
@@ -61,62 +49,12 @@
                     </td>
                 </tr>
             </table>
-           
-            <?php /*
-            ?>
-                <div class="container data-oficial">
-                    <h3>KARIR DAN PRESTASI OFFICIAL</h3>
-                    <div class="scroll-x-outer">
-                        <table class="scroll-x-inner">
-                            <tr>
-                                <td>Bulan</td>
-                                <td>Tahun</td>
-                                <td>Klub</td>
-                                <td>Turnamen / Kompetisi</td>
-                                <td>Peringkat Lisensi Penghargaan</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <select name="" id="">
-                                        <!-- <option value="">Pilih Bulan</option> -->
-                                        <option value="">Jan</option>
-                                        <option value="">Feb</option>
-                                        <option value="">Mar</option>
-                                        <option value="">Apr</option>
-                                        <option value="">Mei</option>
-                                        <option value="">Jun</option>
-                                        <option value="">Jul</option>
-                                        <option value="">Agus</option>
-                                        <option value="">Sept</option>
-                                        <option value="">Okt</option>
-                                        <option value="">Nov</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select name="" id="">
-                                        <!-- <option value="">Pilih Tahun</option> -->
-                                        <option value="">2018</option>
-                                        <option value="">2017</option>
-                                        <option value="">2016</option>
-                                        <option value="">2015</option>
-                                        <option value="">2014</option>
-                                        <option value="">2013</option>
-                                    </select>
-                                </td>
-                                <td><input type="text"></td>
-                                <td><input type="text"></td>
-                                <td><input type="text"></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            <?php
-            */ ?>
         </div>
         <div class="tx-c">
             <input type="submit" value="Simpan" class="klik-dsn" style="font-size:.85em;">
         </div>
     </form>
+<<<<<<< HEAD
 </div>
 <!-- INBOX NOTIFICATION -->
 <div class="container dash-notif" id="notifInbox" style="display: none;">
@@ -127,7 +65,11 @@
     <div class="notific">
         <a href="" class="container inbox-dashboard">
             <div class="container img-inbox-dashboard">
+<<<<<<< HEAD
                 <img src="<?php echo SUBCDN ?>assets/img/eyeme/user-discover.png" alt="">
+=======
+                <img src="<?php echo base_url();?>assets/img/eyeme/user-discover.png" alt="">
+>>>>>>> cc23407462a12b40cd5a8b770a60707f3724e26b
             </div>
             <div class="text-inbox">
                 <span class="time">12:15</span>
@@ -161,7 +103,11 @@
     <div class="notific">
         <a href="" class="container inbox-dashboard">
             <div class="container img-inbox-dashboard">
+<<<<<<< HEAD
                 <img src="<?php echo SUBCDN ?>assets/img/eyeme/user-discover.png" alt="">
+=======
+                <img src="<?php echo base_url();?>assets/img/eyeme/user-discover.png" alt="">
+>>>>>>> cc23407462a12b40cd5a8b770a60707f3724e26b
             </div>
             <div class="text-inbox2">
                 <span>Rika Aulia</span>
@@ -229,3 +175,6 @@
         }
     }
 </script>
+=======
+</div>
+>>>>>>> feca7efae306b410583d08300ba477ae507f5824

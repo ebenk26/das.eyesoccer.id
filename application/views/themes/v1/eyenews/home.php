@@ -42,14 +42,14 @@
 			</span> -->
 		<!--</div>-->
 	<!-- </div> -->
-	<div class="container xc" style="margin-top: 50px;">
+	<!-- <div class="container xc" style="margin-top: 50px;">
 		<table>
 			<tr>
 				<td>
 					<div class="cat-x">
 						<ul>
 							<li>
-								<!--<button onclick="dd()">LIGA</button>-->
+								<button onclick="dd()">LIGA</button>
 								<button onclick="dd()" style="padding-right: 30px;">
 									Kategori
 									<i class="material-icons" style="position: absolute;top: 5px;right: 10px;">arrow_drop_down</i>
@@ -112,7 +112,21 @@
 				</td>
 			</tr>
 		</table>
-	</div>
+	</div> -->
+	<div class="container top-menu-ketegori over-x" style="margin-top: 55px;">
+        <div class="w-max">
+			<a href="<?php echo base_url();?>eyenews/kategori/Di Pinggir Lapangan">Di Pinggir Lapangan</a>
+			<a href="<?php echo base_url();?>eyenews/kategori/Liga">LIGA</a>
+			<a href="<?php echo base_url();?>eyenews/kategori/Pembinaan">Pembinaan</a>
+			<a href="<?php echo base_url();?>eyenews/kategori/Peristiwa">Peristiwa</a>
+			<a href="<?php echo base_url();?>eyenews/kategori/Prediksi">Prediksi</a>
+			<a href="<?php echo base_url();?>eyenews/kategori/Soccer Sains">Soccer Sains</a>
+			<a href="<?php echo base_url();?>eyenews/kategori/Soccer Seri">Soccer Seri</a>
+			<a href="<?php echo base_url();?>eyenews/kategori/Tulisan Kamu">Tulisan Kamu</a>
+			<a href="<?php echo base_url();?>eyenews/kategori/Ulas Tuntas">Ulas Tuntas</a>
+			<a href="<?php echo base_url();?>eyenews/kategori/Umpan Lambung">Umpan Lambung</a>
+        </div>
+    </div>
     <!-- EYENEWS -->
 	<div id="reqonelist" class='loadonelist' action="eyenews" loading="off" clean="clsonelist">
 		<div id='clsonelist'>
