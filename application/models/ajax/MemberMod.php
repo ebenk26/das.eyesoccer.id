@@ -186,13 +186,59 @@ class MemberMod extends CI_Model
 
         $sesi = $this->session->userdata('member');
 
-        $query = array('uid' => $sesi['id'], 'name' => $name, 'namealias' => $namealias);
+        $query = array( 
+            'uid' => $sesi['id'],
+            'name' => $name,
+            'namealias' => $namealias
+        );
+
         $res = $this->excurl->reqCurlapp('register-club', $query, array('legal_pt', 'legal_kemenham', 'legal_npwp', 'legal_dirut'));
 
         $arr = $this->library->errorMessage($res);
 
         if ($res->status == 'Success') {
             $message = "Registrasi Club Berhasil. Silahkan Cek Email Anda";
+            $arr = array('xDirect' => base_url() . 'member', 'xCss' => 'boxsuccess', 'xMsg' => $message, 'xAlert' => true);
+        }
+
+        $this->tools->__flashMessage($arr);
+    }
+
+    function __get_listclub()
+    {
+        $query = array(
+            'page' => '',
+            'limit' => '',
+        );
+        $data['clubs'] = $this->excurl->reqCurlapp('profile-club', $query);
+
+        $html = $this->load->view($this->__theme().'member/player/ajax/view_listclub',$data,true);
+        $data = array('xClass'=> 'reqclub','xHtml' => $html);
+        $this->tools->__flashMessage($data);
+    }
+
+    function __regplayer()
+    {
+        $id_club = $this->input->post('id_club');
+        $name = $this->input->post('name');
+        $no_kk = $this->input->post('no_kk');
+        $no_ktp = $this->input->post('no_ktp');
+
+        $sesi = $this->session->userdata('member');
+
+        $query = array(
+            'uid' => $sesi['id'],
+            'id_club' => $id_club,
+            'name' => $name,
+            'no_kk' => $no_kk,
+            'no_ktp' => $no_ktp,
+        );
+        $res = $this->excurl->reqCurlapp('register-player', $query, array('file_kk', 'file_ktp', 'file_akte', 'file_ijazah', 'file_passport', 'file_bukurek', 'file_ibukandung', 'file_srtrekssb'));
+        var_dump($res);exit();
+        $arr = $this->library->errorMessage($res);
+
+        if ($res->status == 'Success') {
+            $message = "Registrasi Player Berhasil. Silahkan Cek Email Anda";
             $arr = array('xDirect' => base_url() . 'member', 'xCss' => 'boxsuccess', 'xMsg' => $message, 'xAlert' => true);
         }
 

@@ -4,7 +4,7 @@
 ?>
 <div class="responsif-add-100px">
     <form class='form_multi' action="<?= base_url('member'); ?>" enctype="multipart/form-data">
-        <input type="hidden" name="fn" class="cinput" value="regclub">
+        <input type="hidden" name="fn" class="cinput" value="regplayer">
         <div class="container submenu">
             <div class="submenus">
                 <ul>
@@ -23,44 +23,94 @@
             </div>
         </div>
         <div class="container data-profil mt20">
-            <table>
-                <tr>
-                    <td>Nama Lengkap</td>
-                    <td>
-                        <input type="text" name="name">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Nama Alias</td>
-                    <td>
-                        <input type="text" name="namealias">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Legalitas PT</td>
-                    <td>
-                        <input type="file" name="legal_pt">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Legalitas Kemenham</td>
-                    <td>
-                        <input type="file" name="legal_kemenham">
-                    </td>
-                </tr>
-                <tr>
-                    <td>NPWP</td>
-                    <td>
-                        <input type="file" name="legal_npwp">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Legalitas Dirut</td>
-                    <td>
-                        <input type="file" name="legal_dirut">
-                    </td>
-                </tr>
-            </table>
+            <div id="reqclub" class='loadclub' action="member" loading="off" clean="clsclub">
+                <div id='clsclub'>
+                    <script>
+                        $(document).ready(function(){
+                            $(window).on('load',function(){
+                                ajaxOnLoad('loadclub');
+                            });
+                        });
+                    </script>
+                </div>
+                <input type='hidden' name='fn' value='get_listclub' class='cinput'>
+                <table>
+                    <tr>
+                        <td>Klub Sekarang</td>
+                        <td>
+                            <select id="club" name="club" class="form-control">
+                                <option value="">Pilih Klub</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nama</td>
+                        <td>
+                            <input type="text" name="name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>No. Kartu Keluarga</td>
+                        <td>
+                            <input type="text" name="no_kk">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kartu Keluarga</td>
+                        <td>
+                            <input type="file" name="file_kk">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>No. KTP atau NIK</td>
+                        <td>
+                            <input type="number" name="no_ktp">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>KTP (Jika sudah punya)</td>
+                        <td>
+                            <input type="file" name="file_ktp">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Akte Kelahiran</td>
+                        <td>
+                            <input type="file" name="file_akte">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ijazah</td>
+                        <td>
+                            <input type="file" name="file_ijazah">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Passport</td>
+                        <td>
+                            <input type="file" name="file_passport">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Buku Rekening</td>
+                        <td>
+                            <input type="file" name="file_bukurek">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>KTP Ibu Kandung</td>
+                        <td>
+                            <input type="file" name="file_ibukandung">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Surat Rekening SSB</td>
+                        <td>
+                            <input type="file" name="file_srtrekssb">
+                        </td>
+                    </tr>
+                </table>
+            </div>
            
             <?php /*
             ?>
