@@ -211,6 +211,10 @@ class Member extends CI_Controller
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $data['member'] = ($member) ? $member->data[0] : '';
+		
+		if ($data['member']->id_club == 0) {
+			redirect('member');
+		}
 
     	$content = 'member/club/info_klub';
     	$data['content'] = $content;
@@ -261,4 +265,24 @@ class Member extends CI_Controller
 
         $this->load->view($this->__theme() . 'member/template', $data);
     }
+	
+	function galeri()
+	{
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+		
+		if ($data['member']->id_club == 0) {
+			redirect('member');
+		}
+
+    	$content = 'member/club/galeri';
+    	$data['content'] = $content;
+    	$data['title']   = $this->config->item('meta_title');
+    	$data['kanal']   = 'member';
+    	$data['meta_desc'] = $this->config->item('meta_desc');
+	    $data['meta_keyword'] = $this->config->item('meta_keyword');
+	    
+	    $this->load->view($this->__theme().'member/template', $data);
+	}
 }
