@@ -19,7 +19,7 @@
         </div>
         <div class="container mt20">
             <div class="pp-profil">
-                <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/d.jpg" alt="Logo Klub">
+                <img src="<?php echo base_url();?>assets/themes/v1/img/d.jpg" alt="Logo Klub">
             </div>
         </div>
         <div class="container data-profil mt20">
@@ -127,7 +127,7 @@
     <div class="notific">
         <a href="" class="container inbox-dashboard">
             <div class="container img-inbox-dashboard">
-                <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                <img src="<?php echo base_url();?>assets/img/eyeme/user-discover.png" alt="">
             </div>
             <div class="text-inbox">
                 <span class="time">12:15</span>
@@ -161,7 +161,7 @@
     <div class="notific">
         <a href="" class="container inbox-dashboard">
             <div class="container img-inbox-dashboard">
-                <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                <img src="<?php echo base_url();?>assets/img/eyeme/user-discover.png" alt="">
             </div>
             <div class="text-inbox2">
                 <span>Rika Aulia</span>

@@ -8,7 +8,7 @@
             </ul>
         </div>
     <div class="eprofile">
-		<div class="head" style="border-radius: 8px 8px 0px 0px;margin-bottom: 25px;">
+		<div class="head" style="border-radius: 8px 8px 0px 0px;margin-bottom: 25px;height: 80px;min-height:  unset;">
             <div class="img-radius" style="display:none;">
                 <img src="https://www.eyesoccer.id/systems/club_logo/2034LOGO UNTUK APLIKASI.jpg"
                     alt="">
@@ -17,7 +17,7 @@
             <!-- <div class="container tab-eprofile">
                 <a class="active" href="#content1">Info</a>
             </div> -->
-            <div class="table-scroll" style="height: unset;">
+            <!-- <div class="table-scroll" style="height: unset;">
 				<div id="reqclubcount" class='loadclubcount' action="eyeprofile" loading="off" clean="clsclubcount">
 					<div id='clsclubcount'>
 						<script>
@@ -46,7 +46,7 @@
 						</tr>
 					</table>
 				</div>
-            </div>
+            </div> -->
 			<div class="container tab-sub-menu">
 					<a href="<?php echo base_url();?>eyeprofile/klub">info</a>
 					<a href="<?php echo base_url();?>eyeprofile/pemain/<?= $slug; ?>" style="border-left: 1px solid;border-right:  1px solid;border-color: white;" class="active">pemain</a>
