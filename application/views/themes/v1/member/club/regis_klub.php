@@ -5,11 +5,6 @@
 <div class="responsif-add-100px">
     <form class='form_multi' action="<?= base_url('member'); ?>" enctype="multipart/form-data">
         <input type="hidden" name="fn" class="cinput" value="regclub">
-        <div class="container mt20">
-            <div class="pp-profil">
-                <img src="<?php echo SUBCDN ?>assets/themes/v1/img/d.jpg" alt="Logo Klub">
-            </div>
-        </div>
         <div class="container data-profil mt20">
             <table>
                 <tr>
@@ -54,7 +49,6 @@
             <input type="submit" value="Simpan" class="klik-dsn" style="font-size:.85em;">
         </div>
     </form>
-<<<<<<< HEAD
 </div>
 <!-- INBOX NOTIFICATION -->
 <div class="container dash-notif" id="notifInbox" style="display: none;">
@@ -65,11 +59,11 @@
     <div class="notific">
         <a href="" class="container inbox-dashboard">
             <div class="container img-inbox-dashboard">
-<<<<<<< HEAD
+        <<<<<<< HEAD
                 <img src="<?php echo SUBCDN ?>assets/img/eyeme/user-discover.png" alt="">
-=======
+        =======
                 <img src="<?php echo base_url();?>assets/img/eyeme/user-discover.png" alt="">
->>>>>>> cc23407462a12b40cd5a8b770a60707f3724e26b
+        >>>>>>> cc23407462a12b40cd5a8b770a60707f3724e26b
             </div>
             <div class="text-inbox">
                 <span class="time">12:15</span>
@@ -95,7 +89,7 @@
 </div>
 
 <!-- NOTIFICATION -->
-<div class="container dash-notif" id="notifications" style="display: none;">
+<!-- <div class="container dash-notif" id="notifications" style="display: none;">
     <div class="panah-notif2"></div>
     <div class="title-notif">
         <span class="container">Notifikasi</span>
@@ -103,11 +97,11 @@
     <div class="notific">
         <a href="" class="container inbox-dashboard">
             <div class="container img-inbox-dashboard">
-<<<<<<< HEAD
+    <<<<<<< HEAD
                 <img src="<?php echo SUBCDN ?>assets/img/eyeme/user-discover.png" alt="">
-=======
+    =======
                 <img src="<?php echo base_url();?>assets/img/eyeme/user-discover.png" alt="">
->>>>>>> cc23407462a12b40cd5a8b770a60707f3724e26b
+    >>>>>>> cc23407462a12b40cd5a8b770a60707f3724e26b
             </div>
             <div class="text-inbox2">
                 <span>Rika Aulia</span>
@@ -115,7 +109,7 @@
             </div>
             <div class="bb2g"></div>
         </a>
-        <!-- <a href="" class="container inbox-dashboard">
+        <a href="" class="container inbox-dashboard">
             <div class="container img-inbox-dashboard">
                 <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
             </div>
@@ -124,9 +118,9 @@
                 <span>melihat profil kamu</span>
             </div>
             <div class="bb2g"></div>
-        </a> -->
+        </a>
     </div>
-</div>
+</div> -->
 
 <script>
     function myFunction() {
@@ -175,6 +169,3 @@
         }
     }
 </script>
-=======
-</div>
->>>>>>> feca7efae306b410583d08300ba477ae507f5824

@@ -1,27 +1,10 @@
 <?php
     $data['active'] = 'home';
-    $this->load->view($folder.'widget/header_member', $data);
+    $this->load->view($folder.'member/header', $data);
 ?>
 <div class="responsif-add-100px">
     <form class='form_multi' action="<?= base_url('member'); ?>" enctype="multipart/form-data">
         <input type="hidden" name="fn" class="cinput" value="regplayer">
-        <div class="container submenu">
-            <div class="submenus">
-                <ul>
-                    <li>info klub</li>
-                    <li>pemain</li>
-                    <li>ofisial</li>
-                    <li>galeri</li>
-                    <li>verifikasi</li>
-                    <li>daftar liga</li>
-                </ul>
-            </div>
-        </div>
-        <div class="container mt20">
-            <div class="pp-profil">
-                <img src="<?php echo SUBCDN ?>assets/themes/v1/img/d.jpg" alt="Logo Klub">
-            </div>
-        </div>
         <div class="container data-profil mt20">
             <div id="reqclub" class='loadclub' action="member" loading="off" clean="clsclub">
                 <div id='clsclub'>
@@ -33,6 +16,7 @@
                         });
                     </script>
                 </div>
+                <h2>Registrasi Klub</h2>
                 <input type='hidden' name='fn' value='get_listclub' class='cinput'>
                 <table>
                     <tr>

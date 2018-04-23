@@ -244,6 +244,14 @@ class Member extends CI_Controller
 
     function regis_player()
     {
+    	$query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+    	$member = $this->excurl->reqCurlapp('me', $query);
+    	$data['member'] = ($member) ? $member->data[0] : '';
+
+    	if ($data['member']->id_player > 0) {
+    	    redirect('member/player');
+    	}
+
         $content = 'member/player/regis_player';
         $data['content'] = $content;
         $data['title'] = $this->config->item('meta_title');
