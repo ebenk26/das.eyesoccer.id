@@ -166,14 +166,19 @@ class MemberMod extends CI_Model
         $query = array('id_club' => ($v[0]->id_club == 0 ? 1128 : $v[0]->id_club), 'detail' => true);
         $data['klubdetail'] = $this->excurl->reqCurlback('profile-club', $query);
         $val = $data['klubdetail']->data;
+		// print_r($data['klubdetail']);exit();
 		
         $queryprov = array();
         $data['provinsilist'] = $this->excurl->reqCurlback('provinsi', $queryprov);
         $val = $data['provinsilist']->data;
         $data['provinsi'] = $val;
 		
-		$querykab = array('IDKabupaten' => $id_club);
-		$data['kabupaten'] = $this->excurl->reqCurlapp('kabupaten', $querykab);
+		$querykab = array('provinsi' => $data['klubdetail']->data[0]->id_provinsi);
+        $data['kabupatenlist'] = $this->excurl->reqCurlback('kabupaten', $querykab);
+        $val = $data['kabupatenlist']->data;
+        $data['kabupaten'] = $val;
+		// print_r($data['kabupaten']);exit();
+		// print_r($data['klubdetail']->data[0]->Id_kabupaten);exit();
 
         $html = $this->load->view($this->__theme() . 'member/club/ajax/infoklub', $data, true);
 
@@ -214,11 +219,13 @@ class MemberMod extends CI_Model
         $owner = $this->input->post('owner');
         $coach = $this->input->post('coach');
         $manager = $this->input->post('manager');
-        $provinsi = $this->input->post('id_provinsi');
+        $provinsi = $this->input->post('provinsi');
         $kabupaten = $this->input->post('kabupaten');
         $slug = $this->input->post('slug');
+        $supporter_name = $this->input->post('supporter_name');
+        $training_schedule = $this->input->post('training_schedule');
 		
-        $query = array('id_club' => $id_club, 'name' => $name, 'nickname' => $nickname, 'address' => $address, 'description' => $description, 'establish_date' => $establish_date, 'phone' => $phone, 'email' => $email, 'owner' => $owner, 'coach' => $coach, 'provinsi' => $provinsi, 'kabupaten' => $kabupaten, 'manager' => $manager, 'slug' => $slug);
+        $query = array('id_club' => $id_club, 'name' => $name, 'nickname' => $nickname, 'address' => $address, 'description' => $description, 'establish_date' => $establish_date, 'phone' => $phone, 'email' => $email, 'owner' => $owner, 'coach' => $coach, 'provinsi' => $provinsi, 'kabupaten' => $kabupaten, 'manager' => $manager, 'slug' => $slug, 'supporter_name' => $supporter_name, 'training_schedule' => $training_schedule);
 		
         $res = $this->excurl->reqCurlapp('edit-club', $query, array('logo', 'legal_pt'));
 		
@@ -547,7 +554,7 @@ class MemberMod extends CI_Model
 
 	function __get_kabupaten()
     { 
-		$querykab = array('provinsi'=>$this->input->post('id_provinsi'));
+		$querykab = array('provinsi'=>$this->input->post('provinsi'));
         $data['kabupatenlist'] = $this->excurl->reqCurlapp('kabupaten', $querykab);
         $html = $this->load->view($this->__theme().'member/club/ajax/kabupaten',$data,true);
 

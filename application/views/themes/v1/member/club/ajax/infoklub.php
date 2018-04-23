@@ -62,7 +62,7 @@ if ($klubdetail){
 						if($provinsi)
 						{
 					?>
-							<select name="id_provinsi" selected="true" class="slc-musim form_change" action="member" fn="get_kabupaten" loading="off" dest="opt-kabupaten">
+							<select name="provinsi" selected="true" class="slc-musim form_change" action="member" fn="get_kabupaten" loading="off" dest="opt-kabupaten">
 								<option value>--Pilih Provinsi--</option>
 					<?php
 							foreach($provinsi as $dt) 
@@ -93,8 +93,26 @@ if ($klubdetail){
 				<td>Kabupaten</td>
 				<td>
 					<div class="container opt-kabupaten" style="font-size: .8em;">
-						<select id="kabupaten" name="id_kabupaten" class="form-control">
-							<option value="<?php echo ($v[0]->id_kabupaten == 0 ? '': $v[0]->id_kabupaten)?>"><?php echo ($v[0]->id_kabupaten == 0 ? '--Pilih Kabupaten--':)?></option>
+						<select id="kabupaten" name="kabupaten" class="form-control">
+							<option value="">--Pilih Kabupaten--</option>
+							<?php
+									foreach($kabupaten as $dt) 
+									{
+										if($v[0]->Id_kabupaten == $dt->IDKabupaten){
+							?>
+											<option value="<?php echo $dt->IDKabupaten?>" selected> 
+												<?php echo $dt->nama;?> 
+											</option>
+							<?php
+										}else{
+							?>
+											<option value="<?php echo $dt->IDKabupaten?>"> 
+												<?php echo $dt->nama;?> 
+											</option>
+							<?php
+										}
+									}
+							?>
 						</select>
 					</div>
 				</td>
