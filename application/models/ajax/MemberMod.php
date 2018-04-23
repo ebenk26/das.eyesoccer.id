@@ -235,13 +235,13 @@ class MemberMod extends CI_Model
 
         $query = array(
             'uid' => $sesi['id'],
-            'id_club' => $id_club,
+            'club' => md5($id_club),
             'name' => $name,
             'no_kk' => $no_kk,
             'no_ktp' => $no_ktp,
         );
         $res = $this->excurl->reqCurlapp('register-player', $query, array('file_kk', 'file_ktp', 'file_akte', 'file_ijazah', 'file_passport', 'file_bukurek', 'file_ibukandung', 'file_srtrekssb'));
-        var_dump($res);exit();
+        // var_dump($res);exit();
         $arr = $this->library->errorMessage($res);
 
         if ($res->status == 'Success') {
