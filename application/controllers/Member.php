@@ -33,9 +33,6 @@ class Member extends CI_Controller
                 $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
                 $member = $this->excurl->reqCurlapp('me', $query);
                 $data['member'] = ($member) ? $member->data[0] : '';
-
-                $data['id'] = $this->HomeMod->get_id('id_member', 'tbl_member', $this->session->member['id']);
-                $data['detail'] = $this->MemberMod->member_detail($data['id']);
             }
 
             $data['eyeme'] = ($this->input->get('from') == 'eyeme' ? 1 : 0);
@@ -69,14 +66,36 @@ class Member extends CI_Controller
         redirect(base_url(), 'refresh');
     }
 
-    public function profile_upload()
+    function profile()
     {
-        $this->MemberMod->profile_upload($_FILES, $_POST);
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+
+        $content = 'member/profile';
+        $data['content'] = $content;
+        $data['title'] = $this->config->item('meta_title');
+        $data['kanal'] = 'member';
+        $data['meta_desc'] = $this->config->item('meta_desc');
+        $data['meta_keyword'] = $this->config->item('meta_keyword');
+
+        $this->load->view($this->__theme() . 'member/template', $data);
     }
 
-    public function profile_submit_data()
+    function password()
     {
-        $this->MemberMod->submit_data_member($_POST);
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+
+        $content = 'member/password';
+        $data['content'] = $content;
+        $data['title'] = $this->config->item('meta_title');
+        $data['kanal'] = 'member';
+        $data['meta_desc'] = $this->config->item('meta_desc');
+        $data['meta_keyword'] = $this->config->item('meta_keyword');
+
+        $this->load->view($this->__theme() . 'member/template', $data);
     }
 
     function player($page = 1)

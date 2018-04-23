@@ -31,6 +31,7 @@ class MemberMod extends CI_Model
             $sess = array(
                 'id' => $v->id,
                 'username' => $v->username,
+                'fullname' => $v->fullname,
                 'name' => $v->name,
                 'url_pic' => $v->url_pic,
                 'url' => $v->url,
@@ -86,72 +87,76 @@ class MemberMod extends CI_Model
         $this->tools->__flashMessage($arr);
     }
 
-    function __profile_upload()
+    function __profile()
     {
-        $param = array('username' => $this->session->member['username']);
-        $res = $this->excurl->remoteCall($this->__xurl() . 'upload-pic', $this->__xkey(), $param, ['fupload']);
-        $res = json_decode($res);
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $data['member'] = $this->excurl->reqCurlapp('me', $query);
 
-        if ($res->status == 'Error') {
-            $arr = array('xCss' => 'boxfailed', 'xMsg' => $res->message, 'xAlert' => true);
+        $data['folder'] = $this->config->item('themes');
+        $html = $this->load->view($this->__theme() . 'member/ajax/profile', $data, true);
+
+        $data = array('xClass' => 'reqprofile', 'xHtml' => $html);
+        $this->tools->__flashMessage($data);
+    }
+
+    function __profileact()
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $member = ($member) ? $member->data[0] : '';
+
+        if ($member) {
+            $dt = array('username' => $member->username, 'name' => $this->input->post('name'), 'nickname' => $this->input->post('nickname'),
+                        'address' => $this->input->post('address'), 'phone' => $this->input->post('phone'), 'about' => $this->input->post('about'));
+
+            $res = $this->excurl->reqCurlapp('changes-profile', $dt, ['fupload']);
+            $msg = 'Data berhasil disimpan';
+
+            $arr = $this->library->errorMessage($res);
+
+            if ($res->status == 'Success') {
+                $v = $res->data[0];
+                $sess = array(
+                    'id' => $v->id,
+                    'username' => $v->username,
+                    'fullname' => $v->fullname,
+                    'name' => $v->name,
+                    'url_pic' => $v->url_pic,
+                    'url' => $v->url
+                    /*'active' => $v->active,
+                    'verification' => $v->verification*/
+                );
+                $this->session->member = $sess;
+
+                $arr = array('xDirect' => base_url('member/profile'), 'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
+            }
         } else {
-            $arr = array('xDirect' => base_url() . 'member', 'xCss' => 'boxsuccess', 'xMsg' => 'Upload Profile Berhasil.', 'xAlert' => true);
-            $this->session->set_userdata(['member' => (array)$res->data]);
+            $arr = array('xDirect' => base_url('member'));
         }
 
         $this->tools->__flashMessage($arr);
     }
 
-    function member_detail($id)
+    function __password()
     {
-        $query = $this->db->query(" SELECT
-                                        *
-                                    FROM
-                                        tbl_member
-                                    WHERE
-                                        id_member = '$id'
-                                        ")->row();
-        return $query;
-    }
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $member = ($member) ? $member->data[0] : '';
 
-    function submit_data_member($post)
-    {
-        $id = $this->HomeMod->get_id('id_member', 'tbl_member', $this->session->member['id']);
-        $col = "";
-        $i = 0;
-        foreach ($post as $field => $value) {
-            $x = 0;
-            switch ($field) {
-                case 'val':
-                case 'undefined':
-                    $x = 1;
-                    break;
+        if ($member) {
+            $dt = array('username' => $member->username, 'oldpass' => $this->input->post('oldpass'),
+                        'newpass' => $this->input->post('newpass'), 'confirmpass' => $this->input->post('confirmpass'));
+
+            $res = $this->excurl->reqCurlapp('changes-password', $dt);
+            $msg = 'Data berhasil disimpan';
+
+            $arr = $this->library->errorMessage($res);
+
+            if ($res->status == 'Success') {
+                $arr = array('xDirect' => base_url('member/password'), 'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
             }
-
-            if ($x == 0) {
-                if ($i > 0) {
-                    $col .= ",$field='$value'";
-                } else {
-                    //last item
-                    $col .= "$field='$value'";
-                }
-
-                $i++;
-            }
-        }
-
-        $this->db->query(" UPDATE
-								tbl_member
-							SET
-								$col
-							WHERE
-								id_member = '$id'
-						");
-
-        if ($this->db->affected_rows() > 0) {
-            $arr = array('xCss' => 'boxsuccess', 'xMsg' => 'Submit Data Berhasil.', 'xAlert' => true);
         } else {
-            $arr = array('xCss' => 'boxfailed', 'xMsg' => 'Submit Data Gagal.', 'xAlert' => true);
+            $arr = array('xDirect' => base_url('member'));
         }
 
         $this->tools->__flashMessage($arr);
