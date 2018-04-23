@@ -1,9 +1,17 @@
+<a href="<?php echo base_url('member/player/?tab=profil'); ?>" class="btn-blue disp-inblock mg-t mg-b15">Tambah</a>
+
 <?php
     if ($player) {
         foreach ($player->data as $p) {
             ?>
             <div class="x-form-daftar-pemain row">
-                <a href="<?php echo base_url('member/player/?tab=profil&uid='.$p->id); ?>"><i class="far fa-edit" style="float:right; font-size:.9em;"></i></a>
+                <a href="javascript:void(0)" title="Hapus" id="delkarir_<?php echo $p->id; ?>" class="form_post" action="member" fn="playeract"
+                   onclick="return confirm('Apakah anda yakin ingin menghapusnya?')">
+                    <i class="far fa-times" style="float:right; font-size:.9em;"></i>
+                    <span class="cinput disp-none" name="act" val="2"></span>
+                    <input type="hidden" name="uid" value="<?php echo $p->slug; ?>" class="cinput">
+                </a>
+                <a href="<?php echo base_url('member/player/?tab=profil&uid='.$p->id); ?>"><i class="far fa-edit mg-r10" style="float:right; font-size:.9em;"></i></a>
                 <div class="col-xs-4 edits">
                     <div class="img-round">
                         <img src="<?php echo $p->url_pic; ?>" alt="">
@@ -19,6 +27,6 @@
             <?php
         }
 
-        $this->library->backnext('pageplayer', 'pagetotalplayer', $playercount, 'member', 'player');
+        $this->library->backnext('pageplayer', 'pagetotalplayer', $playercount, 'member', 'player', 20);
     }
 ?>

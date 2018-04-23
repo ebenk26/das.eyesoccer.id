@@ -444,11 +444,10 @@ class Library
         if ($res AND is_array($res->data)) {
             if ($res->status == 'Error') {
                 if ($res->message == 'Validation') {
-                    $arr = array_merge($arr, array('xSplit' => true, 'xData' => array()));
+                    $arr = array_merge($arr, array('xSplit' => true, 'xData' => array(), 'xMsg' => 'Inputan belum diisi atau tidak sesuai formatnya', 'xAlert' => true));
                     foreach ($res->data as $key => $value) {
                         $arr['xData'] = array_merge($arr['xData'], array('msg' . $value->param => $value->msg));
                     }
-
                 } else {
                     $arr = array('xCss' => 'boxfailed', 'xMsg' => $res->message, 'xAlert' => true);
                 }
@@ -456,6 +455,65 @@ class Library
         }
 
         return $arr;
+    }
+
+    function monthDate()
+    {
+        return ['januari','februari','maret','april','mei','juni','juli','agustus','september','oktober','november','desember'];
+    }
+
+    function monthFixed($month)
+    {
+        switch ($month) {
+            case 'januari':
+            case 'january':
+                return 'januari';
+                break;
+            case 'februari':
+            case 'february':
+                return 'februari';
+                break;
+            case 'maret':
+            case 'march':
+                return 'maret';
+                break;
+            case 'april':
+            //case 'april':
+                return 'april';
+                break;
+            case 'mei':
+            case 'may':
+                return 'mei';
+                break;
+            case 'juni':
+            case 'june':
+                return 'juni';
+                break;
+            case 'juli':
+            case 'july':
+                return 'juli';
+                break;
+            case 'agustus':
+            case 'august':
+                return 'agustus';
+                break;
+            case 'september':
+            //case 'september':
+                return 'september';
+                break;
+            case 'oktober':
+            case 'october':
+                return 'oktober';
+                break;
+            case 'november':
+            //case 'november':
+                return 'november';
+                break;
+            case 'desember':
+            case 'december':
+                return 'desember';
+                break;
+        }
     }
 
 }
