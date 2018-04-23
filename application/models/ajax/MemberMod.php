@@ -541,6 +541,71 @@ class MemberMod extends CI_Model
         $this->tools->__flashMessage($arr);
     }
 
+    function __playergallery()
+    {
+        $this->library->backnext('pageplayergallery', 'pagetotalplayergallery');
+
+        $query = array('id_player' => $this->input->post('uid'), 'md5' => true);
+        $player = $this->excurl->reqCurlback('profile', $query);
+        $data['player'] = ($player) ? $player->data[0] : '';
+
+        $query = array('page' => $this->session->userdata('pageplayergallery'), 'limit' => 20, 'player' => $data['player']->id_player,
+                       'sorby' => 'a.id_gallery', 'sortdir' => 'desc');
+
+        $data['gallery'] = $this->excurl->reqCurlapp('list-pic', $query);
+        $data['gallerycount'] = $this->excurl->reqCurlapp('list-pic', array_merge($query, ['count' => true]));
+
+        $data['folder'] = $this->config->item('themes');
+        $html = $this->load->view($this->__theme() . 'member/player/ajax/galeri', $data, true);
+
+        $data = array('xClass' => 'reqplayergallery', 'xHtml' => $html,
+                      'xUrlhash' => base_url() . 'member/player/' . $this->session->userdata('pageplayergallery') . '/?tab=galeri&uid=' . $this->input->post('uid'));
+        $this->tools->__flashMessage($data);
+    }
+
+    function __playergalleryact()
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $member = ($member) ? $member->data[0] : '';
+
+        if ($member->id_club > 0) {
+            $slug = $this->input->post('uid');
+        } else {
+            $query = array('id_player' => $member->id_player, 'detail' => true);
+            $player = $this->excurl->reqCurlback('profile',  $query);
+            $player = ($player) ? $player->data[0] : '';
+            $slug = $player->slug;
+        }
+
+        if ($this->input->post('act') > 0) {
+            if ($member AND $member->id_player > 0 OR $member->id_club > 0) {
+                $dt = array('player' => $slug);
+
+                if ($this->input->post('act') < 2) {
+                    $res = $this->excurl->reqCurlapp('upload-pic', $dt, ['fupload']);
+                    $msg = 'Gambar berhasil disimpan';
+                } else {
+                    $dt = array_merge($dt, ['id' => $this->input->post('id')]);
+                    $res = $this->excurl->reqCurlapp('delete-pic', $dt);
+                    $msg = 'Gambar berhasil dihapus';
+                }
+                $arr = $this->library->errorMessage($res);
+
+                if ($res->status == 'Success') {
+                    $arr = array('xDirect' => base_url('member/player/?tab=galeri&uid=' . $this->input->post('xid')),
+                                 'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
+                }
+            } else {
+                $arr = array('xDirect' => base_url('member'));
+            }
+        } else {
+            $arr = array('xDirect' => base_url('member'));
+        }
+
+        $this->tools->__flashMessage($arr);
+    }
+
 	function __get_kabupaten()
     { 
 		$querykab = array('provinsi'=>$this->input->post('id_provinsi'));
