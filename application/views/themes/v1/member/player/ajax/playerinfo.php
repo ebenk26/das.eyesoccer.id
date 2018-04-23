@@ -1,5 +1,20 @@
 <script>
     $(document).ready(function () {
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.viewimg').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('#filepic').change(function () {
+            readURL(this);
+        });
+
         $('#birthdate').datepicker({
             dateFormat: 'dd-mm-yy',
             changeMonth: true,
@@ -7,15 +22,29 @@
         });
     });
 </script>
+
 <?php $player = ($player) ? $player->data[0] : ''; ?>
 
-<div class="container mt20">
-    <div class="pp-profil">
-        <img src="<?php echo ($player) ? $player->url_pic : SUBCDN . "assets/themes/v1/img/fav.png"; ?>" alt="Player">
+<form class='form_multi' action="<?php echo base_url('member'); ?>" enctype="multipart/form-data">
+    <div class="container mt20">
+        <div class="pp-profil">
+            <img src="<?php echo ($player AND $player->url_pic) ? $player->url_pic : SUBCDN . "assets/themes/v1/img/fav.png"; ?>" alt="Player" class="viewimg">
+        </div>
+        <div class="full-width">
+            <label class="btn-blue disp-block mg-b10 mg-b15">
+                Upload Photo
+                <input type="file" name="photo" id="filepic" style="display: none;" accept="image/*">
+            </label>
+        </div>
     </div>
-</div>
-<div class="container data-profil mt20">
-    <form class='form_multi' action="<?php echo base_url('member'); ?>" enctype="multipart/form-data">
+    <?php
+        $uid = (isset($_GET['uid'])) ? $_GET['uid'] : $this->input->post('uid');
+        if ($uid != '') {
+            $data['active'] = 'profil';
+            $this->load->view($folder . 'member/player/header', $data);
+        }
+    ?>
+    <div class="container data-profil">
         <input type="hidden" name="fn" class="cinput" value="playeract">
         <input type="hidden" name="uid" class="cinput" value="<?php echo ($player) ? $player->slug : ''; ?>">
         <input type="hidden" name="act" class="cinput" value="<?php echo ($player) ? 1 : 0; ?>">
@@ -37,9 +66,7 @@
             <tr>
                 <td>Deskripsi</td>
                 <td>
-                    <textarea name="description" rows="5">
-                         <?php echo ($player) ? $player->description : ''; ?>
-                    </textarea>
+                    <textarea name="description" rows="5"><?php echo ($player) ? $player->description : ''; ?></textarea>
                     <span class="err msgdescription"></span>
                 </td>
             </tr>
@@ -53,7 +80,7 @@
             <tr>
                 <td>Tanggal Lahir</td>
                 <td>
-                    <input type="text" name="birth_date" id="birthdate" value="<?php echo ($player) ? $player->birth_date : ''; ?>">
+                    <input type="text" name="birth_date" id="birthdate" value="<?php echo ($player) ? date('d-m-Y', strtotime($player->birth_date)) : ''; ?>">
                     <span class="err msgbirth_date"></span>
                 </td>
             </tr>
@@ -79,36 +106,36 @@
                 </td>
             </tr>
             <?php
-                if (empty($player)) {
-                    ?>
-                    <tr>
-                        <td>Username</td>
-                        <td>
-                            <input type="text" name="username" value="<?php echo ($player) ? $player->username : ''; ?>">
-                            <span class="err msgusername"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td>
-                            <input type="text" name="password" value="<?php echo ($player) ? $player->password : ''; ?>">
-                            <span class="err msgpassword"></span>
-                        </td>
-                    </tr>
-                    <?php
-                }
+            if (empty($player)) {
+                ?>
+                <!--<tr>
+                    <td>Username</td>
+                    <td>
+                        <input type="text" name="username" value="<?php /*echo ($player) ? $player->username : ''; */?>">
+                        <span class="err msgusername"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>
+                        <input type="text" name="password" value="<?php /*echo ($player) ? $player->password : ''; */?>">
+                        <span class="err msgpassword"></span>
+                    </td>
+                </tr>-->
+                <?php
+            }
             ?>
             <tr>
                 <td>Height</td>
                 <td>
-                    <input type="text" name="height" value="<?php echo ($player) ? $player->height : ''; ?>">
+                    <input type="number" min="1" name="height" value="<?php echo ($player) ? $player->height : ''; ?>">
                     <span class="err msgheight"></span>
                 </td>
             </tr>
             <tr>
                 <td>Weight</td>
                 <td>
-                    <input type="text" name="weight" value="<?php echo ($player) ? $player->weight : ''; ?>">
+                    <input type="number" min="1" name="weight" value="<?php echo ($player) ? $player->weight : ''; ?>">
                     <span class="err msgweight"></span>
                 </td>
             </tr>
@@ -116,6 +143,7 @@
                 <td>Jenis Kelamin</td>
                 <td>
                     <select name="gender">
+                        <option value="">- Pilih Jenis Kelamin -</option>
                         <?php
                         $gender = array('1' => 'Laki-laki', '2' => 'Perempuan');
                         foreach ($gender as $n => $v) {
@@ -141,6 +169,7 @@
                 <td>Posisi Utama</td>
                 <td>
                     <select name="position_a">
+                        <option value="">- Pilih Posisi Utama -</option>
                         <?php
                         if ($position) {
                             foreach ($position->data as $v) {
@@ -160,6 +189,7 @@
                 <td>Posisi Cadangan</td>
                 <td>
                     <select name="position_b">
+                        <option value="">- Pilih Posisi Cadangan -</option>
                         <?php
                         if ($position) {
                             foreach ($position->data as $v) {
@@ -186,6 +216,7 @@
                 <td>Kemampuan Kaki</td>
                 <td>
                     <select name="foot">
+                        <option value="">- Pilih Kemampuan Kaki -</option>
                         <?php
                         if ($foot) {
                             foreach ($foot->data as $v) {
@@ -222,20 +253,20 @@
                     <span class="err msgfav_coach"></span>
                 </td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td>Kisaran Gaji</td>
                 <td>
-                    <input type="text" name="contract_start" value="<?php echo ($player) ? $player->contract_start : ''; ?>" placeholder="Start">
+                    <input type="text" name="contract_start" value="<?php /*echo ($player) ? $player->contract_start : ''; */?>" placeholder="Start">
                     <span class="err msgcontract_start"></span>
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <input type="text" name="contract_end" value="<?php echo ($player) ? $player->contract_end : ''; ?>" placeholder="End">
+                    <input type="text" name="contract_end" value="<?php /*echo ($player) ? $player->contract_end : ''; */?>" placeholder="End">
                     <span class="err msgcontract_end"></span>
                 </td>
-            </tr>
+            </tr>-->
             <tr>
                 <td>Nama Bapak</td>
                 <td>
@@ -251,18 +282,10 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                    Foto Pemain
-                </td>
-                <td>
-                    <input type="file" name="photo">
-                </td>
-            </tr>
-            <tr>
                 <td colspan="2" class="tx-c">
                     <button class="klik-dsn">Simpan</button>
                 </td>
             </tr>
         </table>
-    </form>
-</div>
+    </div>
+</form>

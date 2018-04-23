@@ -9,14 +9,16 @@
 </script>
 
 <?php
-    $data['active'] = 'klub';
+    $data['active'] = ($member->id_player > 0) ? 'pemain' : 'klub';
     $this->load->view($folder . 'member/header', $data);
 ?>
 
 <div class="responsif-add-100px">
     <?php
-        $data['active'] = 'info_klub';
-        $this->load->view($folder . 'member/player/header', $data);
+        if ($member->id_club > 0) {
+            $data['active'] = 'pemain';
+            $this->load->view($folder.'member/club/header', $data);
+        }
     ?>
     <div id="reqplayerinfo" class='loadplayerinfo' action="member" loading="off" clean="clsplayerinfo">
         <div id='clsplayerinfo'>
@@ -30,12 +32,18 @@
         </div>
         <input type='hidden' name='fn' value='playerinfo' class='cinput'>
         <input type='hidden' name='uid' value='<?php echo isset($_GET['uid']) ? $_GET['uid'] : ''; ?>' class='cinput'>
-        <div class="container mt20">
+        <div class="container mg-tb15">
             <div class="pp-profil">
                 <img src="<?php echo SUBCDN . "assets/themes/v1/img/fav.png"; ?>" alt="Player">
             </div>
         </div>
-        <div class="container data-profil mt20">
+        <?php
+            if (isset($_GET['uid'])) {
+                $data['active'] = 'profil';
+                $this->load->view($folder . 'member/player/header', $data);
+            }
+        ?>
+        <div class="container data-profil">
             <table>
                 <tr>
                     <td>Nama</td>
