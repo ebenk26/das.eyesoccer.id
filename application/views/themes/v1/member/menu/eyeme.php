@@ -4,7 +4,7 @@
 	?>
     <div class="container wlc">
         <div class="bg-eyeme">
-            <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/a.jpg" alt="Background Image">
+            <img src="<?php echo base_url();?>assets/themes/v1/img/a.jpg" alt="Background Image">
             <div class="close-wlcm">
                 <i class="fas fa-pencil-alt"></i>
             </div>
@@ -13,7 +13,7 @@
                     <i class="fas fa-pencil-alt"></i>
                 </div>
                 <div class="pp-eyeme-img">
-                    <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/d.jpg" alt="Profil Picture">
+                    <img src="<?php echo base_url();?>assets/themes/v1/img/d.jpg" alt="Profil Picture">
                 </div>
             </div>    
         </div>       

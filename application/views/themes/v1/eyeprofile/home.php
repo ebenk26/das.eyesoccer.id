@@ -12,45 +12,16 @@
             </ul>
         </div>
     <div class="eprofile">
-		<div class="head" style="border-radius: 8px 8px 0px 0px;margin-bottom: 25px;">
+		<div class="head" style="border-radius: 8px 8px 0px 0px;margin-bottom: 25px;height: 80px;min-height:  unset;">
             <!-- <div class="img-radius" style="display:none;">
                 <img src=""
                     alt="">
-            </div> -->
+			</div> -->
+			<span class="button-open sbpbtn">Daftarkan SSB Kamu</span>
             <h2 class="h2-text-bottom sdfkjs"><?php echo urldecode($slug);?></h2>
             <!-- <div class="container tab-eprofile">
                 <a class="active" href="#content1">Info</a>
             </div> -->
-            <div class="table-scroll" style="height: unset;">
-				<div id="reqdescleague" class='loadclubcount' action="eyeprofile" loading="off" clean="clsclubcount">
-					<div id='clsclubcount'>
-						<script>
-							$(document).ready(function(){
-								$(window).on('load',function(){
-									ajaxOnLoad('loadclubcount');
-								});
-							});
-						</script>
-					</div>
-					<input type='hidden' name='fn' value='desc_league' class='cinput'>
-					<input type='hidden' name='submenu' value='klub' class='cinput'>
-					<input type='hidden' name='slug' value='<?php echo $slugnya;?>' class='cinput'>
-					<table class="content-tab-eprofile">
-						<tr>
-							<td>Jumlah Klub</td>
-							<td>: 0</td>
-						</tr>
-						<tr>
-							<td>Jumlah Pemain</td>
-							<td>: 0</td>
-						</tr>
-						<tr>
-							<td>Pemain Asing</td>
-							<td>: 0</td>
-						</tr>
-					</table>
-				</div>
-			</div>
 			<div class="container tab-sub-menu">
 					<a href="<?php echo base_url();?>eyeprofile/klub" class="active">info</a>
 					<a href="<?php echo base_url();?>eyeprofile/pemain/<?= $slug; ?>" style="border-left: 1px solid;border-right:  1px solid;border-color: white;">pemain</a>
@@ -69,6 +40,37 @@
                 <a href="">supporter</a>
             </div>
 		</div> -->
+
+		<div class="table-scroll" style="height: unset;margin: 20px 0px 15px;">
+			<div id="reqdescleague" class='loadclubcount' action="eyeprofile" loading="off" clean="clsclubcount">
+				<div id='clsclubcount'>
+					<script>
+						$(document).ready(function(){
+							$(window).on('load',function(){
+								ajaxOnLoad('loadclubcount');
+							});
+						});
+					</script>
+				</div>
+				<input type='hidden' name='fn' value='desc_league' class='cinput'>
+				<input type='hidden' name='submenu' value='klub' class='cinput'>
+				<input type='hidden' name='slug' value='<?php echo $slugnya;?>' class='cinput'>
+				<table class="content-tab-eprofile">
+					<tr>
+						<td>Jumlah Klub</td>
+						<td>: 0</td>
+					</tr>
+					<tr>
+						<td>Jumlah Pemain</td>
+						<td>: 0</td>
+					</tr>
+					<tr>
+						<td>Pemain Asing</td>
+						<td>: 0</td>
+					</tr>
+				</table>
+			</div>
+		</div>
         <div class="container" style="font-size: .8em;">
 			<div id="reqcompetition" class='loadcompetition' action="eyeprofile" loading="off" clean="clscompetition">
 				<div id='clscompetition'>
@@ -368,7 +370,149 @@
                         </div>
                     </div>
                 </div>
-            </div>
+			</div>
+			<div class="section-box-popup to-open">
+				<div class="box-popup">
+				<i class="material-icons sbpclose to-close">clear</i>
+						<div class="container mt20">
+							<div class="pp-profil">
+								<img src="<?php echo base_url();?>assets/themes/v1/img/d.jpg" alt="Logo Klub">
+							</div>
+						</div>
+						<div class="container data-profil mt20">
+							<table>
+								<tbody><tr>
+									<td>Nama Lengkap</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>Tempat Lahir</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>Tanggal Lahir</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>Jenis kelamin</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>No.Identitas / KTP / Passport</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>Warga Negara</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>Klub / SSB Saat Ini</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>Jabatan</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>Lisensi Pelatih</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>No. Telepon</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>Email</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>Kisaran Kontrak</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+							</tbody></table>
+							<div class="container data-oficial">
+								<h3>KARIR DAN PRESTASI OFFICIAL</h3>
+								<div class="scroll-x-outer">
+									<table class="scroll-x-inner">
+										<tbody><tr>
+											<td>Bulan</td>
+											<td>Tahun</td>
+											<td>Klub</td>
+											<td>Turnamen / Kompetisi</td>
+											<td>Peringkat Lisensi Penghargaan</td>
+										</tr>
+										<tr>
+											<td>
+												<select name="" id="">
+													<!-- <option value="">Pilih Bulan</option> -->
+													<option value="">Jan</option>
+													<option value="">Feb</option>
+													<option value="">Mar</option>
+													<option value="">Apr</option>
+													<option value="">Mei</option>
+													<option value="">Jun</option>
+													<option value="">Jul</option>
+													<option value="">Agus</option>
+													<option value="">Sept</option>
+													<option value="">Okt</option>
+													<option value="">Nov</option>
+												</select>
+											</td>
+											<td>
+												<select name="" id="">
+													<!-- <option value="">Pilih Tahun</option> -->
+													<option value="">2018</option>
+													<option value="">2017</option>
+													<option value="">2016</option>
+													<option value="">2015</option>
+													<option value="">2014</option>
+													<option value="">2013</option>
+												</select>
+											</td>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+											<td><input type="text"></td>
+										</tr>
+									</tbody></table>
+								</div>
+							</div>
+						</div>
+						<div class="tx-c">
+							<button class="klik-dsn" style="font-size:.85em;">Simpan</button>
+						</div>
+					</div></div>
+					<script>
+						var buttonOpen = document.getElementsByClassName("button-open")[0];
+						// window.onload = function(){
+						buttonOpen.style.width = "200px";
+						buttonOpen.style.height = "unset";
+						buttonOpen.style.padding = "10px";
+						// }
+					</script>
     </div>
     <?php }
     else{

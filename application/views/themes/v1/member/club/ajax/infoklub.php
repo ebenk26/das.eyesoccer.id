@@ -11,11 +11,9 @@ if ($klubdetail){
         font-size: .9em;
         display: block;
         text-align: center;
-        margin: 8px 8px 8px 0px;
-        float: left;
+        margin: 8px;
         border: 0px;
         box-sizing: border-box;
-        width: 100%;
     }
 </style>
 <form class='form_multi' action="<?= base_url('member'); ?>" enctype="multipart/form-data">
@@ -95,7 +93,9 @@ if ($klubdetail){
 				<td>Kabupaten</td>
 				<td>
 					<div class="container opt-kabupaten" style="font-size: .8em;">
-					
+						<select id="kabupaten" name="id_kabupaten" class="form-control">
+							<option value="<?php echo ($v[0]->id_kabupaten == 0 ? '': $v[0]->id_kabupaten)?>"><?php echo ($v[0]->id_kabupaten == 0 ? '--Pilih Kabupaten--':)?></option>
+						</select>
 					</div>
 				</td>
 			</tr>
