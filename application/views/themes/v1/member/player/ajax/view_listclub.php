@@ -6,7 +6,7 @@
     		<select name="id_club">
     			<option value="">Pilih Club</option>
     			<?php foreach ($clubs->data as $cl): ?>
-	    			<option value="<?= $cl->id_club; ?>"><?= $cl->name; ?></option>
+	    			<option value="<?= $cl->slug; ?>"><?= $cl->name; ?></option>
     			<?php endforeach ?>
     		</select>
     	</td>
