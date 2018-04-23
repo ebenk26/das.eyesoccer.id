@@ -171,6 +171,9 @@ class MemberMod extends CI_Model
         $data['provinsilist'] = $this->excurl->reqCurlback('provinsi', $queryprov);
         $val = $data['provinsilist']->data;
         $data['provinsi'] = $val;
+		
+		$querykab = array('IDKabupaten' => $id_club);
+		$data['kabupaten'] = $this->excurl->reqCurlapp('kabupaten', $querykab);
 
         $html = $this->load->view($this->__theme() . 'member/club/ajax/infoklub', $data, true);
 
@@ -212,12 +215,13 @@ class MemberMod extends CI_Model
         $coach = $this->input->post('coach');
         $manager = $this->input->post('manager');
         $provinsi = $this->input->post('id_provinsi');
-        $kabupaten = $this->input->post('id_provinsi');
+        $kabupaten = $this->input->post('kabupaten');
         $slug = $this->input->post('slug');
 		
         $query = array('id_club' => $id_club, 'name' => $name, 'nickname' => $nickname, 'address' => $address, 'description' => $description, 'establish_date' => $establish_date, 'phone' => $phone, 'email' => $email, 'owner' => $owner, 'coach' => $coach, 'provinsi' => $provinsi, 'kabupaten' => $kabupaten, 'manager' => $manager, 'slug' => $slug);
 		
         $res = $this->excurl->reqCurlapp('edit-club', $query, array('logo', 'legal_pt'));
+		
         // print_r($res);
         // exit;
         $arr = $this->library->errorMessage($res);
