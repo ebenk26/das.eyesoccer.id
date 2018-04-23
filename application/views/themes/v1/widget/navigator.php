@@ -17,7 +17,12 @@
 
     	}
     	else{
-			echo '<i id="src" class="material-icons f-r">search</i><a href="member" style="color: #8ec429;"><i class="material-icons f-r" style="transform: rotate(-90deg);padding:  10px 0px;">system_update_alt</i></a>';
+			echo '<i id="src" class="material-icons f-r">search</i>
+				<a href="member" style="color: #8ec429;">
+					<div class="pprofile">
+						<img src="http://localhost/das.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+					</div>
+				</a>';
     	}
 
     ?>

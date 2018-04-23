@@ -32,8 +32,8 @@ hr{
     border-bottom: 1px solid gainsboro;
 }
 select{
-    padding: 2px 5px;
-    border-radius: 5px;
+    padding: 5px 10px;
+    border-radius: 4px;
 }
 select:focus{
     box-shadow: 0 0 4px #2196f3ab;
@@ -4190,4 +4190,46 @@ video::-webkit-media-controls-panel {
 }
 .table-span2 tr:focus{
     background-color: whitesmoke;
+}
+.oficial-pic{
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.oficial-pic img{
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+.oficial-pic{
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.oficial-pic img, .pprofile img{
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+.pprofile{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    float: right;
+    margin-top: 7px;
 }
