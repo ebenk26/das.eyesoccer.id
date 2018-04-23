@@ -124,7 +124,14 @@ class Member extends CI_Controller
                     break;
                 case 'galeri':
                     $content = 'member/player/galeri';
-                    if (isset($_GET['act'])) $content = 'member/player/galeriform';
+
+                    if (isset($_GET['act'])) {
+                        $content = 'member/player/galeriform';
+                    } else {
+                        $this->library->backnext('pageplayergallery');
+                        if ($page > 1) $this->session->set_userdata(array('pageplayergallery' => $page));
+                    }
+
                     break;
             }
         } else {

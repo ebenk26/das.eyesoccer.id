@@ -148,7 +148,7 @@
         <div class="notific">
             <a href="" class="container inbox-dashboard">
                 <div class="container img-inbox-dashboard">
-                    <img src="http://localhost/mob.eyesoccer.id/assets/img/eyeme/user-discover.png" alt="">
+                    <img src="<?php echo base_url();?>assets/img/eyeme/user-discover.png" alt="">
                 </div>
                 <div class="text-inbox2">
                     <span>Rika Aulia</span>

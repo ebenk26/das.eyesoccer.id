@@ -6,7 +6,7 @@
         <div class="tube-eye">
             <a href="">
                 <div class="tube-eye-img">
-                    <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/d.jpg" alt="">
+                    <img src="<?php echo base_url();?>assets/themes/v1/img/d.jpg" alt="">
                 </div>
                 <h4>Antara Egy MV dan Irfan Bachdim di Kantor Eyesoccer</h4>
                 <span>11 jam lalu - 99987 kali dilihat</span>
@@ -15,7 +15,7 @@
         <div class="tube-eye">
             <a href="">
                 <div class="tube-eye-img">
-                    <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/a.jpg" alt="">
+                    <img src="<?php echo base_url();?>assets/themes/v1/img/a.jpg" alt="">
                 </div>
                 <h4>Antara Egy MV dan Irfan Bachdim di Kantor Eyesoccer</h4>
                 <span>11 jam lalu - 99987 kali dilihat</span>
@@ -24,7 +24,7 @@
         <div class="tube-eye">
             <a href="">
                 <div class="tube-eye-img">
-                    <img src="http://localhost/mob.eyesoccer.id/assets/themes/v1/img/d.jpg" alt="">
+                    <img src="<?php echo base_url();?>assets/themes/v1/img/d.jpg" alt="">
                 </div>
                 <h4>Antara Egy MV dan Irfan Bachdim di Kantor Eyesoccer</h4>
                 <span>11 jam lalu - 99987 kali dilihat</span>
