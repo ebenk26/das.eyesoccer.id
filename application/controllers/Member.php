@@ -390,7 +390,7 @@ class Member extends CI_Controller
 
         $data['id_member'] = $id_member;
 
-        $content = 'member/club/detail_verifikasi';
+        $content = 'member/club/verikasiform';
         $data['content'] = $content;
         $data['title']   = $this->config->item('meta_title');
         $data['kanal']   = 'member';

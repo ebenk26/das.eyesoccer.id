@@ -978,7 +978,7 @@ class MemberMod extends CI_Model
 
         $data['verify'] = $this->excurl->reqCurlapp('reglist-player', $query)->data;
         
-        $html = $this->load->view($this->__theme().'member/club/ajax/view_verify',$data,true);
+        $html = $this->load->view($this->__theme().'member/club/ajax/verifikasi',$data,true);
         $data = array('xClass'=> 'reqverify','xHtml' => $html);
         $this->tools->__flashMessage($data);
     }
@@ -1008,7 +1008,7 @@ class MemberMod extends CI_Model
 
         $data['verify'] = $this->excurl->reqCurlapp('reglist-player', $query)->data;
 
-        $html = $this->load->view($this->__theme().'member/club/ajax/view_detailverify',$data,true);
+        $html = $this->load->view($this->__theme().'member/club/ajax/verikasiform',$data,true);
         $data = array('xClass'=> 'reqverify','xHtml' => $html);
         $this->tools->__flashMessage($data);
     }

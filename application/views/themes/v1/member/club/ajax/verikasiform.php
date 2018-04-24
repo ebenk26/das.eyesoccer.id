@@ -102,6 +102,29 @@
 				</tr>
 			<?php endif ?>
 		</table>
+		<span class="klik-dsn" style="padding-bottom: 12px; margin-left: 33%;"> Approve </span>
+	</div>
+	<div class="x-form-daftar-pemain row">
+		<?php if (count($ver->players) > 0 ): ?>
+			<p>Pemain Dengan Nama yang Sama</p>
+			<table>
+				<?php foreach ($ver->players as $pl): ?>
+					<tr>
+						<td>Nama</td>
+						<td>: <?= $pl->name; ?></td>
+					</tr>
+					<tr>
+						<td>Club</td>
+						<td>: <?= $pl->club; ?></td>
+					</tr>
+					<tr>
+						<td>Kewarganegaraan</td>
+						<td>: <?= $pl->nationality; ?></td>
+					</tr>
+				<?php endforeach ?>
+			</table>
+			<span class="klik-dsn" style="padding-bottom: 12px; margin-left: 33%;"> Approve </span>
+		<?php endif ?>
 	</div>
 	
 <?php endforeach ?>
