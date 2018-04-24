@@ -10,7 +10,6 @@ class Member extends CI_Controller
     {
         parent::__construct();
         $this->load->model('ajax/MemberMod');
-        $this->load->model('ajax/HomeMod');
     }
 
     function index()
@@ -285,6 +284,33 @@ class Member extends CI_Controller
         $this->load->view($this->__theme() . 'member/template', $data);
     }
 
+    function official($page = 1)
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+
+        if ($data['member']->id_club == 0) {
+            redirect('member');
+        }
+
+        $content = 'member/club/official';
+        if (isset($_GET['act'])) {
+            $content = 'member/club/officialform';
+        } else {
+            $this->library->backnext('pageofficial');
+            if ($page > 1) $this->session->set_userdata(array('pageofficial' => $page));
+        }
+
+        $data['content'] = $content;
+        $data['title']   = $this->config->item('meta_title');
+        $data['kanal']   = 'member';
+        $data['meta_desc'] = $this->config->item('meta_desc');
+        $data['meta_keyword'] = $this->config->item('meta_keyword');
+
+        $this->load->view($this->__theme().'member/template', $data);
+    }
+
     function get_club()
     {
     	$id = $this->input->post('id');
@@ -301,7 +327,7 @@ class Member extends CI_Controller
         
         echo json_encode($data);
     }
-	
+
 	function galeri()
 	{
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
