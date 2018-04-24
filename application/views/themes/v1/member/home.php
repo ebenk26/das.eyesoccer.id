@@ -39,6 +39,7 @@
 					<a href="<?php echo base_url()?>member/klub"><button class="klik-dsn">Masuk ke Profil Klub</button></a>
 <?php
 				}
+			}else if($player){
 			}else{
 ?>
 				 <span>JIKA KAMU PEMILIK KLUB / SSB</span>
@@ -54,17 +55,13 @@
 ?>
 				<span><?php echo $player->name;?></span>
 <?php
-				if($player->is_verify == 0 && $player->is_active == 0){
+				if($player->is_active == 0){
 ?>
 					<a href="#"><button class="klik-dsn">Menunggu Verifikasi</button></a>
 <?php
-				}else if($player->is_verify == 1 && $player->is_active == 0){
-?>
-					<a href="#"><button class="klik-dsn">Belum di aktivasi</button></a>
-<?php
 				}else{
 ?>
-					<a href="<?php echo base_url()?>member/klub"><button class="klik-dsn">Masuk ke Profil Klub</button></a>
+					<a href="<?php echo base_url()?>member/player"><button class="klik-dsn">Masuk ke Profil Pemain</button></a>
 <?php
 				}
 			}else if($club){

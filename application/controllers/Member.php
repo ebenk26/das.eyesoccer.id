@@ -36,7 +36,7 @@ class Member extends CI_Controller
 				$queryclub = array('member' => $this->session->member['id']);
 				$data['clubstatus'] = $this->excurl->reqCurlapp('reglist-club', $queryclub);
 				
-				$data['playerstatus'] = $this->excurl->reqCurlapp('reglist-player', $queryclub);
+				$data['playerstatus'] = $this->excurl->reqCurlback('reglist-player', $queryclub);
 				// print_r($data['clubstatus']);
 				// print_r($data['playerstatus']);
 				// exit();
