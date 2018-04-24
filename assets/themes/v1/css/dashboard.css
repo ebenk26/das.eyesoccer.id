@@ -180,9 +180,17 @@
 }
 .klik-dsn.red{
     background-color: #d32f2f !important;
+    box-shadow: inset 0 0 10px #a50000;
+}
+.klik-dsn.blue{
+    font-size: .8em;
+    font-family: arial;
+    background-color: #4FC3F7;
+    box-shadow: inset 0 0 5px #7a99a2;
 }
 .klik-dsn.gray{
     background-color: gray !important;
+    box-shadow: inset 0 0 10px rgb(85, 85, 85);
 }
 .klik-dsn:focus{
     box-shadow: 0 0 7px gray;
@@ -312,22 +320,19 @@
     z-index: 1;
     width: max-content;
 }
-
 .player-galeri .pad{
     margin: 2px;
     background-color: gainsboro;
     border-radius: 5px;
     overflow: hidden;
 }
-
 .player-galeri .img{
     display: block;
-    height: 72px;
+    height: 80px;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
 }
-
 .player-galeri img{
     width: 100%;
     /* position: absolute;
@@ -336,7 +341,15 @@
     margin-right: -50%;
     transform: translate(-50%, -50%); */
 }
-
+.player-galeri i{
+    float: right;
+    font-size: .9em;
+    position: absolute;
+    right: 6px;
+    top: 5px;
+    color: white;
+    text-shadow: 0 0 10px black;
+}
 .pd20{
     padding: 20px !important;
 }
@@ -389,25 +402,18 @@
     margin-right: 5px;
 }
 .tulisankamu input{
-    border: none;
-    border-bottom: 2px solid rgb(243 243 243);
-    padding: 8px;
     font: unset;
-    margin-bottom: 15px;
+    margin: 5px 0 20px;
     text-transform: capitalize;
     display: block;
-    width: 100%;
-    box-sizing: border-box;
 }
 .tulisankamu textarea{
-    width: 100%;
-    max-width: 100%;
     height: 200px;
     padding: 5px 10px;
     box-sizing: border-box;
     border-radius: 7px;
-    border: none;
-    box-shadow: inset 0 0 2px rgb(181, 181, 181);
+    border: 1px solid rgba(222, 222, 222, 0.35);
+    box-shadow: 0 2px rgb(181, 181, 181);
     font: unset;
     margin-top: 15px;
 }
@@ -773,7 +779,7 @@
 .form-daftarpemain td:nth-of-type(1){
     width: 105px;
 }
-.form-daftarpemain input, .data-profil input, .data-oficial input{
+.form-daftarpemain input, .data-profil input, .data-oficial input, .tulisankamu input{
     width: 100%;
     background-color: #fafafa;
     border-radius: 5px;
@@ -859,6 +865,7 @@
 }
 textarea{
     max-width: 100%;
+    width: 100% !important;
 }
 .close-check1{
     display: inline-block;
@@ -874,4 +881,21 @@ select{
 }
 .pad-2{
     margin: 2px;
+}
+.gal-upload{
+    width: 240px;
+    height: 120px;
+    border-radius: 5px;
+    margin: 0 auto;
+    box-shadow: 0 0 5px 1px #f1f1f1;
+    margin-bottom: 10px;
+}
+.gal-upload img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    color: rgb(216 216 216);
+    height: 100%;
 }

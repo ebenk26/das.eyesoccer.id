@@ -32,6 +32,14 @@ class Member extends CI_Controller
                 $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
                 $member = $this->excurl->reqCurlapp('me', $query);
                 $data['member'] = ($member) ? $member->data[0] : '';
+				
+				$queryclub = array('member' => $this->session->member['id']);
+				$data['clubstatus'] = $this->excurl->reqCurlapp('reglist-club', $queryclub);
+				
+				$data['playerstatus'] = $this->excurl->reqCurlback('reglist-player', $queryclub);
+				// print_r($data['clubstatus']);
+				// print_r($data['playerstatus']);
+				// exit();
             }
 
             $data['eyeme'] = ($this->input->get('from') == 'eyeme' ? 1 : 0);
@@ -338,24 +346,27 @@ class Member extends CI_Controller
         $this->load->view($this->__theme().'member/template', $data);
     }
 
-    function get_club()
+	function galeri()
     {
-    	$id = $this->input->post('id');
-    	
-    	$query = array(
-            'page' => '',
-            'limit' => '',
-            'id_club' => $id,
-        );
-
-        $clubs = $this->excurl->reqCurlapp('profile-club', $query);
-        $data = $clubs->data;
-        // var_dump($data);exit();
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
         
-        echo json_encode($data);
+        if ($data['member']->id_club == 0) {
+            redirect('member');
+        }
+
+        $content = 'member/club/galeri';
+        $data['content'] = $content;
+        $data['title']   = $this->config->item('meta_title');
+        $data['kanal']   = 'member';
+        $data['meta_desc'] = $this->config->item('meta_desc');
+        $data['meta_keyword'] = $this->config->item('meta_keyword');
+        
+        $this->load->view($this->__theme().'member/template', $data);
     }
 
-	function galeri()
+    function verifikasi()
 	{
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
@@ -365,7 +376,7 @@ class Member extends CI_Controller
 			redirect('member');
 		}
 
-    	$content = 'member/club/galeri';
+    	$content = 'member/club/verifikasi';
     	$data['content'] = $content;
     	$data['title']   = $this->config->item('meta_title');
     	$data['kanal']   = 'member';
@@ -374,4 +385,26 @@ class Member extends CI_Controller
 	    
 	    $this->load->view($this->__theme().'member/template', $data);
 	}
+
+    function detail_verifikasi($id_member)
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+        
+        if ($data['member']->id_club == 0) {
+            redirect('member');
+        }
+
+        $data['id_member'] = $id_member;
+
+        $content = 'member/club/detail_verifikasi';
+        $data['content'] = $content;
+        $data['title']   = $this->config->item('meta_title');
+        $data['kanal']   = 'member';
+        $data['meta_desc'] = $this->config->item('meta_desc');
+        $data['meta_keyword'] = $this->config->item('meta_keyword');
+        
+        $this->load->view($this->__theme().'member/template', $data);
+    }
 }

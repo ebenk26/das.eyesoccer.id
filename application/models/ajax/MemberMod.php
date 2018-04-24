@@ -167,7 +167,7 @@ class MemberMod extends CI_Model
         $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $res = $this->excurl->reqCurlback('me', $param);
         $v = $res->data;
-
+		// print_r($this->session->member['id']);exit();
         $query = array('id_club' => ($v[0]->id_club == 0 ? 1128 : $v[0]->id_club), 'detail' => true);
         $data['klubdetail'] = $this->excurl->reqCurlback('profile-club', $query);
         $val = $data['klubdetail']->data;
@@ -231,7 +231,7 @@ class MemberMod extends CI_Model
 
     function __regplayer()
     {
-        $id_club = $this->input->post('id_club');
+        $slug = $this->input->post('slug');
         $name = $this->input->post('name');
         $no_kk = $this->input->post('no_kk');
         $no_ktp = $this->input->post('no_ktp');
@@ -240,7 +240,7 @@ class MemberMod extends CI_Model
 
         $query = array(
             'uid' => $sesi['id'],
-            'club' => md5($id_club),
+            'club' => $slug,
             'name' => $name,
             'no_kk' => $no_kk,
             'no_ktp' => $no_ktp,
@@ -943,5 +943,63 @@ class MemberMod extends CI_Model
         }
 
         $this->tools->__flashMessage($arr);
+    }
+
+    function __verify()
+    {
+        $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $res = $this->excurl->reqCurlback('me', $param);
+        $v = $res->data;
+
+        $query = array(
+            'page' => '',
+            'limit' => '',
+            'id_club' => $v[0]->id_club,
+        );
+
+        $club = $this->excurl->reqCurlapp('profile-club', $query)->data;
+        $slug = $club[0]->slug;
+
+        $query = array(
+            'page' => '',
+            'limit' => '',
+            'club' => $slug,
+        );
+
+        $data['verify'] = $this->excurl->reqCurlapp('reglist-player', $query)->data;
+        
+        $html = $this->load->view($this->__theme().'member/club/ajax/view_verify',$data,true);
+        $data = array('xClass'=> 'reqverify','xHtml' => $html);
+        $this->tools->__flashMessage($data);
+    }
+
+    function __detail_verify()
+    {
+        $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $res = $this->excurl->reqCurlback('me', $param);
+        $v = $res->data;
+
+        $query = array(
+            'page' => '',
+            'limit' => '',
+            'id_club' => $v[0]->id_club,
+        );
+
+        $club = $this->excurl->reqCurlapp('profile-club', $query)->data;
+        
+        $slug = $club[0]->slug;
+
+        $query = array(
+            'page' => '',
+            'limit' => '',
+            'club' => $slug,
+            'member' => md5($this->input->post('id_member')),
+        );
+
+        $data['verify'] = $this->excurl->reqCurlapp('reglist-player', $query)->data;
+
+        $html = $this->load->view($this->__theme().'member/club/ajax/view_detailverify',$data,true);
+        $data = array('xClass'=> 'reqverify','xHtml' => $html);
+        $this->tools->__flashMessage($data);
     }
 }
