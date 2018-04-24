@@ -385,32 +385,6 @@ class Member extends CI_Controller
 	    
 	    $this->load->view($this->__theme().'member/template', $data);
 	}
-	
-	function karir($page = 1)
-	{
-        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
-        $member = $this->excurl->reqCurlapp('me', $query);
-        $data['member'] = ($member) ? $member->data[0] : '';
-		$content = 'member/club/karir';
-		if (isset($_GET['act'])) {
-				$content = 'member/club/karirform';
-        }else{
-			$this->library->backnext('pageclubkarir');
-			if ($page > 1) $this->session->set_userdata(array('pageclubkarir' => $page));
-		}
-		
-		if ($data['member']->id_club == 0) {
-			redirect('member');
-		}
-
-    	$data['content'] = $content;
-    	$data['title']   = $this->config->item('meta_title');
-    	$data['kanal']   = 'member';
-    	$data['meta_desc'] = $this->config->item('meta_desc');
-	    $data['meta_keyword'] = $this->config->item('meta_keyword');
-	    
-	    $this->load->view($this->__theme().'member/template', $data);
-	}
 
     function detail_verifikasi($id_member)
     {
