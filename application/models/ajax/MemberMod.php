@@ -167,7 +167,7 @@ class MemberMod extends CI_Model
         $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $res = $this->excurl->reqCurlback('me', $param);
         $v = $res->data;
-
+		// print_r($this->session->member['id']);exit();
         $query = array('id_club' => ($v[0]->id_club == 0 ? 1128 : $v[0]->id_club), 'detail' => true);
         $data['klubdetail'] = $this->excurl->reqCurlback('profile-club', $query);
         $val = $data['klubdetail']->data;
