@@ -785,6 +785,23 @@ class MemberMod extends CI_Model
         $this->tools->__flashMessage($arr);
     }
 
+    function __list_club()
+    {
+        $text = $this->input->post('club');
+
+        $query = array(
+            'page' => '',
+            'limit' => '',
+            'search' => $text
+        );
+        $clubs = $this->excurl->reqCurlapp('profile-club', $query);
+        $data['club'] = $clubs->data;
+        // var_dump($club);exit();
+        $html = $this->load->view($this->__theme() . 'member/player/ajax/listclub', $data, true);
+        $data = array('xClass' => 'showclub', 'xHtml' => $html);
+        $this->tools->__flashMessage($data);
+    }
+
 	function __galeri()
     {
         $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);

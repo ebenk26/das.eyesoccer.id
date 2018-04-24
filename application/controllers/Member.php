@@ -311,6 +311,23 @@ class Member extends CI_Controller
         $this->load->view($this->__theme().'member/template', $data);
     }
 
+    function get_club()
+    {
+    	$id = $this->input->post('id');
+    	
+    	$query = array(
+            'page' => '',
+            'limit' => '',
+            'id_club' => $id,
+        );
+
+        $clubs = $this->excurl->reqCurlapp('profile-club', $query);
+        $data = $clubs->data;
+        // var_dump($data);exit();
+        
+        echo json_encode($data);
+    }
+
 	function galeri()
 	{
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);

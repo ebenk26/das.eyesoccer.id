@@ -374,69 +374,16 @@
 			<div class="section-box-popup to-open">
 				<div class="box-popup">
 				<i class="material-icons sbpclose to-close">clear</i>
-						<div class="container mt20">
-							<div class="pp-profil">
-								<img src="<?php echo base_url();?>assets/themes/v1/img/d.jpg" alt="Logo Klub">
-							</div>
-						</div>
 						<div class="container data-profil mt20">
 							<table>
 								<tbody><tr>
-									<td>Nama Lengkap</td>
+									<td>Nama Klub</td>
 									<td>
 										<input type="text">
 									</td>
 								</tr>
 								<tr>
-									<td>Tempat Lahir</td>
-									<td>
-										<input type="text">
-									</td>
-								</tr>
-								<tr>
-									<td>Tanggal Lahir</td>
-									<td>
-										<input type="text">
-									</td>
-								</tr>
-								<tr>
-									<td>Jenis kelamin</td>
-									<td>
-										<input type="text">
-									</td>
-								</tr>
-								<tr>
-									<td>No.Identitas / KTP / Passport</td>
-									<td>
-										<input type="text">
-									</td>
-								</tr>
-								<tr>
-									<td>Warga Negara</td>
-									<td>
-										<input type="text">
-									</td>
-								</tr>
-								<tr>
-									<td>Klub / SSB Saat Ini</td>
-									<td>
-										<input type="text">
-									</td>
-								</tr>
-								<tr>
-									<td>Jabatan</td>
-									<td>
-										<input type="text">
-									</td>
-								</tr>
-								<tr>
-									<td>Lisensi Pelatih</td>
-									<td>
-										<input type="text">
-									</td>
-								</tr>
-								<tr>
-									<td>No. Telepon</td>
+									<td>Julukan</td>
 									<td>
 										<input type="text">
 									</td>
@@ -448,61 +395,27 @@
 									</td>
 								</tr>
 								<tr>
-									<td>Kisaran Kontrak</td>
+									<td>No HP</td>
 									<td>
 										<input type="text">
 									</td>
 								</tr>
+								<tr>
+									<td>Alamat Sekertariat</td>
+									<td>
+										<input type="text">
+									</td>
+								</tr>
+								<tr>
+									<td>Identitas Pemilik</td>
+									<td>
+										<input type="file">
+									</td>
+								</tr>
 							</tbody></table>
-							<div class="container data-oficial">
-								<h3>KARIR DAN PRESTASI OFFICIAL</h3>
-								<div class="scroll-x-outer">
-									<table class="scroll-x-inner">
-										<tbody><tr>
-											<td>Bulan</td>
-											<td>Tahun</td>
-											<td>Klub</td>
-											<td>Turnamen / Kompetisi</td>
-											<td>Peringkat Lisensi Penghargaan</td>
-										</tr>
-										<tr>
-											<td>
-												<select name="" id="">
-													<!-- <option value="">Pilih Bulan</option> -->
-													<option value="">Jan</option>
-													<option value="">Feb</option>
-													<option value="">Mar</option>
-													<option value="">Apr</option>
-													<option value="">Mei</option>
-													<option value="">Jun</option>
-													<option value="">Jul</option>
-													<option value="">Agus</option>
-													<option value="">Sept</option>
-													<option value="">Okt</option>
-													<option value="">Nov</option>
-												</select>
-											</td>
-											<td>
-												<select name="" id="">
-													<!-- <option value="">Pilih Tahun</option> -->
-													<option value="">2018</option>
-													<option value="">2017</option>
-													<option value="">2016</option>
-													<option value="">2015</option>
-													<option value="">2014</option>
-													<option value="">2013</option>
-												</select>
-											</td>
-											<td><input type="text"></td>
-											<td><input type="text"></td>
-											<td><input type="text"></td>
-										</tr>
-									</tbody></table>
-								</div>
-							</div>
 						</div>
 						<div class="tx-c">
-							<button class="klik-dsn" style="font-size:.85em;">Simpan</button>
+							<button class="klik-dsn" style="font-size:.85em;">DAFTAR</button>
 						</div>
 					</div></div>
 					<script>
