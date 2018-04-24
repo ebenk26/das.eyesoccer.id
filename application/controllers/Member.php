@@ -298,8 +298,35 @@ class Member extends CI_Controller
         if (isset($_GET['act'])) {
             $content = 'member/club/officialform';
         } else {
-            $this->library->backnext('pageofficial');
-            if ($page > 1) $this->session->set_userdata(array('pageofficial' => $page));
+            $this->library->backnext('pageclubofficial');
+            if ($page > 1) $this->session->set_userdata(array('pageclubofficial' => $page));
+        }
+
+        $data['content'] = $content;
+        $data['title']   = $this->config->item('meta_title');
+        $data['kanal']   = 'member';
+        $data['meta_desc'] = $this->config->item('meta_desc');
+        $data['meta_keyword'] = $this->config->item('meta_keyword');
+
+        $this->load->view($this->__theme().'member/template', $data);
+    }
+
+    function karir($page = 1)
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+
+        if ($data['member']->id_club == 0) {
+            redirect('member');
+        }
+
+        $content = 'member/club/karir';
+        if (isset($_GET['act'])) {
+            $content = 'member/club/karirform';
+        } else {
+            $this->library->backnext('pageclubcareer');
+            if ($page > 1) $this->session->set_userdata(array('pageclubcareer' => $page));
         }
 
         $data['content'] = $content;
