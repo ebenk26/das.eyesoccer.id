@@ -22,9 +22,7 @@
                     <tr>
                         <td>Klub Sekarang</td>
                         <td>
-                            <select id="club" name="club" class="form-control">
-                                <option value="">Pilih Klub</option>
-                            </select>
+                            <input type="text" name="name">
                         </td>
                     </tr>
                     <tr>
