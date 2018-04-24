@@ -88,25 +88,14 @@
 
 <script type="text/javascript">
 
-	function select_club(id)
+	function select_club(elem)
 	{
-		var urlnya = "<?= base_url(); ?>Member/get_club";
-
-		$.ajax({
-			url: urlnya,
-			type: 'POST',
-			dataType: 'json',
-			data: {id: id},
-		})
-		.done(function(res) {
-			// console.log(res[0].id);
-			$('#club').val(res[0].name);
-			$('#slug').val(res[0].slug);
-			$('#showclub').attr('style', 'display:none');;
-		})
-		.fail(function() {
-			console.log("error");
-		});
+		var slug = $(elem).attr('slug');
+		var club = $(elem).attr('club');
+		console.log(club);
+		$('#club').val(club);
+		$('#slug').val(slug);
+		$('#showclub').attr('style', 'display:none');
 		
 	}
 

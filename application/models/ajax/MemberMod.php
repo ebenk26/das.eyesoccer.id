@@ -224,7 +224,7 @@ class MemberMod extends CI_Model
         );
         $data['clubs'] = $this->excurl->reqCurlapp('profile-club', $query);
 
-        $html = $this->load->view($this->__theme().'member/player/ajax/view_listclub',$data,true);
+        $html = $this->load->view($this->__theme().'member/player/ajax/view_regplayer',$data,true);
         $data = array('xClass'=> 'reqclub','xHtml' => $html);
         $this->tools->__flashMessage($data);
     }

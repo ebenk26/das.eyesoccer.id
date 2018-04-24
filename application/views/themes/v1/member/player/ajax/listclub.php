@@ -6,7 +6,7 @@
 </style>
 
 <?php foreach ($club as $cl): ?>
-	<div class="daftar-club" id="cl-<?= $cl->id_club; ?>" onclick="select_club(<?= $cl->id_club; ?>)">
+	<div class="daftar-club" id="cl-<?= $cl->id_club; ?>" club="<?= $cl->name; ?>" slug="<?= $cl->slug; ?>" onclick="select_club(this)">
 		<?= $cl->name; ?>
 	</div>
 <?php endforeach ?>
