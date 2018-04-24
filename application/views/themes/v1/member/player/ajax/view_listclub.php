@@ -1,14 +1,21 @@
-
+<h2>Registrasi Klub</h2>
 <table>
     <tr>
         <td>Klub Sekarang</td>
     	<td>
-    		<select name="id_club">
-    			<option value="">Pilih Club</option>
-    			<?php foreach ($clubs->data as $cl): ?>
-	    			<option value="<?= $cl->slug; ?>"><?= $cl->name; ?></option>
-    			<?php endforeach ?>
-    		</select>
+    		<?php /*?>
+	    		<select name="id_club">
+	    			<option value="">Pilih Club</option>
+	    			<?php foreach ($clubs->data as $cl): ?>
+		    			<option value="<?= $cl->slug; ?>"><?= $cl->name; ?></option>
+	    			<?php endforeach ?>
+	    		</select>
+    		<?php */ ?>
+    		<input type="text" id="club" name="club" placeholder="Nama Klub" class="form_keyup" action="member" fn="list_club" wait loading="off">
+    		<input type="hidden" name="slug" id="slug">
+    		<div id='showclub'>
+
+    		</div>
     	</td>
     </tr>
     <tr>
@@ -78,3 +85,29 @@
         </td>
     </tr>
 </table>
+
+<script type="text/javascript">
+
+	function select_club(id)
+	{
+		var urlnya = "<?= base_url(); ?>Member/get_club";
+
+		$.ajax({
+			url: urlnya,
+			type: 'POST',
+			dataType: 'json',
+			data: {id: id},
+		})
+		.done(function(res) {
+			// console.log(res[0].id);
+			$('#club').val(res[0].name);
+			$('#slug').val(res[0].slug);
+			$('#showclub').attr('style', 'display:none');;
+		})
+		.fail(function() {
+			console.log("error");
+		});
+		
+	}
+
+</script>
