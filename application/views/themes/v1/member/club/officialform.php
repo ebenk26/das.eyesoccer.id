@@ -23,6 +23,11 @@
             </div>
             <input type='hidden' name='fn' value='clubofficialform' class='cinput'>
             <input type='hidden' name='act' value='<?php echo isset($_GET['act']) ? $_GET['act'] : ''; ?>' class='cinput'>
+            <div class="container mg-b15">
+                <div class="pp-profil">
+                    <img src="<?php echo SUBCDN . "assets/themes/v1/img/fav.png"; ?>" alt="Ofisial" class="viewimg">
+                </div>
+            </div>
             <div class="container data-profil">
                 <table>
                     <tr>

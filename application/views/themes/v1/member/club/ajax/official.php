@@ -5,7 +5,7 @@
         foreach ($official->data as $p) {
             ?>
             <div class="x-form-daftar-pemain row">
-                <a href="javascript:void(0)" title="Hapus" id="delofficial_<?php echo $p->id_official; ?>" class="form_post" action="member" fn="playeract"
+                <a href="javascript:void(0)" title="Hapus" id="delofficial_<?php echo $p->id_official; ?>" class="form_post" action="member" fn="clubofficialact"
                    onclick="return confirm('Apakah anda yakin ingin menghapusnya?')">
                     <i class="fas fa-times" style="float:right; font-size:.9em;"></i>
                     <span class="cinput disp-none" name="act" val="2"></span>
