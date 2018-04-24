@@ -32,6 +32,14 @@ class Member extends CI_Controller
                 $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
                 $member = $this->excurl->reqCurlapp('me', $query);
                 $data['member'] = ($member) ? $member->data[0] : '';
+				
+				$queryclub = array('member' => $this->session->member['id']);
+				$data['clubstatus'] = $this->excurl->reqCurlapp('reglist-club', $queryclub);
+				
+				$data['playerstatus'] = $this->excurl->reqCurlback('reglist-player', $queryclub);
+				// print_r($data['clubstatus']);
+				// print_r($data['playerstatus']);
+				// exit();
             }
 
             $data['eyeme'] = ($this->input->get('from') == 'eyeme' ? 1 : 0);

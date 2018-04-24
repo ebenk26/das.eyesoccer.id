@@ -167,7 +167,7 @@ class MemberMod extends CI_Model
         $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $res = $this->excurl->reqCurlback('me', $param);
         $v = $res->data;
-
+		// print_r($this->session->member['id']);exit();
         $query = array('id_club' => ($v[0]->id_club == 0 ? 1128 : $v[0]->id_club), 'detail' => true);
         $data['klubdetail'] = $this->excurl->reqCurlback('profile-club', $query);
         $val = $data['klubdetail']->data;
@@ -894,11 +894,8 @@ class MemberMod extends CI_Model
         $res = $this->excurl->reqCurlback('me', $param);
         $v = $res->data;
 
-        $query = array('club' => $v[0]->id_club,
-                       'sortby' => 'a.id_gallery', 'sortdir' => 'desc');
+        $query = array('club' => $v[0]->id_club, 'sortby' => 'a.id_gallery', 'sortdir' => 'desc');
         $data['galerilist'] = $this->excurl->reqCurlapp('list-pic', $query);
-		
-		// print_r($data['galerilist']);exit();
 
         $html = $this->load->view($this->__theme() . 'member/club/ajax/galeri', $data, true);
 
@@ -908,20 +905,19 @@ class MemberMod extends CI_Model
 	
 	function __uploadgalericlub()
     {
-		$query = array('id_club' => $id_club = $this->input->post('id_club'), 'detail' => true);
-		$player = $this->excurl->reqCurlback('profile-club', $query);
-		// print_r($player);exit();
-		$player = ($player) ? $player->data[0] : '';
-		$slug = $player->slug;
-		$queryupload = array('club' => $slug);
-		
-        $res = $this->excurl->reqCurlapp('upload-pic', $queryupload, ['fupload']);
-		
-		// print_r($res);exit;
+        $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $res = $this->excurl->reqCurlback('me', $param);
+        $v = ($res) ? $res->data[0] : '';
+
+		$query = array('id_club' => $id_club = $v->id_club, 'detail' => true);
+		$club = $this->excurl->reqCurlback('profile-club', $query);
+        $club = ($club) ? $club->data[0] : '';
+
+		$query = array('club' => $club->slug);
+        $res = $this->excurl->reqCurlapp('upload-pic', $query, ['fupload']);
+
         $arr = $this->library->errorMessage($res);
-		if ($res->status == 'Error') {
-            $arr = array('xCss' => 'boxfailed', 'xMsg' => $res->message, 'xAlert' => true);
-        } else {
+		if ($res->status == 'Success') {
             $arr = array('xDirect' => base_url() . 'member/galeri', 'xCss' => 'boxsuccess', 'xMsg' => 'Upload Galeri Berhasil.', 'xAlert' => true);
         }
 
@@ -932,23 +928,17 @@ class MemberMod extends CI_Model
     {
 		$param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $res = $this->excurl->reqCurlback('me', $param);
-        $v = $res->data;
+        $v = ($res) ? $res->data[0] : '';
 
-		$query = array('id_club' => $id_club = $v[0]->id_club, 'detail' => true);
-		$player = $this->excurl->reqCurlback('profile-club', $query);
-		// print_r($player);exit();
-		$player = ($player) ? $player->data[0] : '';
-		$slug = $player->slug;
-		$querydelete = array('club' => $slug);
-		
-		$dt = array_merge($querydelete, ['id' => $this->input->post('uid')]);
+		$query = array('id_club' => $id_club = $v->id_club, 'detail' => true);
+        $club = $this->excurl->reqCurlback('profile-club', $query);
+        $club = ($club) ? $club->data[0] : '';
+
+		$dt = array('club' => $club->slug, 'id' => $this->input->post('uid'));
 		$res = $this->excurl->reqCurlapp('delete-pic', $dt);
-		
-		// print_r($res);exit;
+
         $arr = $this->library->errorMessage($res);
-		if ($res->status == 'Error') {
-            $arr = array('xCss' => 'boxfailed', 'xMsg' => $res->message, 'xAlert' => true);
-        } else {
+        if ($res->status == 'Success') {
             $arr = array('xDirect' => base_url() . 'member/galeri', 'xCss' => 'boxsuccess', 'xMsg' => 'Gambar berhasil dihapus.', 'xAlert' => true);
         }
 
