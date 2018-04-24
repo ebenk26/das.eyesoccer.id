@@ -34,7 +34,7 @@
     }
 ?>
 
-<div class="container mg-b15">
+<div class="container mg-b15 mg-lr15">
     <form class='form_multi' action="<?php echo base_url('member'); ?>" enctype="multipart/form-data">
         <input type="hidden" name="fn" class="cinput" value="playergalleryact">
         <input type="hidden" name="xid" class="cinput" value="<?php echo $uid; ?>">

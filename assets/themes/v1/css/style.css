@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,600,700');
-@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
 html, body{
     width: 100%;
@@ -32,8 +32,8 @@ hr{
     border-bottom: 1px solid gainsboro;
 }
 select{
-    padding: 2px 5px;
-    border-radius: 5px;
+    padding: 5px 10px;
+    border-radius: 4px;
 }
 select:focus{
     box-shadow: 0 0 4px #2196f3ab;
@@ -3877,7 +3877,7 @@ video::-webkit-media-controls-panel {
     text-align: center;
     font-size: .85em;
     font-family: 'Roboto', sans-serif;
-    font-weight: 600;
+    font-weight: 300;
     color: #616161;
     padding: 8px;
 }
@@ -4151,7 +4151,8 @@ video::-webkit-media-controls-panel {
     display: block;
     float: left;
     font-weight: 600;
-    color: #BDBDBD;
+    /* color: #BDBDBD; */
+    color: #9E9E9E;
     padding-bottom: 8px;
     padding-top: 5px;
     text-transform: capitalize;
@@ -4190,6 +4191,48 @@ video::-webkit-media-controls-panel {
 }
 .table-span2 tr:focus{
     background-color: whitesmoke;
+}
+.oficial-pic{
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.oficial-pic img{
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+.oficial-pic{
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.oficial-pic img, .pprofile img{
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+.pprofile{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    float: right;
+    margin-top: 7px;
 }
 .section-box-popup{
     position: fixed;
@@ -4259,4 +4302,7 @@ video::-webkit-media-controls-panel {
     transition-timing-function: cubic-bezier(0.88, 0.13, 0.04, 1.01);
     -webkit-transition-timing-function: cubic-bezier(0.88, 0.13, 0.04, 1.01);
 
+}
+input[type="file"]{
+    border: 2px solid #d8d8d8 !important;
 }

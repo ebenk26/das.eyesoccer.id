@@ -31,6 +31,7 @@ class MemberMod extends CI_Model
             $sess = array(
                 'id' => $v->id,
                 'username' => $v->username,
+                'fullname' => $v->fullname,
                 'name' => $v->name,
                 'url_pic' => $v->url_pic,
                 'url' => $v->url,
@@ -86,72 +87,76 @@ class MemberMod extends CI_Model
         $this->tools->__flashMessage($arr);
     }
 
-    function __profile_upload()
+    function __profile()
     {
-        $param = array('username' => $this->session->member['username']);
-        $res = $this->excurl->remoteCall($this->__xurl() . 'upload-pic', $this->__xkey(), $param, ['fupload']);
-        $res = json_decode($res);
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $data['member'] = $this->excurl->reqCurlapp('me', $query);
 
-        if ($res->status == 'Error') {
-            $arr = array('xCss' => 'boxfailed', 'xMsg' => $res->message, 'xAlert' => true);
+        $data['folder'] = $this->config->item('themes');
+        $html = $this->load->view($this->__theme() . 'member/ajax/profile', $data, true);
+
+        $data = array('xClass' => 'reqprofile', 'xHtml' => $html);
+        $this->tools->__flashMessage($data);
+    }
+
+    function __profileact()
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $member = ($member) ? $member->data[0] : '';
+
+        if ($member) {
+            $dt = array('username' => $member->username, 'name' => $this->input->post('name'), 'nickname' => $this->input->post('nickname'),
+                        'address' => $this->input->post('address'), 'phone' => $this->input->post('phone'), 'about' => $this->input->post('about'));
+
+            $res = $this->excurl->reqCurlapp('changes-profile', $dt, ['fupload']);
+            $msg = 'Data berhasil disimpan';
+
+            $arr = $this->library->errorMessage($res);
+
+            if ($res->status == 'Success') {
+                $v = $res->data[0];
+                $sess = array(
+                    'id' => $v->id,
+                    'username' => $v->username,
+                    'fullname' => $v->fullname,
+                    'name' => $v->name,
+                    'url_pic' => $v->url_pic,
+                    'url' => $v->url
+                    /*'active' => $v->active,
+                    'verification' => $v->verification*/
+                );
+                $this->session->member = $sess;
+
+                $arr = array('xDirect' => base_url('member/profile'), 'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
+            }
         } else {
-            $arr = array('xDirect' => base_url() . 'member', 'xCss' => 'boxsuccess', 'xMsg' => 'Upload Profile Berhasil.', 'xAlert' => true);
-            $this->session->set_userdata(['member' => (array)$res->data]);
+            $arr = array('xDirect' => base_url('member'));
         }
 
         $this->tools->__flashMessage($arr);
     }
 
-    function member_detail($id)
+    function __password()
     {
-        $query = $this->db->query(" SELECT
-                                        *
-                                    FROM
-                                        tbl_member
-                                    WHERE
-                                        id_member = '$id'
-                                        ")->row();
-        return $query;
-    }
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $member = ($member) ? $member->data[0] : '';
 
-    function submit_data_member($post)
-    {
-        $id = $this->HomeMod->get_id('id_member', 'tbl_member', $this->session->member['id']);
-        $col = "";
-        $i = 0;
-        foreach ($post as $field => $value) {
-            $x = 0;
-            switch ($field) {
-                case 'val':
-                case 'undefined':
-                    $x = 1;
-                    break;
+        if ($member) {
+            $dt = array('username' => $member->username, 'oldpass' => $this->input->post('oldpass'),
+                        'newpass' => $this->input->post('newpass'), 'confirmpass' => $this->input->post('confirmpass'));
+
+            $res = $this->excurl->reqCurlapp('changes-password', $dt);
+            $msg = 'Data berhasil disimpan';
+
+            $arr = $this->library->errorMessage($res);
+
+            if ($res->status == 'Success') {
+                $arr = array('xDirect' => base_url('member/password'), 'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
             }
-
-            if ($x == 0) {
-                if ($i > 0) {
-                    $col .= ",$field='$value'";
-                } else {
-                    //last item
-                    $col .= "$field='$value'";
-                }
-
-                $i++;
-            }
-        }
-
-        $this->db->query(" UPDATE
-								tbl_member
-							SET
-								$col
-							WHERE
-								id_member = '$id'
-						");
-
-        if ($this->db->affected_rows() > 0) {
-            $arr = array('xCss' => 'boxsuccess', 'xMsg' => 'Submit Data Berhasil.', 'xAlert' => true);
         } else {
-            $arr = array('xCss' => 'boxfailed', 'xMsg' => 'Submit Data Gagal.', 'xAlert' => true);
+            $arr = array('xDirect' => base_url('member'));
         }
 
         $this->tools->__flashMessage($arr);
@@ -271,7 +276,15 @@ class MemberMod extends CI_Model
         $supporter_name = $this->input->post('supporter_name');
         $training_schedule = $this->input->post('training_schedule');
 		
-        $query = array('id_club' => $id_club, 'name' => $name, 'nickname' => $nickname, 'address' => $address, 'description' => $description, 'establish_date' => $establish_date, 'phone' => $phone, 'email' => $email, 'owner' => $owner, 'coach' => $coach, 'provinsi' => $provinsi, 'kabupaten' => $kabupaten, 'manager' => $manager, 'slug' => $slug, 'supporter_name' => $supporter_name, 'training_schedule' => $training_schedule);
+		$query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $member = ($member) ? $member->data[0] : '';
+
+        if ($member->id_club > 0) {
+            $query = array('id_club' => $id_club, 'name' => $name, 'nickname' => $nickname, 'address' => $address, 'description' => $description, 'establish_date' => $establish_date, 'phone' => $phone, 'email' => $email, 'owner' => $owner, 'coach' => $coach, 'provinsi' => $provinsi, 'kabupaten' => $kabupaten, 'manager' => $manager, 'slug' => $slug, 'supporter_name' => $supporter_name, 'training_schedule' => $training_schedule);
+        } else {
+            $query = array();
+        }
 		
         $res = $this->excurl->reqCurlapp('edit-club', $query, array('logo', 'legal_pt'));
 		
@@ -282,7 +295,10 @@ class MemberMod extends CI_Model
         if ($res->status == 'Success') {
             $message = "Data berhasil disimpan.";
             $arr = array('xDirect' => base_url() . 'member', 'xCss' => 'boxsuccess', 'xMsg' => $message, 'xAlert' => true);
-        }
+        }else{
+			$message = "Data gagal disimpan.";
+            $arr = array('xDirect' => base_url() . 'member', 'xCss' => 'boxfailed', 'xMsg' => $message, 'xAlert' => true);
+		}
 
         $this->tools->__flashMessage($arr);
     }
@@ -688,5 +704,72 @@ class MemberMod extends CI_Model
         $html = $this->load->view($this->__theme() . 'member/player/ajax/listclub', $data, true);
         $data = array('xClass' => 'showclub', 'xHtml' => $html);
         $this->tools->__flashMessage($data);
+    }
+	
+	function __galeri()
+    {
+        $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $res = $this->excurl->reqCurlback('me', $param);
+        $v = $res->data;
+
+        $query = array('club' => $v[0]->id_club,
+                       'sorby' => 'a.id_gallery', 'sortdir' => 'desc');
+        $data['galerilist'] = $this->excurl->reqCurlapp('list-pic', $query);
+		
+		// print_r($data['galerilist']);exit();
+
+        $html = $this->load->view($this->__theme() . 'member/club/ajax/galeri', $data, true);
+
+        $data = array('xClass' => 'reqgaleri', 'xHtml' => $html);
+        $this->tools->__flashMessage($data);
+    }
+	
+	function __uploadgalericlub()
+    {
+		$query = array('id_club' => $id_club = $this->input->post('id_club'), 'detail' => true);
+		$player = $this->excurl->reqCurlback('profile-club', $query);
+		// print_r($player);exit();
+		$player = ($player) ? $player->data[0] : '';
+		$slug = $player->slug;
+		$queryupload = array('club' => $slug);
+		
+        $res = $this->excurl->reqCurlapp('upload-pic', $queryupload, ['fupload']);
+		
+		// print_r($res);exit;
+        $arr = $this->library->errorMessage($res);
+		if ($res->status == 'Error') {
+            $arr = array('xCss' => 'boxfailed', 'xMsg' => $res->message, 'xAlert' => true);
+        } else {
+            $arr = array('xDirect' => base_url() . 'member/galeri', 'xCss' => 'boxsuccess', 'xMsg' => 'Upload Galeri Berhasil.', 'xAlert' => true);
+        }
+
+        $this->tools->__flashMessage($arr);
+    }
+	
+	function __deletegalericlub()
+    {
+		$param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $res = $this->excurl->reqCurlback('me', $param);
+        $v = $res->data;
+
+		$query = array('id_club' => $id_club = $v[0]->id_club, 'detail' => true);
+		$player = $this->excurl->reqCurlback('profile-club', $query);
+		// print_r($player);exit();
+		$player = ($player) ? $player->data[0] : '';
+		$slug = $player->slug;
+		$querydelete = array('club' => $slug);
+		
+		$dt = array_merge($querydelete, ['id' => $this->input->post('uid')]);
+		$res = $this->excurl->reqCurlapp('delete-pic', $dt);
+		
+		// print_r($res);exit;
+        $arr = $this->library->errorMessage($res);
+		if ($res->status == 'Error') {
+            $arr = array('xCss' => 'boxfailed', 'xMsg' => $res->message, 'xAlert' => true);
+        } else {
+            $arr = array('xDirect' => base_url() . 'member/galeri', 'xCss' => 'boxsuccess', 'xMsg' => 'Gambar berhasil dihapus.', 'xAlert' => true);
+        }
+
+        $this->tools->__flashMessage($arr);
     }
 }

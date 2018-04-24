@@ -24,7 +24,9 @@
                 <tr>
                     <td> 
                         <a href="<?= base_url(); ?>eyeprofile/official_detail/<?= $value->slug; ?>">
-                            <img src="<?= $value->url_pic; ?>/small" alt=""> 
+                            <div class="oficial-pic">
+                                <img src="<?= $value->url_pic; ?>/small" alt=""> 
+                            </div>
                         </a> 
                     </td>
                     <td> 
