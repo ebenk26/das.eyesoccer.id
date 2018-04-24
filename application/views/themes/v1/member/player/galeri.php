@@ -35,19 +35,29 @@
             ?>
             <div class="pad-lr15 pad-b15">
                 <div class="player-galeri">
-                    <img src="<?php echo SUBCDN . "assets/themes/v1/img/a.jpg"; ?>" alt="">
+                    <div class="pad">
+                        <span style="background-image: url('<?php echo SUBCDN . "assets/themes/v1/img/a.jpg"; ?>')" class="img"></span>
+                    </div>
                 </div>
                 <div class="player-galeri">
-                    <img src="<?php echo SUBCDN . "assets/themes/v1/img/a.jpg"; ?>" alt="">
+                    <div class="pad">
+                        <span style="background-image: url('<?php echo SUBCDN . "assets/themes/v1/img/a.jpg"; ?>')" class="img"></span>
+                    </div>
                 </div>
                 <div class="player-galeri">
-                    <img src="<?php echo SUBCDN . "assets/themes/v1/img/a.jpg"; ?>" alt="">
+                    <div class="pad">
+                        <span style="background-image: url('<?php echo SUBCDN . "assets/themes/v1/img/a.jpg"; ?>')" class="img"></span>
+                    </div>
                 </div>
                 <div class="player-galeri">
-                    <img src="<?php echo SUBCDN . "assets/themes/v1/img/a.jpg"; ?>" alt="">
+                    <div class="pad">
+                        <span style="background-image: url('<?php echo SUBCDN . "assets/themes/v1/img/a.jpg"; ?>')" class="img"></span>
+                    </div>
                 </div>
                 <div class="player-galeri">
-                    <img src="<?php echo SUBCDN . "assets/themes/v1/img/a.jpg"; ?>" alt="">
+                    <div class="pad">
+                        <span style="background-image: url('<?php echo SUBCDN . "assets/themes/v1/img/a.jpg"; ?>')" class="img"></span>
+                    </div>
                 </div>
             </div>
         </div>
