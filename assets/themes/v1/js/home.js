@@ -121,7 +121,13 @@ window.onload = function(){
     //    heighControl.style.display = "block";
     //    heighControl2.style.display = "none";
     //}
-
+    toClose.onclick = function() {
+        if (toOpen.style.display == "block") {
+            toOpen.style.display = "none";
+        } else {
+            toOpen.style.display = "block";
+        }
+    }
     toClose.onclick = function() {
         // toOpen.style.display = "none";
         sectionBoxPopup.style.width = "0px";
@@ -147,6 +153,7 @@ window.onload = function(){
     // xClose2.onclick = function() {
     //    containerComment.style.display = "none";
     // }
+
     function onhover(id) {
         var e = document.getElementById(id);
         if(e.style.display == 'block')

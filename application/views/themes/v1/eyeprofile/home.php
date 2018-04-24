@@ -371,7 +371,7 @@
                     </div>
                 </div>
 			</div>
-			<div class="section-box-popup to-open">
+			<div class="section-box-popup">
 				<div class="box-popup">
 				<i class="material-icons sbpclose to-close">clear</i>
 						<div class="container data-profil mt20">

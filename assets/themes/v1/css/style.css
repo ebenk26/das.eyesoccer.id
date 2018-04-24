@@ -4271,7 +4271,7 @@ video::-webkit-media-controls-panel {
     position:  absolute;right:  5px;top:  5px;font-size:  1em;
 }
 .to-open{
-    /* display: none; */
+    display: none;
 }
 .sbpbtn{
     /* position: fixed; */
@@ -4305,4 +4305,11 @@ video::-webkit-media-controls-panel {
 }
 input[type="file"]{
     border: 2px solid #d8d8d8 !important;
+}
+.x-form-daftar-pemain td{
+    padding: 3px;
+}
+.x-form-daftar-pemain tr td:nth-of-type(1){
+    /* max-width: 50px; */
+    color: #616161;
 }

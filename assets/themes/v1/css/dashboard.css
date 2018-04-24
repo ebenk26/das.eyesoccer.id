@@ -1,11 +1,11 @@
 @media screen and (min-width: 445px){
     .responsif-add-100px{
-        margin-top: 100px;
+        margin-top: 92px;
     }
 }
 @media screen and (max-width: 475px) {
     .m-pd-t-100{
-        padding-top: 100px;
+        padding-top: 92px;
     }
     .body-responsive{
         width: 100%;
@@ -107,7 +107,7 @@
     padding: 10px 0;
     width: 100%;
     max-width: 768px;
-    height: 43px;
+    height: 38px;
     overflow-x: auto;
     min-height: 30px;
     position: fixed;
@@ -172,11 +172,14 @@
 .klik-dsn{
     color: white;
     background-color: rgb(255, 208, 0);
-    padding: 8px 30px;
+    padding: 8px 30px 9px !important;
     border: none;
     border-radius: 20px;
-    margin: 5px;
-    box-shadow: inset 0 0 10px 0 #ffb300;
+    box-shadow: 0 0 6px -2px #ffb300;
+    max-height: unset !important;
+    font-size: .9em;
+    font-weight: 600;
+    margin: 10px auto;
 }
 .klik-dsn.red{
     background-color: #d32f2f !important;
@@ -655,10 +658,9 @@
 }
 .submenu{
     box-sizing: border-box;
-    margin-top: -6px;
     font-size: .75em;
     width: 100%;
-    height: 44px;
+    height: 40px;
     overflow-x: auto;
     background-color: rgb(224, 224, 224);
 }
@@ -683,6 +685,8 @@
     margin: 0px 10px 10px !important;
     background: rgb(253 253 253);
     min-height: 90px;
+    position: relative;
+    letter-spacing: .5px;
 }
 .x-form-daftar-pemain span{
     display: block;
@@ -859,6 +863,7 @@
     border: none;
     border-bottom: 2px solid #d8d8d8;
     appearance: unset;
+    box-sizing: border-box;
 }
 .data-profil select, .data-oficial input, textarea{
     width: 100%;
@@ -898,4 +903,23 @@ select{
     transform: translate(-50%, -50%);
     color: rgb(216 216 216);
     height: 100%;
+}
+.top-edit{
+    font-size: .9em;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}
+.semibold-grey{
+    color: #616161;
+    font-size: .7em;
+    padding-left: 3px;
+    font-weight: 600;
+}
+.tabel-lampiran td{
+    max-width: 100px;
+    text-align: center;
+}
+.tabel-lampiran td img{
+    width: 100%;
 }
