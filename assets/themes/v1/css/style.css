@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,600,700');
-@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600');
 html, body{
     width: 100%;
@@ -3877,7 +3877,7 @@ video::-webkit-media-controls-panel {
     text-align: center;
     font-size: .85em;
     font-family: 'Roboto', sans-serif;
-    font-weight: 600;
+    font-weight: 300;
     color: #616161;
     padding: 8px;
 }
@@ -4151,7 +4151,8 @@ video::-webkit-media-controls-panel {
     display: block;
     float: left;
     font-weight: 600;
-    color: #BDBDBD;
+    /* color: #BDBDBD; */
+    color: #9E9E9E;
     padding-bottom: 8px;
     padding-top: 5px;
     text-transform: capitalize;
@@ -4259,4 +4260,7 @@ video::-webkit-media-controls-panel {
     transition-timing-function: cubic-bezier(0.88, 0.13, 0.04, 1.01);
     -webkit-transition-timing-function: cubic-bezier(0.88, 0.13, 0.04, 1.01);
 
+}
+input[type="file"]{
+    border: 2px solid #d8d8d8 !important;
 }
