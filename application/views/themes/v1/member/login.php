@@ -27,7 +27,7 @@
                     <span>password</span>
                     <input type="password" name="password" placeholder="password anda" class="cinput">
                     <span class='err msgpassword'></span>
-                    <a href="<?php echo FORGOTPASS?>">lupa password?</a>
+                    <a href="<?php echo base_url('member/forgot'); ?>">lupa password?</a>
                     <button type="submit" class="">masuk</button>
                     <!--  <div class="container atau-menggunakan">
                         <span>atau menggunakan</span>
