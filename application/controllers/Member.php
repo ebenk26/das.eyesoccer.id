@@ -306,8 +306,8 @@ class Member extends CI_Controller
         if (isset($_GET['act'])) {
             $content = 'member/club/officialform';
         } else {
-            $this->library->backnext('pageofficial');
-            if ($page > 1) $this->session->set_userdata(array('pageofficial' => $page));
+            $this->library->backnext('pageclubofficial');
+            if ($page > 1) $this->session->set_userdata(array('pageclubofficial' => $page));
         }
 
         $data['content'] = $content;
@@ -319,24 +319,54 @@ class Member extends CI_Controller
         $this->load->view($this->__theme().'member/template', $data);
     }
 
-    function get_club()
+    function karir($page = 1)
     {
-    	$id = $this->input->post('id');
-    	
-    	$query = array(
-            'page' => '',
-            'limit' => '',
-            'id_club' => $id,
-        );
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
 
-        $clubs = $this->excurl->reqCurlapp('profile-club', $query);
-        $data = $clubs->data;
-        // var_dump($data);exit();
-        
-        echo json_encode($data);
+        if ($data['member']->id_club == 0) {
+            redirect('member');
+        }
+
+        $content = 'member/club/karir';
+        if (isset($_GET['act'])) {
+            $content = 'member/club/karirform';
+        } else {
+            $this->library->backnext('pageclubcareer');
+            if ($page > 1) $this->session->set_userdata(array('pageclubcareer' => $page));
+        }
+
+        $data['content'] = $content;
+        $data['title']   = $this->config->item('meta_title');
+        $data['kanal']   = 'member';
+        $data['meta_desc'] = $this->config->item('meta_desc');
+        $data['meta_keyword'] = $this->config->item('meta_keyword');
+
+        $this->load->view($this->__theme().'member/template', $data);
     }
 
 	function galeri()
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+        
+        if ($data['member']->id_club == 0) {
+            redirect('member');
+        }
+
+        $content = 'member/club/galeri';
+        $data['content'] = $content;
+        $data['title']   = $this->config->item('meta_title');
+        $data['kanal']   = 'member';
+        $data['meta_desc'] = $this->config->item('meta_desc');
+        $data['meta_keyword'] = $this->config->item('meta_keyword');
+        
+        $this->load->view($this->__theme().'member/template', $data);
+    }
+
+    function verifikasi()
 	{
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
@@ -346,7 +376,7 @@ class Member extends CI_Controller
 			redirect('member');
 		}
 
-    	$content = 'member/club/galeri';
+    	$content = 'member/club/verifikasi';
     	$data['content'] = $content;
     	$data['title']   = $this->config->item('meta_title');
     	$data['kanal']   = 'member';
@@ -381,4 +411,26 @@ class Member extends CI_Controller
 	    
 	    $this->load->view($this->__theme().'member/template', $data);
 	}
+
+    function detail_verifikasi($id_member)
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $data['member'] = ($member) ? $member->data[0] : '';
+        
+        if ($data['member']->id_club == 0) {
+            redirect('member');
+        }
+
+        $data['id_member'] = $id_member;
+
+        $content = 'member/club/detail_verifikasi';
+        $data['content'] = $content;
+        $data['title']   = $this->config->item('meta_title');
+        $data['kanal']   = 'member';
+        $data['meta_desc'] = $this->config->item('meta_desc');
+        $data['meta_keyword'] = $this->config->item('meta_keyword');
+        
+        $this->load->view($this->__theme().'member/template', $data);
+    }
 }

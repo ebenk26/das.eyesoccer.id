@@ -231,7 +231,7 @@ class MemberMod extends CI_Model
 
     function __regplayer()
     {
-        $id_club = $this->input->post('id_club');
+        $slug = $this->input->post('slug');
         $name = $this->input->post('name');
         $no_kk = $this->input->post('no_kk');
         $no_ktp = $this->input->post('no_ktp');
@@ -240,7 +240,7 @@ class MemberMod extends CI_Model
 
         $query = array(
             'uid' => $sesi['id'],
-            'club' => md5($id_club),
+            'club' => $slug,
             'name' => $name,
             'no_kk' => $no_kk,
             'no_ktp' => $no_ktp,
@@ -781,6 +781,96 @@ class MemberMod extends CI_Model
         $this->tools->__flashMessage($arr);
     }
 
+    function __clubcareer()
+    {
+        $this->library->backnext('pageclubcareer', 'pagetotalclubcareer');
+
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $member = ($member) ? $member->data[0] : '';
+
+        $query = array('page' => $this->session->userdata('pageclubcareer'), 'limit' => 20, 'id_club' => $member->id_club,
+                       'sortby' => 'a.id_career', 'sortdir' => 'desc');
+
+        $data['career'] = $this->excurl->reqCurlback('club-career', $query);
+        $data['careercount'] = $this->excurl->reqCurlapp('club-career', array_merge($query, ['count' => true]));
+
+        $data['folder'] = $this->config->item('themes');
+        $html = $this->load->view($this->__theme() . 'member/club/ajax/karir', $data, true);
+
+        $data = array('xClass' => 'reqclubcareer', 'xHtml' => $html, 'xUrlhash' => base_url() . 'member/karir/' . $this->session->userdata('pageclubcareer'));
+        $this->tools->__flashMessage($data);
+    }
+
+    function __clubcareerform()
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $member = ($member) ? $member->data[0] : '';
+
+        $query = array('id_career' => $this->input->post('act'), 'detail' => true);
+        $data['career'] = ($this->input->post('act') != 'add') ? $this->excurl->reqCurlback('club-career', $query) : '';
+
+        $data['folder'] = $this->config->item('themes');
+        $html = $this->load->view($this->__theme() . 'member/club/ajax/karirform', $data, true);
+
+        $data = array('xClass' => 'reqclubcareerform', 'xHtml' => $html);
+        $this->tools->__flashMessage($data);
+    }
+
+    function __clubcareeract()
+    {
+        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $member = $this->excurl->reqCurlapp('me', $query);
+        $member = ($member) ? $member->data[0] : '';
+
+        $query = array('id_club' => $member->id_club);
+        $club = $this->excurl->reqCurlback('profile-club',  $query);
+        $club = ($club) ? $club->data[0] : '';
+
+        $dt = [];
+        if ($this->input->post('act') < 2) {
+            $dt = array('slug' => $club->slug, 'month' => $this->input->post('month'), 'year' => $this->input->post('year'),
+                        'tournament' => $this->input->post('tournament'), 'rank' => $this->input->post('rank'),
+                        'coach' => $this->input->post('coach'));
+        }
+
+        if ($this->input->post('act') > 0) {
+            if ($member AND $member->id_club > 0) {
+                $dt = array_merge($dt, ['id' => $this->input->post('id')]);
+
+                if ($this->input->post('act') < 2) {
+                    $res = $this->excurl->reqCurlapp('edit-career-club', $dt);
+                    $msg = 'Data berhasil disimpan';
+                } else {
+                    $dt = array_merge($dt, ['slug' => $club->slug]);
+                    $res = $this->excurl->reqCurlapp('del-career-club', $dt);
+                    $msg = 'Data berhasil dihapus';
+                }
+                $arr = $this->library->errorMessage($res);
+
+                if ($res->status == 'Success') {
+                    $arr = array('xDirect' => base_url('member/karir'), 'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
+                }
+            } else {
+                $arr = array('xDirect' => base_url('member'));
+            }
+        } else {
+            if ($member AND $member->id_club > 0) {
+                $res = $this->excurl->reqCurlapp('add-career-club', $dt);
+                $arr = $this->library->errorMessage($res);
+
+                if ($res->status == 'Success') {
+                    $arr = array('xDirect' => base_url('member/karir'), 'xCss' => 'boxsuccess', 'xMsg' => 'Data berhasil disimpan', 'xAlert' => true);
+                }
+            } else {
+                $arr = array('xDirect' => base_url('member'));
+            }
+        }
+
+        $this->tools->__flashMessage($arr);
+    }
+
     function __list_club()
     {
         $text = $this->input->post('club');
@@ -863,5 +953,63 @@ class MemberMod extends CI_Model
         }
 
         $this->tools->__flashMessage($arr);
+    }
+
+    function __verify()
+    {
+        $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $res = $this->excurl->reqCurlback('me', $param);
+        $v = $res->data;
+
+        $query = array(
+            'page' => '',
+            'limit' => '',
+            'id_club' => $v[0]->id_club,
+        );
+
+        $club = $this->excurl->reqCurlapp('profile-club', $query)->data;
+        $slug = $club[0]->slug;
+
+        $query = array(
+            'page' => '',
+            'limit' => '',
+            'club' => $slug,
+        );
+
+        $data['verify'] = $this->excurl->reqCurlapp('reglist-player', $query)->data;
+        
+        $html = $this->load->view($this->__theme().'member/club/ajax/view_verify',$data,true);
+        $data = array('xClass'=> 'reqverify','xHtml' => $html);
+        $this->tools->__flashMessage($data);
+    }
+
+    function __detail_verify()
+    {
+        $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $res = $this->excurl->reqCurlback('me', $param);
+        $v = $res->data;
+
+        $query = array(
+            'page' => '',
+            'limit' => '',
+            'id_club' => $v[0]->id_club,
+        );
+
+        $club = $this->excurl->reqCurlapp('profile-club', $query)->data;
+        
+        $slug = $club[0]->slug;
+
+        $query = array(
+            'page' => '',
+            'limit' => '',
+            'club' => $slug,
+            'member' => md5($this->input->post('id_member')),
+        );
+
+        $data['verify'] = $this->excurl->reqCurlapp('reglist-player', $query)->data;
+
+        $html = $this->load->view($this->__theme().'member/club/ajax/view_detailverify',$data,true);
+        $data = array('xClass'=> 'reqverify','xHtml' => $html);
+        $this->tools->__flashMessage($data);
     }
 }
