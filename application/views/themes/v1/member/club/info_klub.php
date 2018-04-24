@@ -4,7 +4,7 @@
 	?>
     <div class="responsif-add-100px">
 		<?php
-			$data['active'] = 'info_klub';
+			$data['active'] = 'klub';
 			$this->load->view($folder.'member/club/header', $data);
 		?>
 	<div id="reqinfoklub" class='loadinfoklub' action="member" loading="off" clean="clsinfoklub">

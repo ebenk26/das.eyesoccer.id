@@ -393,9 +393,10 @@ class Library
                             <input type='hidden' name='fn' value='<?php echo $fn; ?>' class='cinput'>
                             <input type='hidden' name='paging' value='back' class='cinput'>
                             <?php
-                            if (isset($opt['slug'])) {
-                                ?> <input type='hidden' name='slug' value='<?php echo $opt['slug']; ?>' class='cinput'> <?php
+                            foreach ($opt as $n => $v) {
+                                ?> <input type='hidden' name='<?php echo $n; ?>' value='<?php echo $v; ?>' class='cinput'> <?php
                             }
+
                             $class = (isset($opt['class'])) ? $opt['class'] : "pagination-green-btn";
                             $name = (isset($opt['name'])) ? $opt['name'] : "Sebelumnya";
                             ?>
@@ -409,9 +410,10 @@ class Library
                             <input type='hidden' name='fn' value='<?php echo $fn; ?>' class='cinput'>
                             <input type='hidden' name='paging' value='next' class='cinput'>
                             <?php
-                            if (isset($opt['slug'])) {
-                                ?> <input type='hidden' name='slug' value='<?php echo $opt['slug']; ?>' class='cinput'> <?php
+                            foreach ($opt as $n => $v) {
+                                ?> <input type='hidden' name='<?php echo $n; ?>' value='<?php echo $v; ?>' class='cinput'> <?php
                             }
+
                             $class = (isset($opt['class'])) ? $opt['class'] : "pagination-green-btn";
                             $name = (isset($opt['name'])) ? $opt['name'] : "Selanjutnya";
                             ?>
