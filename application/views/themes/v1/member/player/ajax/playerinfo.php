@@ -23,7 +23,7 @@
     });
 </script>
 
-<?php $player = ($player) ? $player->data[0] : ''; ?>
+<?php $player = ($player AND isset($player->data[0])) ? $player->data[0] : ''; ?>
 
 <form class='form_multi' action="<?php echo base_url('member'); ?>" enctype="multipart/form-data">
     <div class="container mt20">
