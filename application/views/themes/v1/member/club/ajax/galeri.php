@@ -22,8 +22,8 @@
         foreach ($galerilist->data as $g) {
             ?>
             <div class="player-galeri">
-                <a onclick="if(confirm('Apa anda yakin untuk menghapus ?')){return true;}else{return false;}" href="javascript:void(0)" title="Hapus"
-                   id="delgalericlub_<?php echo $g->id; ?>" class="form_post" action="member" fn="deletegalericlub">
+                <a href="javascript:void(0)" title="Hapus" id="delgalericlub_<?php echo $g->id; ?>" class="form_post" action="member" fn="deletegalericlub"
+                   confirm="Apakah anda yakin ingin menghapusnya?">
                     <i class="fas fa-times" style="float:right; font-size:.9em;position: relative;top: 5px;"></i>
                     <input type="hidden" name="uid" value="<?php echo $g->id; ?>" class="cinput">
                 </a>
