@@ -425,6 +425,12 @@
 						buttonOpen.style.height = "unset";
 						buttonOpen.style.padding = "10px";
 						// }
+						
+						var str = window.location.href;
+						var res = str.split("/");
+						if(res[res.length-2] != "Liga%20Usia%20Muda"){
+							$(".sbpbtn").hide();
+						}
 					</script>
     </div>
     <?php }
