@@ -17,12 +17,7 @@
 
     	}
     	else{
-			echo '<i id="src" class="material-icons f-r">search</i>
-				<a href="member" style="color: #8ec429;">
-					<div class="pprofile">
-						<img src="'.SUBCDN.'assets/img/eyeme/user-discover.png" alt="">
-					</div>
-				</a>';
+			echo loginAvaTop($this->session->member);
     	}
 
     ?>

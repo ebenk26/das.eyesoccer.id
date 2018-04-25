@@ -716,3 +716,22 @@ function set_breadcrumb($kanal,$page)
 function imgEyesoccer(){
 	return 'http://static.eyesoccer.id/v1/cache/images/1519793206557_logo_login.png/small';
 }
+
+function loginAvaTop($hasLogin){
+    
+    if(is_array($hasLogin)){
+        return '<i id="src" class="material-icons f-r">search</i>
+				<a href="'.LOGINURL.'" style="color: #8ec429;">
+					<div class="pprofile">
+						<img src="'.$hasLogin['url_pic'].'/small" alt="avatar">
+					</div>
+				</a>';
+    } else {
+        return '<i id="src" class="material-icons f-r">search</i>
+				<a href="member" style="color: #8ec429;">
+					<div class="pprofile">
+						<img src="'.SUBCDN.'assets/img/eyeme/user-discover.png" alt="">
+					</div>
+				</a>';
+    }
+}
