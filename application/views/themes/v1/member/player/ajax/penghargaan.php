@@ -23,7 +23,7 @@ if ($achive) {
         ?>
         <div class="x-form-daftar-pemain row">
             <a href="javascript:void(0)" title="Hapus" id="delachive_<?php echo $c->id_achievement; ?>" class="form_post" action="member" fn="playerachiveact"
-               onclick="return confirm('Apakah anda yakin ingin menghapusnya?')">
+               confirm="Apakah anda yakin ingin menghapusnya?">
                 <i class="fas fa-times" style="float:right; font-size:.9em;"></i>
                 <span class="cinput disp-none" name="act" val="2"></span>
                 <input type="hidden" name="xid" value="<?php echo $this->input->post('uid'); ?>" class="cinput">

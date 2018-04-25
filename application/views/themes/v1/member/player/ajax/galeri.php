@@ -62,7 +62,7 @@
             ?>
             <div class="player-galeri">
                 <a href="javascript:void(0)" title="Hapus" id="delgallery_<?php echo $c->id; ?>" class="form_post" action="member" fn="playergalleryact"
-                   onclick="return confirm('Apakah anda yakin ingin menghapusnya?')">
+                   confirm="Apakah anda yakin ingin menghapusnya?">
                     <i class="fas fa-times"></i>
                     <span class="cinput disp-none" name="act" val="2"></span>
                     <input type="hidden" name="xid" value="<?php echo $this->input->post('uid'); ?>" class="cinput">

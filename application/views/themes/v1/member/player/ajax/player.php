@@ -6,7 +6,7 @@
             ?>
             <div class="x-form-daftar-pemain row">
                 <a href="javascript:void(0)" title="Hapus" id="delkarir_<?php echo $p->id; ?>" class="form_post" action="member" fn="playeract"
-                   onclick="return confirm('Apakah anda yakin ingin menghapusnya?')">
+                   confirm="Apakah anda yakin ingin menghapusnya?">
                     <i class="fas fa-times" style="float:right; font-size:.9em;"></i>
                     <span class="cinput disp-none" name="act" val="2"></span>
                     <input type="hidden" name="uid" value="<?php echo $p->slug; ?>" class="cinput">
