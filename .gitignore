@@ -30,3 +30,5 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /tests/tests/
 /tests/results/
 index.php
+assets/js/kcfinder/themes/dark/img/loading.gif
+assets/js/kcfinder/themes/oxygen/img/loading.gif
