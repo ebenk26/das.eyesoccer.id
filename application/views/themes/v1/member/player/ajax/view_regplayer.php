@@ -1,7 +1,7 @@
-<h2>Registrasi Klub</h2>
+<h2>Registrasi Pemain</h2>
 <table>
     <tr>
-        <td>Klub Sekarang</td>
+        <td>Pilih Klub</td>
     	<td>
     		<?php /*?>
 	    		<select name="id_club">
@@ -37,7 +37,7 @@
         </td>
     </tr>
     <tr>
-        <td>No. KTP atau NIK</td>
+        <td>No. KTP / NIK / No. Kartu Pelajar</td>
         <td>
             <input type="number" name="no_ktp">
         </td>

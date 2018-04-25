@@ -964,6 +964,7 @@ class MemberMod extends CI_Model
             'page' => '',
             'limit' => '',
             'club' => $slug,
+            'active' => 'false',
         );
 
         $data['verify'] = $this->excurl->reqCurlapp('reglist-player', $query)->data;
@@ -1001,5 +1002,25 @@ class MemberMod extends CI_Model
         $html = $this->load->view($this->__theme().'member/club/ajax/verikasiform',$data,true);
         $data = array('xClass'=> 'reqverify','xHtml' => $html);
         $this->tools->__flashMessage($data);
+    }
+
+    function __verifyapp()
+    {
+        $id_reg = $this->input->post('id_reg');
+
+        $query  = array('id' => $id_reg, 'player' => '');
+        // var_dump($query);exit();
+        $res = $this->excurl->reqCurlapp('verify-player', $query);
+        $msg = 'Pemain atas nama '.$this->input->post('name').' berhasil di setujui.';
+
+        $arr = $this->library->errorMessage($res);
+
+        if ($res->status == 'Success') {
+            $arr = array('xDirect' => base_url('member/verifikasi'), 'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
+        }
+        else
+        {
+            echo $arr;
+        }
     }
 }

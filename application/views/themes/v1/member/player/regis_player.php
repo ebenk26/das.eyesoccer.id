@@ -16,11 +16,11 @@
                         });
                     </script>
                 </div>
-                <h2>Registrasi Klub</h2>
+                <h2>Registrasi Pemain</h2>
                 <input type='hidden' name='fn' value='get_listclub' class='cinput'>
                 <table>
                     <tr>
-                        <td>Klub Sekarang</td>
+                        <td>Klub</td>
                         <td>
                             <input type="text" name="name">
                         </td>
@@ -44,7 +44,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>No. KTP atau NIK</td>
+                        <td>No. KTP / NIK / No. Kartu Pelajar</td>
                         <td>
                             <input type="number" name="no_ktp">
                         </td>
