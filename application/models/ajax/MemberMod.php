@@ -1018,9 +1018,7 @@ class MemberMod extends CI_Model
         if ($res->status == 'Success') {
             $arr = array('xDirect' => base_url('member/verifikasi'), 'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
         }
-        else
-        {
-            echo $arr;
-        }
+
+        $this->tools->__flashMessage($arr);
     }
 }
