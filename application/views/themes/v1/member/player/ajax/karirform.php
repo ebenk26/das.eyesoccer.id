@@ -24,9 +24,10 @@
         <input type="hidden" name="uid" class="cinput" value="<?php echo ($player) ? $player->slug : ''; ?>">
         <input type="hidden" name="act" class="cinput" value="<?php echo ($career) ? 1 : 0; ?>">
         <input type="hidden" name="id" class="cinput" value="<?php echo ($career) ? $career->id_career : ''; ?>">
+        <div class="ff-12 mg-b15">Perhatian: Data yang bertanda <span class="cl-red">*</span> harus diisi</div>
         <table>
             <tr>
-                <td>Bulan</td>
+                <td>Bulan <span class="cl-red">*</span></td>
                 <td>
                     <select name="month" class="tx-cp">
                         <?php
@@ -44,28 +45,28 @@
                 </td>
             </tr>
             <tr>
-                <td>Tahun</td>
+                <td>Tahun <span class="cl-red">*</span></td>
                 <td>
                     <input type="number" min="0" name="year" value="<?php echo ($career) ? $career->year : date('Y'); ?>">
                     <span class="err msgyear"></span>
                 </td>
             </tr>
             <tr>
-                <td>Klub</td>
+                <td>Klub <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="club" value="<?php echo ($career) ? $career->club : ''; ?>">
                     <span class="err msgclub"></span>
                 </td>
             </tr>
             <tr>
-                <td>Turnament</td>
+                <td>Turnament <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="tournament" value="<?php echo ($career) ? $career->tournament : ''; ?>">
                     <span class="err msgtournament"></span>
                 </td>
             </tr>
             <tr>
-                <td>Negara</td>
+                <td>Negara <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="country" value="<?php echo ($career) ? $career->country : ''; ?>">
                     <span class="err msgcountry"></span>
@@ -79,14 +80,14 @@
                 </td>
             </tr>
             <tr>
-                <td>Nomor Punggung</td>
+                <td>Nomor Punggung <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="back_number" value="<?php echo ($career) ? $career->back_number : ''; ?>">
                     <span class="err msgback_number"></span>
                 </td>
             </tr>
             <tr>
-                <td>Pelatih</td>
+                <td>Pelatih <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="coach" value="<?php echo ($career) ? $career->coach : ''; ?>">
                     <span class="err msgcoach"></span>

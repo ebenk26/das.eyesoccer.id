@@ -349,10 +349,13 @@ class MemberMod extends CI_Model
         $member = $this->excurl->reqCurlapp('me', $query);
         $member = ($member) ? $member->data[0] : '';
 
+        $birthdate = $this->input->post('birth_date');
+        $birthdate = ($birthdate) ? date('Y-m-d', strtotime($this->input->post('birth_date'))) : '';
+
         $dt = [];
         if ($this->input->post('act') < 2) {
             $dt = array('name' => $this->input->post('name'), 'nickname' => $this->input->post('nickname'), 'description' => $this->input->post('description'),
-                        'birth_place' => $this->input->post('birth_place'), 'birth_date' => date('Y-m-d', strtotime($this->input->post('birth_date'))),
+                        'birth_place' => $this->input->post('birth_place'), 'birth_date' => $birthdate,
                         'phone' => $this->input->post('phone'), 'mobile' => $this->input->post('mobile'), 'email' => $this->input->post('email'),
                         'height' => $this->input->post('height'), 'weight' => $this->input->post('weight'), 'gender' => $this->input->post('gender'),
                         'nationality' => $this->input->post('nationality'), 'position_a' => $this->input->post('position_a'), 'position_b' => $this->input->post('position_b'),
@@ -744,13 +747,16 @@ class MemberMod extends CI_Model
         $club = $this->excurl->reqCurlback('profile-club',  $query);
         $club = ($club) ? $club->data[0] : '';
 
+        $birthdate = $this->input->post('birth_date');
+        $birthdate = ($birthdate) ? date('Y-m-d', strtotime($this->input->post('birth_date'))) : '';
+
         $dt = [];
         if ($this->input->post('act') < 2) {
             $dt = array('slug' => $club->slug, 'name' => $this->input->post('name'), 'position' => $this->input->post('position'),
                         'nationality' => $this->input->post('nationality'), 'license' => $this->input->post('license'), 'no_identity' => $this->input->post('no_identity'),
-                        'birth_place' => $this->input->post('birth_place'), 'birth_date' => date('Y-m-d', strtotime($this->input->post('birth_date'))),
-                        'address' => $this->input->post('address'), 'phone' => $this->input->post('phone'), 'email' => $this->input->post('email'),
-                        'contact' => $this->input->post('contact'), 'contract' => $this->input->post('contract'));
+                        'birth_place' => $this->input->post('birth_place'), 'birth_date' => $birthdate, 'address' => $this->input->post('address'),
+                        'phone' => $this->input->post('phone'), 'email' => $this->input->post('email'), 'contact' => $this->input->post('contact'),
+                        'contract' => $this->input->post('contract'));
         }
 
         if ($this->input->post('act') > 0) {

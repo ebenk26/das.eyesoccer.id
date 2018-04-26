@@ -24,37 +24,38 @@
         <input type="hidden" name="uid" class="cinput" value="<?php echo ($player) ? $player->slug : ''; ?>">
         <input type="hidden" name="act" class="cinput" value="<?php echo ($achive) ? 1 : 0; ?>">
         <input type="hidden" name="id" class="cinput" value="<?php echo ($achive) ? $achive->id_achievement : ''; ?>">
+        <div class="ff-12 mg-b15">Perhatian: Data yang bertanda <span class="cl-red">*</span> harus diisi</div>
         <table>
             <tr>
-                <td>Tahun</td>
+                <td>Tahun <span class="cl-red">*</span></td>
                 <td>
                     <input type="number" min="0" name="year" value="<?php echo ($achive) ? $achive->year : date('Y'); ?>">
                     <span class="err msgyear"></span>
                 </td>
             </tr>
             <tr>
-                <td>Turnament</td>
+                <td>Turnament <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="tournament" value="<?php echo ($achive) ? $achive->tournament : ''; ?>">
                     <span class="err msgtournament"></span>
                 </td>
             </tr>
             <tr>
-                <td>Negara</td>
+                <td>Negara <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="country" value="<?php echo ($achive) ? $achive->country : ''; ?>">
                     <span class="err msgcountry"></span>
                 </td>
             </tr>
             <tr>
-                <td>Peringkat</td>
+                <td>Peringkat <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="rank" value="<?php echo ($achive) ? $achive->rank : ''; ?>">
                     <span class="err msgrank"></span>
                 </td>
             </tr>
             <tr>
-                <td>Penghargaan</td>
+                <td>Penghargaan <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="appreciation" value="<?php echo ($achive) ? $achive->appreciation : ''; ?>">
                     <span class="err msgappreciation"></span>

@@ -48,37 +48,38 @@
         <input type="hidden" name="fn" class="cinput" value="playeract">
         <input type="hidden" name="uid" class="cinput" value="<?php echo ($player) ? $player->slug : ''; ?>">
         <input type="hidden" name="act" class="cinput" value="<?php echo ($player) ? 1 : 0; ?>">
+        <div class="ff-12 mg-b15">Perhatian: Data yang bertanda <span class="cl-red">*</span> harus diisi</div>
         <table>
             <tr>
-                <td>Nama</td>
+                <td>Nama <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="name" value="<?php echo ($player) ? $player->name : ''; ?>">
                     <span class="err msgname"></span>
                 </td>
             </tr>
             <tr>
-                <td>Nama Panggilan</td>
+                <td>Nama Panggilan <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="nickname" value="<?php echo ($player) ? $player->nickname : ''; ?>">
                     <span class="err msgnickname"></span>
                 </td>
             </tr>
             <tr>
-                <td>Deskripsi</td>
+                <td>Deskripsi <span class="cl-red">*</span></td>
                 <td>
                     <textarea name="description" rows="5"><?php echo ($player) ? $player->description : ''; ?></textarea>
                     <span class="err msgdescription"></span>
                 </td>
             </tr>
             <tr>
-                <td>Tempat Lahir</td>
+                <td>Tempat Lahir <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="birth_place" value="<?php echo ($player) ? $player->birth_place : ''; ?>">
                     <span class="err msgbirth_place"></span>
                 </td>
             </tr>
             <tr>
-                <td>Tanggal Lahir</td>
+                <td>Tanggal Lahir <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="birth_date" id="birthdate" value="<?php echo ($player) ? date('d-m-Y', strtotime($player->birth_date)) : ''; ?>">
                     <span class="err msgbirth_date"></span>
@@ -92,14 +93,14 @@
                 </td>
             </tr>
             <tr>
-                <td>No. Hp</td>
+                <td>No. Hp <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="mobile" value="<?php echo ($player) ? $player->mobile : ''; ?>">
                     <span class="err msgmobile"></span>
                 </td>
             </tr>
             <tr>
-                <td>Email</td>
+                <td>Email <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="email" value="<?php echo ($player) ? $player->email : ''; ?>">
                     <span class="err msgemail"></span>
@@ -126,21 +127,21 @@
             }
             ?>
             <tr>
-                <td>Height</td>
+                <td>Height <span class="cl-red">*</span></td>
                 <td>
                     <input type="number" min="1" name="height" value="<?php echo ($player) ? $player->height : ''; ?>">
                     <span class="err msgheight"></span>
                 </td>
             </tr>
             <tr>
-                <td>Weight</td>
+                <td>Weight <span class="cl-red">*</span></td>
                 <td>
                     <input type="number" min="1" name="weight" value="<?php echo ($player) ? $player->weight : ''; ?>">
                     <span class="err msgweight"></span>
                 </td>
             </tr>
             <tr>
-                <td>Jenis Kelamin</td>
+                <td>Jenis Kelamin <span class="cl-red">*</span></td>
                 <td>
                     <select name="gender">
                         <option value="">- Pilih Jenis Kelamin -</option>
@@ -159,14 +160,14 @@
                 </td>
             </tr>
             <tr>
-                <td>Negara</td>
+                <td>Negara <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="nationality" value="<?php echo ($player) ? $player->nationality : ''; ?>">
                     <span class="err msgnationality"></span>
                 </td>
             </tr>
             <tr>
-                <td>Posisi Utama</td>
+                <td>Posisi Utama <span class="cl-red">*</span></td>
                 <td>
                     <select name="position_a">
                         <option value="">- Pilih Posisi Utama -</option>
@@ -206,14 +207,14 @@
                 </td>
             </tr>
             <tr>
-                <td>Nomor Punggung</td>
+                <td>Nomor Punggung <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="back_number" value="<?php echo ($player) ? $player->back_number : ''; ?>">
                     <span class="err msgback_number"></span>
                 </td>
             </tr>
             <tr>
-                <td>Kemampuan Kaki</td>
+                <td>Kemampuan Kaki <span class="cl-red">*</span></td>
                 <td>
                     <select name="foot">
                         <option value="">- Pilih Kemampuan Kaki -</option>

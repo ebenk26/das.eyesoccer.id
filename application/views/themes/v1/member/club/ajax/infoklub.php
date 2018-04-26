@@ -17,24 +17,25 @@ if ($klubdetail) {
                 </label>
             </div>
         </div>
-        <div class="container data-profil mt20">
+        <div class="container data-profil mg-t15">
+            <div class="ff-12 mg-b15">Perhatian: Data yang bertanda <span class="cl-red">*</span> harus diisi</div>
             <table>
                 <tr>
-                    <td>Nama Klub</td>
+                    <td>Nama Klub <span class="cl-red">*</span></td>
                     <td>
                         <input type="text" name="name" value="<?php echo $v[0]->name; ?>">
                         <span class='err msgname'></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>Nama Panggilan</td>
+                    <td>Nama Panggilan <span class="cl-red">*</span></td>
                     <td>
                         <input type="text" name="nickname" value="<?php echo $v[0]->nickname; ?>">
                         <span class='err msgnickname'></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>Deskripsi Klub</td>
+                    <td>Deskripsi Klub <span class="cl-red">*</span></td>
                     <td>
                         <input type="text" name="description" value="<?php echo strip_tags($v[0]->description); ?>">
                         <span class='err msgdescription'></span>
@@ -48,95 +49,89 @@ if ($klubdetail) {
                     </td>
                 </tr>
                 <tr>
-                    <td>No. Telp</td>
+                    <td>No. Telp <span class="cl-red">*</span></td>
                     <td>
                         <input type="number" name="phone" value="<?php echo $v[0]->phone; ?>">
                         <span class='err msgphone'></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>Email</td>
+                    <td>Email <span class="cl-red">*</span></td>
                     <td>
                         <input type="text" name="email" value="<?php echo $v[0]->email; ?>">
                         <span class='err msgemail'></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>Alamat Klub</td>
+                    <td>Alamat Klub <span class="cl-red">*</span></td>
                     <td>
                         <input type="text" name="address" value="<?php echo strip_tags($v[0]->address); ?>">
                         <span class='err msgaddress'></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>Provinsi</td>
+                    <td>Provinsi <span class="cl-red">*</span></td>
                     <td>
-                        <div class="container" style="font-size: .8em;">
+                        <select name="provinsi" selected="true" class="slc-musim form_change" action="member" fn="get_kabupaten" loading="off" dest="opt-kabupaten">
+                            <option value="">--Pilih Provinsi--</option>
                             <?php
                             if ($provinsi) {
-                                ?>
-                                <select name="provinsi" selected="true" class="slc-musim form_change" action="member" fn="get_kabupaten" loading="off" dest="opt-kabupaten">
-                                    <option value>--Pilih Provinsi--</option>
-                                    <?php
-                                    foreach ($provinsi as $dt) {
-                                        if ($v[0]->id_provinsi == $dt->IDProvinsi) {
-                                            ?>
-                                            <option value="<?php echo $dt->IDProvinsi ?>" selected>
-                                                <?php echo $dt->nama; ?>
-                                            </option>
-                                            <?php
-                                        } else {
-                                            ?>
-                                            <option value="<?php echo $dt->IDProvinsi ?>">
-                                                <?php echo $dt->nama; ?>
-                                            </option>
-                                            <?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                                <?php
-                            }
-                            ?>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Kabupaten</td>
-                    <td>
-                        <div class="container opt-kabupaten" style="font-size: .8em;">
-                            <select id="kabupaten" name="kabupaten" class="form-control">
-                                <option value="">--Pilih Kabupaten--</option>
-                                <?php
-                                foreach ($kabupaten as $dt) {
-                                    if ($v[0]->Id_kabupaten == $dt->IDKabupaten) {
+                                foreach ($provinsi as $dt) {
+                                    if ($v[0]->id_provinsi == $dt->IDProvinsi) {
                                         ?>
-                                        <option value="<?php echo $dt->IDKabupaten ?>" selected>
+                                        <option value="<?php echo $dt->IDProvinsi ?>" selected>
                                             <?php echo $dt->nama; ?>
                                         </option>
                                         <?php
                                     } else {
                                         ?>
-                                        <option value="<?php echo $dt->IDKabupaten ?>">
+                                        <option value="<?php echo $dt->IDProvinsi ?>">
                                             <?php echo $dt->nama; ?>
                                         </option>
                                         <?php
                                     }
                                 }
-                                ?>
-                            </select>
-                        </div>
+                            }
+                            ?>
+                        </select>
+                        <span class='err msgprovinsi'></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>Nama Pelatih</td>
+                    <td>Kabupaten <span class="cl-red">*</span></td>
+                    <td class="opt-kabupaten">
+                        <select id="kabupaten" name="kabupaten" class="form-control">
+                            <option value="">--Pilih Kabupaten--</option>
+                            <?php
+                            foreach ($kabupaten as $dt) {
+                                if ($v[0]->Id_kabupaten == $dt->IDKabupaten) {
+                                    ?>
+                                    <option value="<?php echo $dt->IDKabupaten ?>" selected>
+                                        <?php echo $dt->nama; ?>
+                                    </option>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <option value="<?php echo $dt->IDKabupaten ?>">
+                                        <?php echo $dt->nama; ?>
+                                    </option>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                        <span class='err msgkabupaten'></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nama Pelatih <span class="cl-red">*</span></td>
                     <td>
                         <input type="text" name="coach" value="<?php echo $v[0]->coach; ?>">
                         <span class='err msgcoach'></span>
                     </td>
                 </tr>
                 <tr>
-                    <td>Nama Manager</td>
+                    <td>Nama Manager <span class="cl-red">*</span></td>
                     <td>
                         <input type="text" name="manager" value="<?php echo $v[0]->manager; ?>">
                         <span class='err msgmanager'></span>
@@ -149,7 +144,7 @@ if ($klubdetail) {
                     </td>
                 </tr>
                 <tr>
-                    <td>Nama Pemilik</td>
+                    <td>Nama Pemilik <span class="cl-red">*</span></td>
                     <td>
                         <input type="text" name="owner" value="<?php echo $v[0]->owner; ?>">
                         <span class='err msgowner'></span>
@@ -163,53 +158,53 @@ if ($klubdetail) {
                     </td>
                 </tr>
                 <?php
-                    if ($v[0]->legalitas_pt == '') {
-                        ?>
-                        <tr>
-                            <td>Legalitas PT</td>
-                            <td>
-                                <input type="file" name="legal_pt" accept="image/*">
-                                <span class='err msglegal_pt'></span>
-                            </td>
-                        </tr>
-                        <?php
-                    }
+                if ($v[0]->legalitas_pt == '') {
+                    ?>
+                    <tr>
+                        <td>Legalitas PT</td>
+                        <td>
+                            <input type="file" name="legal_pt" accept="image/*">
+                            <span class='err msglegal_pt'></span>
+                        </td>
+                    </tr>
+                    <?php
+                }
 
-                    if ($v[0]->legalitas_kemenham == '') {
-                        ?>
-                        <tr>
-                            <td>Legalitas Kemenham</td>
-                            <td>
-                                <input type="file" name="legal_kemenham" accept="image/*">
-                                <span class='err msglegal_kemenham'></span>
-                            </td>
-                        </tr>
-                        <?php
-                    }
+                if ($v[0]->legalitas_kemenham == '') {
+                    ?>
+                    <tr>
+                        <td>Legalitas Kemenham</td>
+                        <td>
+                            <input type="file" name="legal_kemenham" accept="image/*">
+                            <span class='err msglegal_kemenham'></span>
+                        </td>
+                    </tr>
+                    <?php
+                }
 
-                    if ($v[0]->legalitas_npwp == '') {
-                        ?>
-                        <tr>
-                            <td>Legalitas NPWP</td>
-                            <td>
-                                <input type="file" name="legal_npwp" accept="image/*">
-                                <span class='err msglegal_npwp'></span>
-                            </td>
-                        </tr>
-                        <?php
-                    }
+                if ($v[0]->legalitas_npwp == '') {
+                    ?>
+                    <tr>
+                        <td>Legalitas NPWP</td>
+                        <td>
+                            <input type="file" name="legal_npwp" accept="image/*">
+                            <span class='err msglegal_npwp'></span>
+                        </td>
+                    </tr>
+                    <?php
+                }
 
-                    if ($v[0]->legalitas_dirut == '') {
-                        ?>
-                        <tr>
-                            <td>Legalitas Dirut</td>
-                            <td>
-                                <input type="file" name="legal_dirut" accept="image/*">
-                                <span class='err msglegal_dirut'></span>
-                            </td>
-                        </tr>
-                        <?php
-                    }
+                if ($v[0]->legalitas_dirut == '') {
+                    ?>
+                    <tr>
+                        <td>Legalitas Dirut</td>
+                        <td>
+                            <input type="file" name="legal_dirut" accept="image/*">
+                            <span class='err msglegal_dirut'></span>
+                        </td>
+                    </tr>
+                    <?php
+                }
                 ?>
                 <tr>
                     <td colspan="2" class="tx-c">

@@ -42,58 +42,59 @@
         <input type="hidden" name="fn" class="cinput" value="clubofficialact">
         <input type="hidden" name="act" class="cinput" value="<?php echo ($official) ? 1 : 0; ?>">
         <input type="hidden" name="id" class="cinput" value="<?php echo ($official) ? $official->id_official : ''; ?>">
+        <div class="ff-12 mg-b15">Perhatian: Data yang bertanda <span class="cl-red">*</span> harus diisi</div>
         <table>
             <tr>
-                <td>Nama</td>
+                <td>Nama <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="name" value="<?php echo ($official) ? $official->name : ''; ?>">
                     <span class="err msgname"></span>
                 </td>
             </tr>
             <tr>
-                <td>Posisi</td>
+                <td>Posisi <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="position" value="<?php echo ($official) ? $official->position : ''; ?>">
                     <span class="err msgposition"></span>
                 </td>
             </tr>
             <tr>
-                <td>Negara</td>
+                <td>Negara <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="nationality" value="<?php echo ($official) ? $official->nationality : ''; ?>">
                     <span class="err msgnationality"></span>
                 </td>
             </tr>
             <tr>
-                <td>Lisensi</td>
+                <td>Lisensi <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="license" value="<?php echo ($official) ? $official->license : ''; ?>">
                     <span class="err msglicense"></span>
                 </td>
             </tr>
             <tr>
-                <td>No Identitas</td>
+                <td>No Identitas <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="no_identity" value="<?php echo ($official) ? $official->no_identity : ''; ?>">
                     <span class="err msgno_identity"></span>
                 </td>
             </tr>
             <tr>
-                <td>Tempat Lahir</td>
+                <td>Tempat Lahir <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="birth_place" value="<?php echo ($official) ? $official->birth_place : ''; ?>">
                     <span class="err msgbirth_place"></span>
                 </td>
             </tr>
             <tr>
-                <td>Tanggal Lahir</td>
+                <td>Tanggal Lahir <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="birth_date" id="birthdate" value="<?php echo ($official) ? date('d-m-Y', strtotime($official->birth_date)) : ''; ?>">
                     <span class="err msgbirth_date"></span>
                 </td>
             </tr>
             <tr>
-                <td>Alamat</td>
+                <td>Alamat <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="address" value="<?php echo ($official) ? $official->address : ''; ?>">
                     <span class="err msgaddress"></span>
@@ -107,7 +108,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Email</td>
+                <td>Email <span class="cl-red">*</span></td>
                 <td>
                     <input type="text" name="email" value="<?php echo ($official) ? $official->email : ''; ?>">
                     <span class="err msgemail"></span>
