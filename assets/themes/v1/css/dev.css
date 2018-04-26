@@ -341,7 +341,9 @@ body {
     font-size: .9em;
     text-align: center;
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: 35px;
+    border: 0px;
+    box-shadow: 0 0 10px -4px #59c2fc;
 }
 
 /* Popup */

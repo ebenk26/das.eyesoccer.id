@@ -1,5 +1,17 @@
-<a href="<?php echo base_url('member/player/?tab=profil'); ?>" class="btn-blue disp-inblock mg-t mg-b15">Tambah</a>
 
+<a href="<?php echo base_url('member/player/?tab=profil'); ?>" class="btn-white-orange fl-r">Tambah pemain</a>
+<div class="container mt20">
+		<div class="pp-profil">
+			<img src="<?php echo (!empty($v[0]->url_logo) ? $v[0]->url_logo : base_url()."assets/themes/v1/img/fav.png")?>" alt="" class="viewimg">
+		</div>
+		<div class="full-width">
+            <label class="btn-blue">
+                Ganti Logo
+                <input id="file_pic" name="logo" type="file" style="display: none;" accept="image/*">
+            </label>
+        </div>
+    </div>
+    <div class="container">
 <?php
     if ($player) {
         foreach ($player->data as $p) {
@@ -30,3 +42,4 @@
         $this->library->backnext('pageplayer', 'pagetotalplayer', $playercount, 'member', 'player', 20);
     }
 ?>
+</div>

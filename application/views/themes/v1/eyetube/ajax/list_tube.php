@@ -1,16 +1,16 @@
 <div class="etube-home" style="padding: unset;">
     <div class="container top-menu-ketegori over-x" style="margin-top: 55px;">
         <div class="w-max">
-            <a href="<?php echo base_url();?>eyetube/kategori/EyeSoccer-Fact">EYESOCCER FACT</a>
+            <a href="<?php echo base_url();?>eyetube/kategori/Highlight">HIGHLIGHT</a>
+            <a href="<?php echo base_url();?>eyetube/kategori/Profile-SSB">PROFILE SSB</a>
             <a href="<?php echo base_url();?>eyetube/kategori/Eye-Soccer-Flash">EYESOCCER FLASH</a>
+            <a href="<?php echo base_url();?>eyetube/kategori/EyeSoccer-Fact">EYESOCCER FACT</a>
             <a href="<?php echo base_url();?>eyetube/kategori/Eyesoccerpedia">EYESOCCER PEDIA</a>
             <a href="<?php echo base_url();?>eyetube/kategori/Match-Preview">MATCH PREVIEW</a>
             <a href="<?php echo base_url();?>eyetube/kategori/Eye-Soccer-Hits">EYESOCCER HITS</a>
-            <a href="<?php echo base_url();?>eyetube/kategori/Profile-SSB">PROFILE SSB</a>
             <a href="<?php echo base_url();?>eyetube/kategori/Eyesoccer-Star">EYESOCCER STAR</a>
             <a href="<?php echo base_url();?>eyetube/kategori/Eye-Soccer-Funny">EYESOCCER FUNNY</a>
             <a href="<?php echo base_url();?>eyetube/kategori/VIDEO-KAMU">VIDEO KAMU</a>
-            <a href="<?php echo base_url();?>eyetube/kategori/Highlight">HIGHLIGHT</a>
         </div>
     </div>
     <?php

@@ -2,27 +2,13 @@
 if ($klubdetail){
 	$v = $klubdetail->data;
 ?>
-<style>
-	.btn-blue{
-        background-color: #4FC3F7;
-        color: white;
-        padding: 8px 10px;
-        border-radius: 5px;
-        font-size: .9em;
-        display: block;
-        text-align: center;
-        margin: 8px;
-        border: 0px;
-        box-sizing: border-box;
-    }
-</style>
 <form class='form_multi' action="<?= base_url('member'); ?>" enctype="multipart/form-data">
 	<input type="hidden" name="fn" class="cinput" value="editclub">
 	<input type="hidden" name="id_club" value="<?php echo $v[0]->id_club;?>">
 	<input type="hidden" name="slug" value="<?php echo $v[0]->slug;?>">
 	<div class="container mt20">
 		<div class="pp-profil">
-			<img src="<?php echo (!empty($v[0]->url_logo) ? $v[0]->url_logo : base_url()."assets/themes/v1/img/fav.png")?>" alt="Logo Klub" class="viewimg">
+			<img src="<?php echo (!empty($v[0]->url_logo) ? $v[0]->url_logo : base_url()."assets/themes/v1/img/fav.png")?>" alt="" class="viewimg">
 		</div>
 		<div class="full-width">
             <label class="btn-blue">

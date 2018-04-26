@@ -347,11 +347,11 @@
 .player-galeri i{
     float: right;
     font-size: .9em;
-    position: absolute;
-    right: 6px;
+    position: relative;
     top: 5px;
+    right: 17px;
     color: white;
-    text-shadow: 0 0 10px black;
+    text-shadow: 0 0 8px #0000007a;
 }
 .pd20{
     padding: 20px !important;
@@ -802,8 +802,10 @@
     border: 4px solid white;
     border-radius: 50%;
     overflow: hidden;
-    background-color: gainsboro;
+    background-color: #fafafa;
     box-shadow: 0px 0 8px -3px #5a5a5a;
+    background: url('http://static.eyesoccer.id/v1/cache/images/4033LOGO UNTUK APLIKASI.jpg');
+    background-size: cover;
 }
 .m-t-70{
     margin-top: -70px;
@@ -973,4 +975,27 @@ select{
 .body-responsive ::scrollbar {
     height: 0px;
     background: transparent;
+}
+.full-width{
+    box-sizing: border-box;
+    width: 100%;
+    float: left;
+    display: block;
+    padding: 0px 10px;
+    margin: 10px 0px;
+}
+.full-width .btn-blue{
+    width: 100%;
+    display: block;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin: 0px;
+}
+.btn-white-orange{
+    color: rgb(255, 208, 0);
+    text-transform: uppercase;
+    font-size: .7em;
+    font-weight: 500;
+    float: right;
+    margin-right: 20px;
 }

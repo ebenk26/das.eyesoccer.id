@@ -50,7 +50,7 @@
                 Upload Photo
                 <input type="file" name="fupload" id="filepic" style="display: none;" accept="image/*">
             </label>
-            <button class="klik-dsn">Simpan</button>
+            <button class="btn-blue">Simpan</button>
         </div>
     </form>
 </div>
