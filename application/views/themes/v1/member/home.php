@@ -20,10 +20,10 @@
         </div>
     </div>
     <div class="container daftar-pemain">
-        <div class="form-daftar-pemain">
 <?php
-			if($club){
+		if($club){
 ?>
+        <div class="form-daftar-pemain">
 				<span><?php echo $club->name;?></span>
 <?php
 				if($club->is_verify == 0 && $club->is_active == 0){
@@ -45,14 +45,14 @@
 				 <span>JIKA KAMU PEMILIK KLUB / SSB</span>
 				<span>DAFTARKAN KLUB KAMU</span>
 				<a href="<?php echo base_url()?>member/regis_klub"><button class="klik-dsn">KLIK DISINI</button></a>
-<?php
-			}
-?>
         </div>
-        <div class="form-daftar-pemain">
 <?php
-			if($player){
+		}
 ?>
+<?php
+		if($player){
+?>
+        <div class="form-daftar-pemain">
 				<span><?php echo $player->name;?></span>
 <?php
 				if($player->is_active == 0){
@@ -70,9 +70,9 @@
 				<span class="fs68">JIKA KAMU PEMAIN SEPAKBOLA</span>
 				<span>DAFTARKAN PEMAIN</span>
 				<a href="<?php echo base_url()?>member/regis_player"><button class="klik-dsn">KLIK DISINI</button></a>
-<?php
-			}
-?>
         </div>
+<?php
+		}
+?>
     </div>
 </div>

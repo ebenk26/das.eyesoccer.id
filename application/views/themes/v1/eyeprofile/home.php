@@ -428,7 +428,7 @@
 						
 						var str = window.location.href;
 						var res = str.split("/");
-						if(res[res.length-2] != "Liga%20Usia%20Muda"){
+						if(res[res.length-1] != "Liga%20Usia%20Muda"){
 							$(".sbpbtn").hide();
 						}
 					</script>
