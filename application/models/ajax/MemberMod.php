@@ -167,11 +167,10 @@ class MemberMod extends CI_Model
         $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $res = $this->excurl->reqCurlback('me', $param);
         $v = $res->data;
-		// print_r($this->session->member['id']);exit();
+
         $query = array('id_club' => ($v[0]->id_club == 0 ? 1128 : $v[0]->id_club), 'detail' => true);
         $data['klubdetail'] = $this->excurl->reqCurlback('profile-club', $query);
         $val = $data['klubdetail']->data;
-		// print_r($data['klubdetail']);exit();
 		
         $queryprov = array();
         $data['provinsilist'] = $this->excurl->reqCurlback('provinsi', $queryprov);
@@ -182,8 +181,6 @@ class MemberMod extends CI_Model
         $data['kabupatenlist'] = $this->excurl->reqCurlback('kabupaten', $querykab);
         $val = $data['kabupatenlist']->data;
         $data['kabupaten'] = $val;
-		// print_r($data['kabupaten']);exit();
-		// print_r($data['klubdetail']->data[0]->Id_kabupaten);exit();
 
         $html = $this->load->view($this->__theme() . 'member/club/ajax/infoklub', $data, true);
 
@@ -195,15 +192,11 @@ class MemberMod extends CI_Model
     {
         $name = $this->input->post('name');
         $namealias = $this->input->post('namealias');
+        $address = $this->input->post('address');
+        $phone = $this->input->post('phone');
+        $ses = $this->session->userdata('member');
 
-        $sesi = $this->session->userdata('member');
-
-        $query = array( 
-            'uid' => $sesi['id'],
-            'name' => $name,
-            'namealias' => $namealias
-        );
-
+        $query = array( 'uid' => $ses['id'], 'name' => $name, 'namealias' => $namealias, 'address' => $address, 'phone' => $phone);
         $res = $this->excurl->reqCurlapp('register-club', $query, array('legal_pt', 'legal_kemenham', 'legal_npwp', 'legal_dirut'));
 
         $arr = $this->library->errorMessage($res);
@@ -293,25 +286,21 @@ class MemberMod extends CI_Model
         $member = $this->excurl->reqCurlapp('me', $query);
         $member = ($member) ? $member->data[0] : '';
 
+        $query = [];
         if ($member->id_club > 0) {
-            $query = array('id_club' => $id_club, 'name' => $name, 'nickname' => $nickname, 'address' => $address, 'description' => $description, 'establish_date' => $establish_date, 'phone' => $phone, 'email' => $email, 'owner' => $owner, 'coach' => $coach, 'provinsi' => $provinsi, 'kabupaten' => $kabupaten, 'manager' => $manager, 'slug' => $slug, 'supporter_name' => $supporter_name, 'training_schedule' => $training_schedule);
-        } else {
-            $query = array();
+            $query = array('id_club' => $id_club, 'name' => $name, 'nickname' => $nickname, 'address' => $address, 'description' => $description,
+                           'establish_date' => date('Y-m-d', strtotime($establish_date)), 'phone' => $phone, 'email' => $email, 'owner' => $owner,
+                           'coach' => $coach, 'provinsi' => $provinsi, 'kabupaten' => $kabupaten, 'manager' => $manager, 'slug' => $slug,
+                           'supporter_name' => $supporter_name, 'training_schedule' => $training_schedule);
         }
-		
-        $res = $this->excurl->reqCurlapp('edit-club', $query, array('logo', 'legal_pt'));
-		
-        // print_r($res);
-        // exit;
+
+        $res = $this->excurl->reqCurlapp('edit-club', $query, array('logo', 'legal_pt', 'legal_kemenham', 'legal_npwp', 'legal_dirut'));
         $arr = $this->library->errorMessage($res);
 
         if ($res->status == 'Success') {
             $message = "Data berhasil disimpan.";
-            $arr = array('xDirect' => base_url() . 'member', 'xCss' => 'boxsuccess', 'xMsg' => $message, 'xAlert' => true);
-        }else{
-			$message = "Data gagal disimpan.";
-            $arr = array('xDirect' => base_url() . 'member', 'xCss' => 'boxfailed', 'xMsg' => $message, 'xAlert' => true);
-		}
+            $arr = array('xDirect' => base_url('member/klub'), 'xCss' => 'boxsuccess', 'xMsg' => $message, 'xAlert' => true);
+        }
 
         $this->tools->__flashMessage($arr);
     }
@@ -323,6 +312,9 @@ class MemberMod extends CI_Model
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $member = ($member) ? $member->data[0] : '';
+
+        $club = $this->excurl->reqCurlback('profile-club', ['id_club' => $member->id_club]);
+        $data['club'] = ($club) ? $club->data[0] : '';
 
         $query = array('page' => $this->session->userdata('pageplayer'), 'limit' => 20, 'id_club' => $member->id_club,
                        'sortby' => 'a.id_player', 'sortdir' => 'desc');
@@ -710,6 +702,9 @@ class MemberMod extends CI_Model
         $member = $this->excurl->reqCurlapp('me', $query);
         $member = ($member) ? $member->data[0] : '';
 
+        $club = $this->excurl->reqCurlback('profile-club', ['id_club' => $member->id_club]);
+        $data['club'] = ($club) ? $club->data[0] : '';
+
         $query = array('page' => $this->session->userdata('pageclubofficial'), 'limit' => 20, 'id_club' => $member->id_club,
                        'sortby' => 'a.id_official', 'sortdir' => 'desc');
 
@@ -801,6 +796,9 @@ class MemberMod extends CI_Model
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $member = ($member) ? $member->data[0] : '';
+
+        $club = $this->excurl->reqCurlback('profile-club', ['id_club' => $member->id_club]);
+        $data['club'] = ($club) ? $club->data[0] : '';
 
         $query = array('page' => $this->session->userdata('pageclubcareer'), 'limit' => 20, 'id_club' => $member->id_club,
                        'sortby' => 'a.id_career', 'sortdir' => 'desc');

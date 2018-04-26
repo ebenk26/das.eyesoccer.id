@@ -242,7 +242,7 @@ class Member extends CI_Controller
 			redirect('member');
 		}
 
-    	$content = 'member/club/info_klub';
+    	$content = 'member/club/infoklub';
     	$data['content'] = $content;
     	$data['title']   = $this->config->item('meta_title');
     	$data['kanal']   = 'member';
@@ -262,7 +262,7 @@ class Member extends CI_Controller
             redirect('member/klub');
         }
 
-        $content = 'member/club/regis_klub';
+        $content = 'member/club/regisklub';
         $data['content'] = $content;
         $data['title'] = $this->config->item('meta_title');
         $data['kanal'] = 'member';

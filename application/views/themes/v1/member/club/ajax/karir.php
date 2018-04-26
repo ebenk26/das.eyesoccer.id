@@ -1,15 +1,12 @@
-<a href="<?php echo base_url('member/karir/?act=add'); ?>" class="btn-white-orange fl-r">Tambah</a>
-<div class="container mt20">
-		<div class="pp-profil">
-			<img src="<?php echo (!empty($v[0]->url_logo) ? $v[0]->url_logo : base_url()."assets/themes/v1/img/fav.png")?>" alt="" class="viewimg">
-		</div>
-		<div class="full-width">
-            <label class="btn-blue">
-                Ganti Logo
-                <input id="file_pic" name="logo" type="file" style="display: none;" accept="image/*">
-            </label>
-        </div>
+<a href="<?php echo base_url('member/karir/?act=add'); ?>" class="btn-white-orange fl-r"><i class="fas fa-plus mg-r5"></i>Tambah</a>
+<div class="container mg-tb15">
+    <div class="pp-profil">
+        <img src="<?php echo ($club AND $club->url_logo) ? $club->url_logo : base_url("assets/themes/v1/img/fav.png"); ?>" alt="" class="viewimg">
     </div>
+    <div class="full-width tx-center mg-tb15">
+        <?php echo ($club) ? $club->name : ''; ?>
+    </div>
+</div>
 <?php
 if ($career) {
     foreach ($career->data as $c) {
@@ -21,7 +18,7 @@ if ($career) {
                 <span class="cinput disp-none" name="act" val="2"></span>
                 <input type="hidden" name="id" value="<?php echo $c->id_career; ?>" class="cinput">
             </a>
-            <a href="<?php echo base_url('member/karir/?act='.$c->id_career); ?>" title="Edit">
+            <a href="<?php echo base_url('member/karir/?act=' . $c->id_career); ?>" title="Edit">
                 <i class="far fa-edit mg-r10" style="float:right; font-size:.9em;"></i>
             </a>
             <div class="col-xs-12 pd-t-19 edits dftr-pemain">
