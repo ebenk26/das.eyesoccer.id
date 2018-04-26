@@ -218,11 +218,24 @@ class MemberMod extends CI_Model
 
     function __get_listclub()
     {
-        $query = array(
-            'page' => '',
-            'limit' => '',
-        );
-        $data['clubs'] = $this->excurl->reqCurlapp('profile-club', $query);
+        if ($this->input->post('is_club') != '1')
+        {
+            $query = array(
+                'page' => '',
+                'limit' => '',
+            );
+        }
+        else
+        {
+            $query = array(
+                'page' => '1',
+                'limit' => '10',
+                'id_club' => $this->input->post('id_club'),
+            );
+        }
+
+        $data['clubs'] = $this->excurl->reqCurlapp('profile-club', $query)->data;
+        $data['is_club'] = $this->input->post('is_club');
 
         $html = $this->load->view($this->__theme().'member/player/ajax/view_regplayer',$data,true);
         $data = array('xClass'=> 'reqclub','xHtml' => $html);

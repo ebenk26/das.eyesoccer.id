@@ -1,23 +1,21 @@
+
 <h2>Registrasi Pemain</h2>
 <table>
-    <tr>
-        <td>Pilih Klub</td>
-    	<td>
-    		<?php /*?>
-	    		<select name="id_club">
-	    			<option value="">Pilih Club</option>
-	    			<?php foreach ($clubs->data as $cl): ?>
-		    			<option value="<?= $cl->slug; ?>"><?= $cl->name; ?></option>
-	    			<?php endforeach ?>
-	    		</select>
-    		<?php */ ?>
-    		<input type="text" id="club" name="club" placeholder="Nama Klub" class="form_keyup" action="member" fn="list_club" wait loading="off">
-    		<input type="hidden" name="slug" id="slug">
-    		<div id='showclub'>
+    <?php if ($is_club != 1): ?>
+        <tr>
+            <td>Pilih Klub</td>
+            <td>
+                <input type="text" id="club" name="club" placeholder="Nama Klub" class="form_keyup" action="member" fn="list_club" wait loading="off">
+                <input type="hidden" name="slug" id="slug">
+                <div id='showclub'>
 
-    		</div>
-    	</td>
-    </tr>
+                </div>
+            </td>
+        </tr>
+    <?php else: ?>
+        <input type="hidden" name="club" id="club" value="<?= $clubs[0]->name; ?>">
+        <input type="hidden" name="slug" id="slug" value="<?= $clubs[0]->slug; ?>">
+    <?php endif ?>
     <tr>
         <td>Nama</td>
         <td>

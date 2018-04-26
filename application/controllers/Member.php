@@ -281,6 +281,10 @@ class Member extends CI_Controller
     	if ($data['member']->id_player > 0) {
     	    redirect('member/player');
     	}
+        
+        if ($data['member']->id_club != 0) {
+            $data['is_club'] = '1';
+        }
 
         $content = 'member/player/regis_player';
         $data['content'] = $content;

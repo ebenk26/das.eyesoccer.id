@@ -18,6 +18,9 @@
                 </div>
                 <h2>Registrasi Pemain</h2>
                 <input type='hidden' name='fn' value='get_listclub' class='cinput'>
+                <input type='hidden' name='is_club' value='<?= $is_club; ?>' class='cinput'>
+                <input type='hidden' name='id_club' value='<?= $member->id_club; ?>' class='cinput'>
+                <input type='hidden' name='id_member' value='<?= $member->id_member; ?>' class='cinput'>
                 <table>
                     <tr>
                         <td>Klub</td>
