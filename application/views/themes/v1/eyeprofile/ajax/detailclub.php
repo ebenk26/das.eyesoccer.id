@@ -8,47 +8,44 @@
 div.user-data{background-color:#00000005}
 div.user-data:hover{background-color:#ff990026}
 </style>
-		<div class="head">
-			<div class="img-radius">
-				<img src="<?php echo $dt->url_logo;?>"
-					alt="">
+		<div class="head" style="border-radius: 8px 8px 0px 0px;margin-bottom: 25px;height: 180px;min-height:  unset;">
+			<div class="container tx-c">
+				<div class="img-radius">
+					<img src="<?php echo $dt->url_logo;?>" alt="">
+				</div>
 			</div>
-			<h2 class="h2-text-bottom"><?php echo $dt->name;?></h2>
-			<div class="container tab-eprofile">
-				<a class="active" href="#content1">Info</a>
+				<h2 class="tx-c h2-pemain-top-head"><?php echo $dt->name;?></h2>
+				<span class="button-open sbpbtn unset-btn-white">Daftarkan Pemain Kamu</span>
+							<div id="boxtab" class="container tab-sub-menu">
+								<a id="tab-pemain" href="javascript:void(0)" class="active" onclick="tabmenu(this.id, 'a', 'div', 'active')" active="true">Pemain</a>
+								<a id="tab-ofisial" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')" style="border-left: 1px solid;border-right:  1px solid;border-color: white;">Ofisial</a>
+								<a id="tab-suporter" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')">Prestasi</a>
+							</div>
 			</div>
 			<div class="table-scroll">
-				<table class="content-tab-eprofile">
-					<tr>
-						<td>Julukan</td>
-						<td>: <?php echo $dt->nickname;?></td>
-					</tr>
-					<tr>
-						<td>Tanggal Berdiri</td>
-						<td>: <?php echo $dt->establish_date;?></td>
-					</tr>
-					<tr>
-						<td>Alamat</td>
-						<td>: <?php echo strip_tags($dt->address);?></td>
-					</tr>
-					<tr>
-						<td>Email</td>
-						<td>: <?php echo $dt->email;?></td>
-					</tr>
-					<tr>
-						<td>Website</td>
-						<td>: <?php echo $dt->website;?></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		<div class="container">
-			<div id="boxtab" class="container sub-menu">
-				<a id="tab-pemain" href="javascript:void(0)" class="active" onclick="tabmenu(this.id, 'a', 'div', 'active')" active="true">Pemain</a>
-				<a id="tab-ofisial" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')">Ofisial</a>
-				<a id="tab-suporter" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')">suporter</a>
-			</div>
-		</div>
+					<table class="content-tab-eprofile">
+						<tr>
+							<td>Julukan</td>
+							<td>: <?php echo $dt->nickname;?></td>
+						</tr>
+						<tr>
+							<td>Tanggal Berdiri</td>
+							<td>: <?php echo $dt->establish_date;?></td>
+						</tr>
+						<tr>
+							<td>Alamat</td>
+							<td>: <?php echo strip_tags($dt->address);?></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td>: <?php echo $dt->email;?></td>
+						</tr>
+						<!-- <tr>
+							<td>Website</td>
+							<td>: <?php echo $dt->website;?></td>
+						</tr> -->
+					</table>
+				</div>
 		<div id="tab-pemain" class="container">
 			<?php
 				foreach($dt->players as $players){
