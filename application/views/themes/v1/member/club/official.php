@@ -9,7 +9,7 @@
             $this->load->view($folder.'member/club/header', $data);
         }
     ?>
-    <div class="container mg-tb15">
+    <div class="container mg-tb15 tx-r">
         <div id="reqclubofficial" class='loadclubofficial' action="member" loading="off" clean="clsclubofficial">
             <div id='clsclubofficial'>
                 <script>

@@ -923,3 +923,43 @@ select{
 .tabel-lampiran td img{
     width: 100%;
 }
+.body-responsive .ui-datepicker {
+    margin-bottom: 25px;
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px -3px #00000063;
+}
+.body-responsive .ui-datepicker-month, .body-responsive .ui-datepicker-year{
+    -webkit-appearance: unset !important;
+    background-color: unset;
+    border: unset;
+    font-size: 1em;
+    color: white;
+    font-weight: 600;
+    padding: 0px;
+}
+.body-responsive .ui-datepicker-next span{
+    content: url(https://www.eyesoccer.id/assets/img/arrowleft.png);
+    transform: rotate(180deg);
+    float: right;
+    position: relative;
+    top: 8.5px;
+}
+.body-responsive .ui-datepicker-prev span{
+    content: url(https://www.eyesoccer.id/assets/img/arrowleft.png);
+    float: left;
+    position: relative;
+    top: 8.5px;
+}
+.body-responsive #ui-datepicker-div{
+    position: fixed !important;
+    width: 98%;
+    max-width: 370px;
+    /* margin: 0 1%; */
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%);
+    margin-bottom: unset !important;
+    box-shadow: 0 0 250px #00000059;
+}

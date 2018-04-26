@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="full-width col-xs-5 container tx-c" style="box-sizing:border-box;">
-            <label class="klik-dsn blue disp-inblock mg-b10 mg-b15">
+            <label class="klik-dsn disp-inblock mg-b10 mg-b15">
                 Upload Photo
                 <input type="file" name="fupload" id="filepic" style="display: none;" accept="image/*">
             </label>
@@ -21,7 +21,7 @@
     if ($galerilist) {
         foreach ($galerilist->data as $g) {
             ?>
-            <div class="player-galeri">
+            <!-- <div class="player-galeri">
                 <a href="javascript:void(0)" title="Hapus" id="delgalericlub_<?php echo $g->id; ?>" class="form_post" action="member" fn="deletegalericlub"
                    confirm="Apakah anda yakin ingin menghapusnya?">
                     <i class="fas fa-times" style="float:right; font-size:.9em;position: relative;top: 5px;"></i>
@@ -30,7 +30,7 @@
                 <div class="pad">
                     <span style="background-image: url('<?php echo $g->url_pic; ?>')" class="img"></span>
                 </div>
-            </div>
+            </div> -->
             <?php
         }
     }

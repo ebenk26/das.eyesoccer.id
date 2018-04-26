@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="full-width col-xs-5 container tx-c" style="box-sizing:border-box;">
-            <label class="klik-dsn blue disp-inblock mg-b10 mg-b15">
+            <label class="klik-dsn disp-inblock mg-b10 mg-b15">
                 Upload Photo
                 <input type="file" name="fupload" id="filepic" style="display: none;" accept="image/*">
             </label>
