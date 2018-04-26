@@ -923,6 +923,9 @@ select{
 .tabel-lampiran td img{
     width: 100%;
 }
+.body-responsive{
+    font-size: 18px;
+}
 .body-responsive .ui-datepicker {
     margin-bottom: 25px;
     background-color: white;
@@ -962,4 +965,12 @@ select{
     transform: translate(-50%, -50%);
     margin-bottom: unset !important;
     box-shadow: 0 0 250px #00000059;
+}
+.body-responsive ::-webkit-scrollbar {
+    height: 0px;
+    background: transparent;
+}
+.body-responsive ::scrollbar {
+    height: 0px;
+    background: transparent;
 }

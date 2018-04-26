@@ -4338,3 +4338,14 @@ input[type="file"]{
     float: left;
     margin: 8px 0px;
 }
+.black-notif{
+    position: absolute;
+    top: -1em;
+    font-size: .9em;
+    padding: 3px 6px;
+    background-color: #616161;
+    color: white;
+    font-weight: 600;
+    -webkit-font-smoothing: unset;
+    border-radius: 10px;
+}
