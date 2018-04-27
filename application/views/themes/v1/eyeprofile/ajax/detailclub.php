@@ -35,7 +35,7 @@ div.user-data:hover{background-color:#ff990026}
 				<?php echo $dt->description;?>
 				<table class="content-tab-eprofile">
 					<tr>
-						<td>Julukan123</td>
+						<td>Julukan</td>
 						<td>: <?php echo $dt->nickname;?></td>
 					</tr>
 					<tr>
