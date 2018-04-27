@@ -1,8 +1,9 @@
 <?php
 	if($detailclub)
 	{
-		$detailclub = json_decode($detailclub);
+		// $detailclub = json_decode($detailclub);
 		$dt = $detailclub->data;
+		// print_r($dt);
 ?>
 <style>
 div.user-data{background-color:#00000005}
@@ -15,9 +16,11 @@ div.user-data:hover{background-color:#ff990026}
 				</div>
 			</div>
 				<h2 class="tx-c h2-pemain-top-head"><?php echo $dt->name;?></h2>
-				<span class="button-open sbpbtn unset-btn-white" style="max-height: unset;box-shadow: 1px 2px 3px 1px #0357b5;border-radius: 30px;max-width: max-content;font-size: .8em;">Daftarkan Sebagai Pemain <?php echo $dt->name;?></span>
+				<?php if($dt->id_competition == 4){?>
+				<a href="<?php echo ($this->session->member ? base_url().'member/regis_player' : base_url().'member/?from=member/regis_player')?>"><span class="button-open sbpbtn unset-btn-white" style="max-height: unset;box-shadow: 1px 2px 3px 1px #0357b5;border-radius: 30px;max-width: max-content;font-size: .8em;">Daftarkan Sebagai Pemain <?php echo $dt->name;?></span></a>
+				<?php }?>
 				<div class="container over-x">
-							<div id="boxtab" class="container tab-sub-menu w-max" style="position: relative;bottom: unset;margin-top: 20px;">
+							<div id="boxtab" class="container tab-sub-menu w-max m-0" style="float: unset;position: relative;bottom: unset;margin-top: 20px;">
 								<a id="tab-info" href="javascript:void(0)" class="active" onclick="tabmenu(this.id, 'a', 'div', 'active')" active="true" style="padding: 0 8px;">Info</a>
 								<a id="tab-pemain" href="javascript:void(0)" class="tabmenu(this.id, 'a', 'div', 'active')" onclick="tabmenu(this.id, 'a', 'div', 'active')" active="true" style="border-left: 1px solid;padding: 0 8px;">Pemain</a>
 								<a id="tab-ofisial" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')" style="border-left: 1px solid;border-right:  1px solid;border-color: white; padding: 0 8px;">Ofisial</a>
