@@ -1,3 +1,11 @@
+<div class="container mg-tb15">
+    <div class="pp-profil">
+        <img src="<?php echo ($club AND $club->url_logo) ? $club->url_logo : base_url("assets/themes/v1/img/fav.png"); ?>" alt="" class="viewimg">
+    </div>
+    <div class="full-width tx-center mg-tb15">
+        <?php echo ($club) ? $club->name : ''; ?>
+    </div>
+</div>
 <?php
 if ($verify) {
     foreach ($verify->data as $ver) {
