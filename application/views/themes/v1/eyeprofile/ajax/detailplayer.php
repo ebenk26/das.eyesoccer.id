@@ -299,10 +299,10 @@
 					?>
 				</div>
 			</div>
-			<div class="arrow" style="top:  -147px;">
+			<!-- <div class="arrow" style="top:  -147px;">
 				<i class="material-icons">keyboard_arrow_left</i>
 				<i style="float: right;" class="material-icons">keyboard_arrow_right</i>
-			</div>
+			</div> -->
 		</div>
 		<script>
 				$(document).ready(function(){
@@ -312,7 +312,7 @@
 			<?php
 	}
 ?>
-<div class="container pemain-detailll">
+<!-- <div class="container pemain-detailll">
 <div class="container table-span1" active="false" onclick="functionPemainDetail()">
 	<span>#1</span>
 	<i class="fas fa-angle-double-down"></i>
@@ -347,7 +347,7 @@
 		</tr>
 	</table>
 </div>
-</div>
+</div> -->
 <script>
 function functionPemainDetail() {
 	var x = document.getElementById("pemainDetail");

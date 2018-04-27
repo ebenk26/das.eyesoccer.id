@@ -8,21 +8,25 @@
 div.user-data{background-color:#00000005}
 div.user-data:hover{background-color:#ff990026}
 </style>
-		<div class="head" style="border-radius: 8px 8px 0px 0px;margin-bottom: 25px;height: 180px;min-height:  unset;">
+		<div class="head" style="border-radius: 8px 8px 0px 0px;margin-bottom: 25px;height: 210px;min-height:  unset;">
 			<div class="container tx-c">
 				<div class="img-radius">
 					<img src="<?php echo $dt->url_logo;?>" alt="">
 				</div>
 			</div>
 				<h2 class="tx-c h2-pemain-top-head"><?php echo $dt->name;?></h2>
-				<span class="button-open sbpbtn unset-btn-white">Daftarkan Pemain Kamu</span>
-							<div id="boxtab" class="container tab-sub-menu">
-								<a id="tab-pemain" href="javascript:void(0)" class="active" onclick="tabmenu(this.id, 'a', 'div', 'active')" active="true">Pemain</a>
-								<a id="tab-ofisial" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')" style="border-left: 1px solid;border-right:  1px solid;border-color: white;">Ofisial</a>
-								<a id="tab-suporter" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')">Prestasi</a>
+				<span class="button-open sbpbtn unset-btn-white" style="max-height: unset;box-shadow: 1px 2px 3px 1px #0357b5;border-radius: 30px;max-width: max-content;">Daftarkan Sebagai Pemain <?php echo $dt->name;?></span>
+				<div class="container over-x">
+							<div id="boxtab" class="container tab-sub-menu w-max" style="position: relative;bottom: unset;margin-top: 20px;">
+								<a id="tab-info" href="javascript:void(0)" class="active" onclick="tabmenu(this.id, 'a', 'div', 'active')" active="true" style="padding: 0 8px;">Info</a>
+								<a id="tab-pemain" href="javascript:void(0)" class="tabmenu(this.id, 'a', 'div', 'active')" onclick="tabmenu(this.id, 'a', 'div', 'active')" active="true" style="border-left: 1px solid;padding: 0 8px;">Pemain</a>
+								<a id="tab-ofisial" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')" style="border-left: 1px solid;border-right:  1px solid;border-color: white; padding: 0 8px;">Ofisial</a>
+								<a id="tab-suporter" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')"  style="padding: 0 8px;border-right:  1px solid;">Prestasi</a>
+								<a id="tab-galeri" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')"  style="padding: 0 8px;">Galeri</a>
 							</div>
+						</div>
 			</div>
-			<div class="table-scroll">
+			<div class="container">
 					<table class="content-tab-eprofile">
 						<tr>
 							<td>Julukan</td>
