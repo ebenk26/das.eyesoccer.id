@@ -973,18 +973,32 @@ class MemberMod extends CI_Model
     function __verifyapp()
     {
         $id_reg = $this->input->post('id_reg');
-
         $query  = array('id' => $id_reg, 'player' => '');
-        // var_dump($query);exit();
         $res = $this->excurl->reqCurlapp('verify-player', $query);
-        $msg = 'Pemain atas nama '.$this->input->post('name').' berhasil di setujui.';
-
         $arr = $this->library->errorMessage($res);
 
         if ($res->status == 'Success') {
+            $msg = 'Pemain atas nama '.$this->input->post('name').' berhasil di setujui.';
             $arr = array('xDirect' => base_url('member/verifikasi'), 'xCss' => 'boxsuccess', 'xMsg' => $msg, 'xAlert' => true);
         }
 
         $this->tools->__flashMessage($arr);
     }
+
+    function __verifycount()
+    {
+        $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
+        $res = $this->excurl->reqCurlback('me', $param);
+        $v = $res->data;
+
+        $club = $this->excurl->reqCurlapp('profile-club', ['id_club' => $v[0]->id_club])->data;
+        $slug = $club[0]->slug;
+
+        $query = array('club' => $slug, 'active' => 'false', 'count' => true);
+        $verify = $this->excurl->reqCurlapp('reglist-player', $query);
+
+        $data = array('xClass' => 'reqverifycount', 'xHtml' => $verify->data[0]->cc);
+        $this->tools->__flashMessage($data);;
+    }
+
 }
