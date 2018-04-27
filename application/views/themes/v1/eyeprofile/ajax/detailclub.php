@@ -135,8 +135,38 @@ div.user-data:hover{background-color:#ff990026}
 		
 		<div id="tab-suporter" class="container" style="display:none;">
 			<div class="user-data">
-				coming soon
+				<?php
+					foreach($dt->careers as $careers){
+				?>
+						<span>
+							<span><?php echo $careers->month;?></span>
+							<span><?php echo $careers->year;?></span>
+							<span><?php echo $careers->tournament;?></span>
+							<span><?php echo $careers->rank;?></span>
+							<span><?php echo $careers->coach;?></span>
+						</span>
+				<?php
+					}
+				?>
+			</div>
+		</div>
+		<div id="tab-galeri" class="container" style="display:none;">
+			<div class="user-data">
+				<?php
+					foreach($dt->gallery as $gallery){
+				?>
+						<img style="width:90%;" src="<?php echo $gallery->url_pic;?>" alt="foto club">
+				<?php
+					}
+				?>
+			</div>
 		</div>
 			<?php
 	}
 ?>
+<script>
+	$(document).ready(function(){
+		// alert();
+		$("#tab-info").click();
+	});
+</script>
