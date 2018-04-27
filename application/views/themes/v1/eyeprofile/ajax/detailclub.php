@@ -32,6 +32,7 @@ div.user-data:hover{background-color:#ff990026}
 		<div id="tab-info" class="container">
 			<div class="ep-des">
 			<!-- <h2 class="tx-c" style="font-weight: 400;"><?php echo $dt->name;?></h2>	 -->
+				<?php echo $dt->description;?>
 				<table class="content-tab-eprofile">
 					<tr>
 						<td>Julukan</td>
@@ -54,7 +55,6 @@ div.user-data:hover{background-color:#ff990026}
 						<td>: <?php echo $dt->website;?></td>
 					</tr> -->
 				</table>
-				<?php echo $dt->description;?>
 			</div>
 		</div>
 		<div id="tab-pemain" class="container">
