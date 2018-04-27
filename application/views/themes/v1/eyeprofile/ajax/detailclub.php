@@ -29,33 +29,34 @@ div.user-data:hover{background-color:#ff990026}
 							</div>
 						</div>
 			</div>
-			<div class="container">
-				<div class="ep-des">
-				<!-- <h2 class="tx-c" style="font-weight: 400;"><?php echo $dt->name;?></h2>	 -->
-				<?php echo $dt->description;?></div>
-					<table class="content-tab-eprofile">
-						<tr>
-							<td>Julukan</td>
-							<td>: <?php echo $dt->nickname;?></td>
-						</tr>
-						<tr>
-							<td>Tanggal Berdiri</td>
-							<td>: <?php echo $dt->establish_date;?></td>
-						</tr>
-						<tr>
-							<td>Alamat</td>
-							<td>: <?php echo strip_tags($dt->address);?></td>
-						</tr>
-						<tr>
-							<td>Email</td>
-							<td>: <?php echo $dt->email;?></td>
-						</tr>
-						<!-- <tr>
-							<td>Website</td>
-							<td>: <?php echo $dt->website;?></td>
-						</tr> -->
-					</table>
-				</div>
+		<div id="tab-info" class="container">
+			<div class="ep-des">
+			<!-- <h2 class="tx-c" style="font-weight: 400;"><?php echo $dt->name;?></h2>	 -->
+				<table class="content-tab-eprofile">
+					<tr>
+						<td>Julukan</td>
+						<td>: <?php echo $dt->nickname;?></td>
+					</tr>
+					<tr>
+						<td>Tanggal Berdiri</td>
+						<td>: <?php echo $dt->establish_date;?></td>
+					</tr>
+					<tr>
+						<td>Alamat</td>
+						<td>: <?php echo strip_tags($dt->address);?></td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td>: <?php echo $dt->email;?></td>
+					</tr>
+					<!-- <tr>
+						<td>Website</td>
+						<td>: <?php echo $dt->website;?></td>
+					</tr> -->
+				</table>
+				<?php echo $dt->description;?>
+			</div>
+		</div>
 		<div id="tab-pemain" class="container">
 			<?php
 				foreach($dt->players as $players){
@@ -138,19 +139,46 @@ div.user-data:hover{background-color:#ff990026}
 		
 		<div id="tab-suporter" class="container" style="display:none;">
 			<div class="user-data">
+				<div class="container pemain-detailll">
 				<?php
+					$i = 0;
 					foreach($dt->careers as $careers){
+					$i++;
 				?>
-						<span>
-							<span><?php echo $careers->month;?></span>
-							<span><?php echo $careers->year;?></span>
-							<span><?php echo $careers->tournament;?></span>
-							<span><?php echo $careers->rank;?></span>
-							<span><?php echo $careers->coach;?></span>
-						</span>
+							<div class="container table-span1" active="false" onclick="functionPemainDetail(<?php echo $i;?>)">
+								<span>#<?php echo $i;?></span>
+								<i class="fas fa-angle-double-down"></i>
+								<table>
+									<tr>
+										<td>Tahun</td>
+										<td><?php echo $careers->year;?></td>
+									</tr>
+									<tr>
+										<td>Bulan</td>
+										<td><?php echo $careers->month;?></td>
+									</tr>
+								</table>
+							</div>
+							<div class="table-span2 pemainDetail" id="pemainDetail<?php echo $i;?>" style="display:none;">
+								<table>
+									<tr>
+										<td>Turnamen / Kompetisi</td>
+										<td><?php echo $careers->tournament;?></td>
+									</tr>
+									<tr>
+										<td>Peringkat</td>
+										<td><?php echo $careers->rank;?></td>
+									</tr>
+									<tr>
+										<td>Pelatih</td>
+										<td><?php echo $careers->coach;?></td>
+									</tr>
+								</table>
+							</div>
 				<?php
 					}
 				?>
+				</div>
 			</div>
 		</div>
 		<div id="tab-galeri" class="container" style="display:none;">
@@ -172,4 +200,12 @@ div.user-data:hover{background-color:#ff990026}
 		// alert();
 		$("#tab-info").click();
 	});
+	function functionPemainDetail(i) {
+		var x = document.getElementById("pemainDetail"+i);
+		if (x.style.display == "none") {
+			x.style.display = "block";
+		} else {
+			x.style.display = "none";
+		}
+	}
 </script>
