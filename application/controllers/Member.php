@@ -401,25 +401,4 @@ class Member extends CI_Controller
 	    $this->load->view($this->__theme().'member/template', $data);
 	}
 
-    function detail_verifikasi($id_member)
-    {
-        $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
-        $member = $this->excurl->reqCurlapp('me', $query);
-        $data['member'] = ($member) ? $member->data[0] : '';
-        
-        if ($data['member']->id_club == 0) {
-            redirect('member');
-        }
-
-        $data['id_member'] = $id_member;
-
-        $content = 'member/club/verikasiform';
-        $data['content'] = $content;
-        $data['title']   = $this->config->item('meta_title');
-        $data['kanal']   = 'member';
-        $data['meta_desc'] = $this->config->item('meta_desc');
-        $data['meta_keyword'] = $this->config->item('meta_keyword');
-        
-        $this->load->view($this->__theme().'member/template', $data);
-    }
 }
