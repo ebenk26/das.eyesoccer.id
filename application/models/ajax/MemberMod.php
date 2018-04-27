@@ -209,29 +209,16 @@ class MemberMod extends CI_Model
         $this->tools->__flashMessage($arr);
     }
 
-    function __get_listclub()
+    function __listclub()
     {
-        if ($this->input->post('is_club') != '1')
-        {
-            $query = array(
-                'page' => '',
-                'limit' => '',
-            );
-        }
-        else
-        {
-            $query = array(
-                'page' => '1',
-                'limit' => '10',
-                'id_club' => $this->input->post('id_club'),
-            );
-        }
+        $text = $this->input->post('club');
 
-        $data['clubs'] = $this->excurl->reqCurlapp('profile-club', $query)->data;
-        $data['is_club'] = $this->input->post('is_club');
+        $query = array('page' => '', 'limit' => '', 'search' => $text);
+        $clubs = $this->excurl->reqCurlapp('profile-club', $query);
+        $data['club'] = $clubs->data;
 
-        $html = $this->load->view($this->__theme().'member/player/ajax/view_regplayer',$data,true);
-        $data = array('xClass'=> 'reqclub','xHtml' => $html);
+        $html = $this->load->view($this->__theme() . 'member/player/ajax/listclub', $data, true);
+        $data = array('xClass' => 'showclub', 'xHtml' => $html);
         $this->tools->__flashMessage($data);
     }
 
@@ -888,23 +875,6 @@ class MemberMod extends CI_Model
         $this->tools->__flashMessage($arr);
     }
 
-    function __list_club()
-    {
-        $text = $this->input->post('club');
-
-        $query = array(
-            'page' => '',
-            'limit' => '',
-            'search' => $text
-        );
-        $clubs = $this->excurl->reqCurlapp('profile-club', $query);
-        $data['club'] = $clubs->data;
-        // var_dump($club);exit();
-        $html = $this->load->view($this->__theme() . 'member/player/ajax/listclub', $data, true);
-        $data = array('xClass' => 'showclub', 'xHtml' => $html);
-        $this->tools->__flashMessage($data);
-    }
-
 	function __galeri()
     {
         $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
@@ -964,59 +934,38 @@ class MemberMod extends CI_Model
 
     function __verify()
     {
+        $this->library->backnext('pageverify', 'pagetotalverify');
+
         $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $res = $this->excurl->reqCurlback('me', $param);
         $v = $res->data;
 
-        $query = array(
-            'page' => '',
-            'limit' => '',
-            'id_club' => $v[0]->id_club,
-        );
-
-        $club = $this->excurl->reqCurlapp('profile-club', $query)->data;
+        $club = $this->excurl->reqCurlapp('profile-club', ['id_club' => $v[0]->id_club])->data;
         $slug = $club[0]->slug;
 
-        $query = array(
-            'page' => '',
-            'limit' => '',
-            'club' => $slug,
-            'active' => 'false',
-        );
-
-        $data['verify'] = $this->excurl->reqCurlapp('reglist-player', $query)->data;
+        $query = array('page' => $this->session->userdata('pageverify'), 'limit' => 20, 'club' => $slug,
+                       'active' => 'false', 'sortby' => 'a.id_register', 'sortdir' => 'desc');
+        $data['verify'] = $this->excurl->reqCurlapp('reglist-player', $query);
+        $data['verifycount'] = $this->excurl->reqCurlapp('reglist-player', array_merge($query, ['count' => true]));
         
-        $html = $this->load->view($this->__theme().'member/club/ajax/verifikasi',$data,true);
-        $data = array('xClass'=> 'reqverify','xHtml' => $html);
-        $this->tools->__flashMessage($data);
+        $html = $this->load->view($this->__theme().'member/club/ajax/verifikasi', $data, true);
+        $data = array('xClass' => 'reqverify', 'xHtml' => $html, 'xUrlhash' => base_url() . 'member/verifikasi/' . $this->session->userdata('pageverify'));
+        $this->tools->__flashMessage($data);;
     }
 
-    function __detail_verify()
+    function __verifydetail()
     {
         $param = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $res = $this->excurl->reqCurlback('me', $param);
         $v = $res->data;
 
-        $query = array(
-            'page' => '',
-            'limit' => '',
-            'id_club' => $v[0]->id_club,
-        );
-
-        $club = $this->excurl->reqCurlapp('profile-club', $query)->data;
-        
+        $club = $this->excurl->reqCurlapp('profile-club', ['id_club' => $v[0]->id_club])->data;
         $slug = $club[0]->slug;
 
-        $query = array(
-            'page' => '',
-            'limit' => '',
-            'club' => $slug,
-            'member' => md5($this->input->post('id_member')),
-        );
-
+        $query = array('page' => '', 'limit' => '', 'club' => $slug, 'id_register' => $this->input->post('act'));
         $data['verify'] = $this->excurl->reqCurlapp('reglist-player', $query)->data;
 
-        $html = $this->load->view($this->__theme().'member/club/ajax/verikasiform',$data,true);
+        $html = $this->load->view($this->__theme().'member/club/ajax/verifikasiform', $data, true);
         $data = array('xClass'=> 'reqverify','xHtml' => $html);
         $this->tools->__flashMessage($data);
     }

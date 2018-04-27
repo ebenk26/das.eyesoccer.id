@@ -33,13 +33,19 @@ class Member extends CI_Controller
                 $member = $this->excurl->reqCurlapp('me', $query);
                 $data['member'] = ($member) ? $member->data[0] : '';
 				
-				$queryclub = array('member' => $this->session->member['id']);
-				$data['clubstatus'] = $this->excurl->reqCurlapp('reglist-club', $queryclub);
-				
-				$data['playerstatus'] = $this->excurl->reqCurlback('reglist-player', $queryclub);
-				// print_r($data['clubstatus']);
-				// print_r($data['playerstatus']);
-				// exit();
+				$query = array('member' => $this->session->member['id']);
+				$data['clubstatus'] = $this->excurl->reqCurlapp('reglist-club', $query);
+				$data['playerstatus'] = $this->excurl->reqCurlback('reglist-player', $query);
+
+				if ($data['member']->id_club > 0) {
+                    $club = $this->excurl->reqCurlapp('profile-club', ['id_club' => $data['member']->id_club]);
+                    $data['clubpic'] = ($club) ? $club->data[0] : '';
+                } else {
+                    if ($data['member']->id_player > 0) {
+                        $player = $this->excurl->reqCurlapp('profile', ['id_player' => $data['member']->id_player]);
+                        $data['playerpic'] = ($player) ? $player->data[0] : '';
+                    }
+                }
             }
 
             $data['eyeme'] = ($this->input->get('from') == 'eyeme' ? 1 : 0);
@@ -272,7 +278,7 @@ class Member extends CI_Controller
         $this->load->view($this->__theme() . 'member/template', $data);
     }
 
-    function regis_player()
+    function regis_player($club = '')
     {
     	$query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
     	$member = $this->excurl->reqCurlapp('me', $query);
@@ -281,12 +287,10 @@ class Member extends CI_Controller
     	if ($data['member']->id_player > 0) {
     	    redirect('member/player');
     	}
-        
-        if ($data['member']->id_club != 0) {
-            $data['is_club'] = '1';
-        }
 
-        $content = 'member/player/regis_player';
+    	$data['club'] = $club;
+
+        $content = 'member/player/regisplayer';
         $data['content'] = $content;
         $data['title'] = $this->config->item('meta_title');
         $data['kanal'] = 'member';
@@ -370,7 +374,7 @@ class Member extends CI_Controller
         $this->load->view($this->__theme().'member/template', $data);
     }
 
-    function verifikasi()
+    function verifikasi($page = 1)
 	{
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
@@ -381,6 +385,13 @@ class Member extends CI_Controller
 		}
 
     	$content = 'member/club/verifikasi';
+        if (isset($_GET['act'])) {
+            $content = 'member/club/verifikasiform';
+        } else {
+            $this->library->backnext('pageverify');
+            if ($page > 1) $this->session->set_userdata(array('pageverify' => $page));
+        }
+
     	$data['content'] = $content;
     	$data['title']   = $this->config->item('meta_title');
     	$data['kanal']   = 'member';
