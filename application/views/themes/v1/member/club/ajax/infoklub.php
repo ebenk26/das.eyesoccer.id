@@ -37,7 +37,7 @@ if ($klubdetail) {
                 <tr>
                     <td>Deskripsi Klub <span class="cl-red">*</span></td>
                     <td>
-                        <input type="text" name="description" value="<?php echo strip_tags($v[0]->description); ?>">
+                        <textarea name="description" rows="5"><?php echo strip_tags($v[0]->description); ?></textarea>
                         <span class='err msgdescription'></span>
                     </td>
                 </tr>
@@ -153,7 +153,7 @@ if ($klubdetail) {
                 <tr>
                     <td>Jadwal Latihan</td>
                     <td>
-                        <input type="text" name="training_schedule" value="<?php echo $v[0]->training_schedule; ?>">
+                        <textarea name="training_schedule" rows="5"><?php echo $v[0]->training_schedule; ?></textarea>
                         <span class='err msgtraining_schedule'></span>
                     </td>
                 </tr>
