@@ -17,7 +17,7 @@
                 <img src=""
                     alt="">
 			</div> -->
-			<a href="<?php echo ($this->session->member ? base_url().'member/regis_player' : base_url().'member/?from=member/regis_player')?>"><span class="button-open sbpbtn">Daftarkan SSB Kamu</span></a>
+			<a href="<?php echo ($this->session->member ? base_url().'member/regis_klub' : base_url().'member/?from=member/regis_klub')?>"><span class="button-open sbpbtn">Daftarkan SSB Kamu</span></a>
             <h2 class="h2-text-bottom sdfkjs"><?php echo urldecode($slug);?></h2>
             <!-- <div class="container tab-eprofile">
                 <a class="active" href="#content1">Info</a>
