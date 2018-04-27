@@ -47,7 +47,7 @@ $player = (!empty($playerstatus->data) ? $playerstatus->data[0] : "");
                     <a href="<?php echo base_url() ?>member/klub">
                         <button class="klik-dsn">Masuk ke Profil Klub</button>
                     </a>
-                    <div class="ff-14 mg-t10">Url Website : <a href="<?php echo base_url($clubpic->slug); ?>"><?php echo base_url($clubpic->slug); ?></a></div>
+                    <div class="ff-14 mg-t10">Url Website : <a href="<?php echo base_url("p/$clubpic->slug"); ?>"><?php echo base_url("p/$clubpic->slug"); ?></a></div>
                     <?php
                 }
                 ?>

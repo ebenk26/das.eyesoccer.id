@@ -49,15 +49,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['tentang-kami'] 							= "home/tentang_kami";
-$route['tim-eyesoccer'] 						= "home/tim_eyesoccer";
-$route['pedoman-media-siber'] 					= "home/pedoman_media_siber";
-$route['kebijakan-privasi'] 					= "home/kebijakan_privasi";
-$route['panduan-komunitas'] 					= "home/panduan_komunitas";
-$route['kontak'] 								= "home/kontak";
-$route['karir'] 								= "home/karir";
-$route['eyevent/hasil-pertandingan'] 			= "Eyevent/hasil";
-$route['eyevent/jadwal-pertandingan'] 	= "Eyevent/jadwal";
+$route['tentang-kami'] = "home/tentang_kami";
+$route['tim-eyesoccer'] = "home/tim_eyesoccer";
+$route['pedoman-media-siber'] = "home/pedoman_media_siber";
+$route['kebijakan-privasi'] = "home/kebijakan_privasi";
+$route['panduan-komunitas'] = "home/panduan_komunitas";
+$route['kontak'] = "home/kontak";
+$route['karir'] = "home/karir";
+$route['eyevent/hasil-pertandingan'] = "Eyevent/hasil";
+$route['eyevent/jadwal-pertandingan'] = "Eyevent/jadwal";
+$route['p/(:any)'] = "eyeprofile/klub_detail/$1";
 
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
