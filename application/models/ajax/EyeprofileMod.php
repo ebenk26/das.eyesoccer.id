@@ -197,8 +197,8 @@ class EyeprofileMod extends CI_Model
 	function __detailclub(){
         $slug = $this->input->post('slug');
         $query = array();
-        $data['detailclub'] = $this->excurl->remoteCall($this->__xurl().'profile-club/'.$slug, $this->__xkey(), $query);
-        
+        // $data['detailclub'] = $this->excurl->remoteCall($this->__xurl().'profile-club/'.$slug, $this->__xkey(), $query);
+        $data['detailclub'] = $this->excurl->reqCurlback('profile-club/'.$slug,  $query);
         $html = $this->load->view($this->__theme().'eyeprofile/ajax/detailclub', $data, true);
     
         $data =array('xClass'=>'reqdetailclub','xHtml'=> $html);
