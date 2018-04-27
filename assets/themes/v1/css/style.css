@@ -4355,3 +4355,13 @@ input[type="file"]{
     position: absolute;
     background-color: white;
 }
+.ep-des p{
+    text-align: left !important;
+    font-size: .9em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    letter-spacing: .5px;
+    -webkit-font-smoothing: unset;
+    margin: 1.4em 0px;
+    color: #333;
+}
