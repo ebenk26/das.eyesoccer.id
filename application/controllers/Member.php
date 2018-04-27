@@ -81,6 +81,8 @@ class Member extends CI_Controller
 
     function profile()
     {
+        if ($this->session->member == '') redirect('member');
+
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $data['member'] = ($member) ? $member->data[0] : '';
@@ -97,6 +99,8 @@ class Member extends CI_Controller
 
     function password()
     {
+        if ($this->session->member == '') redirect('member');
+
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $data['member'] = ($member) ? $member->data[0] : '';
@@ -113,6 +117,8 @@ class Member extends CI_Controller
 
     function player($page = 1)
     {
+        if ($this->session->member == '') redirect('member');
+
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $data['member'] = ($member) ? $member->data[0] : '';
@@ -192,6 +198,8 @@ class Member extends CI_Controller
 
     function eyeme()
     {
+        if ($this->session->member == '') redirect('member');
+
         $content = 'member/menu/eyeme';
         $data['content'] = $content;
         $data['title'] = $this->config->item('meta_title');
@@ -204,6 +212,8 @@ class Member extends CI_Controller
 
     function eyetube()
     {
+        if ($this->session->member == '') redirect('member');
+
         $content = 'member/menu/eyetube';
         $data['content'] = $content;
         $data['title'] = $this->config->item('meta_title');
@@ -216,6 +226,8 @@ class Member extends CI_Controller
 
     function tulisan_kamu()
     {
+        if ($this->session->member == '') redirect('member');
+
         $content = 'member/menu/tulisan_kamu';
         $data['content'] = $content;
         $data['title'] = $this->config->item('meta_title');
@@ -228,6 +240,8 @@ class Member extends CI_Controller
 
     function analytics()
     {
+        if ($this->session->member == '') redirect('member');
+
         $content = 'member/menu/analytics';
         $data['content'] = $content;
         $data['title'] = $this->config->item('meta_title');
@@ -240,6 +254,8 @@ class Member extends CI_Controller
 	
 	function klub()
 	{
+        if ($this->session->member == '') redirect('member');
+
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $data['member'] = ($member) ? $member->data[0] : '';
@@ -260,6 +276,8 @@ class Member extends CI_Controller
 
     function regis_klub()
     {
+        if ($this->session->member == '') redirect('member');
+
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $data['member'] = ($member) ? $member->data[0] : '';
@@ -280,6 +298,8 @@ class Member extends CI_Controller
 
     function regis_player($club = '')
     {
+        if ($this->session->member == '') redirect('member');
+
     	$query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
     	$member = $this->excurl->reqCurlapp('me', $query);
     	$data['member'] = ($member) ? $member->data[0] : '';
@@ -302,6 +322,8 @@ class Member extends CI_Controller
 
     function official($page = 1)
     {
+        if ($this->session->member == '') redirect('member');
+
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $data['member'] = ($member) ? $member->data[0] : '';
@@ -329,6 +351,8 @@ class Member extends CI_Controller
 
     function karir($page = 1)
     {
+        if ($this->session->member == '') redirect('member');
+
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $data['member'] = ($member) ? $member->data[0] : '';
@@ -356,6 +380,8 @@ class Member extends CI_Controller
 
 	function galeri()
     {
+        if ($this->session->member == '') redirect('member');
+
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $data['member'] = ($member) ? $member->data[0] : '';
@@ -376,6 +402,8 @@ class Member extends CI_Controller
 
     function verifikasi($page = 1)
 	{
+        if ($this->session->member == '') redirect('member');
+
         $query = array('id_member' => $this->session->member['id'], 'detail' => true, 'md5' => true);
         $member = $this->excurl->reqCurlapp('me', $query);
         $data['member'] = ($member) ? $member->data[0] : '';
