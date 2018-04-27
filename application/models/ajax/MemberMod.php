@@ -940,8 +940,9 @@ class MemberMod extends CI_Model
         $res = $this->excurl->reqCurlback('me', $param);
         $v = $res->data;
 
-        $club = $this->excurl->reqCurlapp('profile-club', ['id_club' => $v[0]->id_club])->data;
-        $slug = $club[0]->slug;
+        $club = $this->excurl->reqCurlback('profile-club', ['id_club' => $v[0]->id_club]);
+        $data['club'] = ($club) ? $club->data[0] : '';
+        $slug = $data['club']->slug;
 
         $query = array('page' => $this->session->userdata('pageverify'), 'limit' => 20, 'club' => $slug,
                        'active' => 'false', 'sortby' => 'a.id_register', 'sortdir' => 'desc');
