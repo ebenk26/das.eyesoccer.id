@@ -137,11 +137,12 @@
                     </tr>
                     <tr>
                         <td>Aktif</td>
-                        <td>: <?= $pl->is_active; ?></td>
+                        <td>: <?= ($pl->is_active > 0) ? 'Iya' : 'Tidak' ; ?></td>
                     </tr>
                 <?php endforeach ?>
             </table>
             <span class="klik-dsn m-0"> Approve </span>
+            <!-- pake id player -->
         </div>
     <?php endif ?>
 

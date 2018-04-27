@@ -10,7 +10,7 @@
             <div class="ff-12 mg-b15">Perhatian: Data yang bertanda <span class="cl-red">*</span> harus diisi</div>
             <table>
                 <tr>
-                    <td>Nama Lengkap <span class="cl-red">*</span></td>
+                    <td>Nama Klub <span class="cl-red">*</span></td>
                     <td>
                         <input type="text" name="name">
                         <span class="err msgname"></span>
@@ -38,7 +38,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Legalitas PT <span class="cl-red">*</span></td>
+                    <td>Legalitas PT / Identitas Pemilik <span class="cl-red">*</span></td>
                     <td>
                         <input type="file" name="legal_pt">
                         <span class="err msglegal_pt"></span>
