@@ -19,12 +19,15 @@ div.user-data:hover{background-color:#ff990026}
 				<?php if($dt->id_competition == 4 && $dt->id_league == 5){?>
 				<a href="<?php echo ($this->session->member ? base_url().'member/regis_player' : base_url().'member/?from=member/regis_player')?>"><span class="button-open sbpbtn unset-btn-white" style="max-height: unset;box-shadow: 1px 2px 3px 1px #0357b5;border-radius: 30px;max-width: max-content;">Daftarkan Sebagai Pemain <?php echo $dt->name;?></span></a>
 				<?php }?>
-							<div id="boxtab" class="container tab-sub-menu">
+				<div class="container over-x">
+							<div id="boxtab" class="container tab-sub-menu w-max" style="position: relative;bottom: unset;margin-top: 20px;">
 								<a id="tab-info" href="javascript:void(0)" class="active" onclick="tabmenu(this.id, 'a', 'div', 'active')" active="true" style="padding: 0 8px;">Info</a>
 								<a id="tab-pemain" href="javascript:void(0)" class="tabmenu(this.id, 'a', 'div', 'active')" onclick="tabmenu(this.id, 'a', 'div', 'active')" active="true" style="border-left: 1px solid;padding: 0 8px;">Pemain</a>
 								<a id="tab-ofisial" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')" style="border-left: 1px solid;border-right:  1px solid;border-color: white; padding: 0 8px;">Ofisial</a>
-								<a id="tab-suporter" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')"  style="padding: 0 8px;">Prestasi</a>
+								<a id="tab-suporter" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')"  style="padding: 0 8px;border-right:  1px solid;">Prestasi</a>
+								<a id="tab-galeri" href="javascript:void(0)" onclick="tabmenu(this.id, 'a', 'div', 'active')"  style="padding: 0 8px;">Galeri</a>
 							</div>
+						</div>
 			</div>
 			<div class="container">
 					<table class="content-tab-eprofile">
