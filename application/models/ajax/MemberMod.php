@@ -213,7 +213,7 @@ class MemberMod extends CI_Model
     {
         $text = $this->input->post('club');
 
-        $query = array('page' => '', 'limit' => '', 'search' => $text);
+        $query = array('page' => '', 'limit' => '', 'search' => $text, 'competition' => 'Liga Usia Muda');
         $clubs = $this->excurl->reqCurlapp('profile-club', $query);
         $data['club'] = $clubs->data;
 
