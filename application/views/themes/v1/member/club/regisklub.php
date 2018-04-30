@@ -7,7 +7,7 @@
         <input type="hidden" name="fn" class="cinput" value="regclub">
         <div class="container data-profil">
             <h2>Registrasi Klub / SSB</h2>
-            <div class="ff-12 mg-b15">Perhatian: Data yang bertanda <span class="cl-red">*</span> harus diisi</div>
+            <div class="ff-12 mg-b15" style="font-weight:bold"><span class="cl-red">*</span> harus diisi</div>
             <table>
                 <tr>
                     <td>Nama Klub <span class="cl-red">*</span></td>

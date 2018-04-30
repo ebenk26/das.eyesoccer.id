@@ -7,7 +7,7 @@
         <input type="hidden" name="fn" class="cinput" value="regplayer">
         <div class="container data-profil">
             <h2 style="text-align: center;font-weight: 400;">Registrasi Pemain</h2>
-            <div class="ff-12 mg-b15">Perhatian: Data yang bertanda <span class="cl-red">*</span> harus diisi</div>
+            <div class="ff-12 mg-b15" style="font-weight:bold"><span class="cl-red">*</span> harus diisi</div>
             <table>
                 <?php if ($club == ''): ?>
                     <tr>

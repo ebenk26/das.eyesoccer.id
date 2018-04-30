@@ -24,7 +24,7 @@
         <input type="hidden" name="uid" class="cinput" value="<?php echo ($player) ? $player->slug : ''; ?>">
         <input type="hidden" name="act" class="cinput" value="<?php echo ($achive) ? 1 : 0; ?>">
         <input type="hidden" name="id" class="cinput" value="<?php echo ($achive) ? $achive->id_achievement : ''; ?>">
-        <div class="ff-12 mg-b15">Perhatian: Data yang bertanda <span class="cl-red">*</span> harus diisi</div>
+        <div class="ff-12 mg-b15" style="font-weight:bold"><span class="cl-red">*</span> harus diisi</div>
         <table>
             <tr>
                 <td>Tahun <span class="cl-red">*</span></td>

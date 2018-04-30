@@ -18,7 +18,7 @@ if ($klubdetail) {
             </div>
         </div>
         <div class="container data-profil mg-t15">
-            <div class="ff-12 mg-b15">Perhatian: Data yang bertanda <span class="cl-red">*</span> harus diisi</div>
+            <div class="ff-12 mg-b15" style="font-weight:bold"><span class="cl-red">*</span> harus diisi</div>
             <table>
                 <tr>
                     <td>Nama Klub <span class="cl-red">*</span></td>
@@ -157,55 +157,62 @@ if ($klubdetail) {
                         <span class='err msgtraining_schedule'></span>
                     </td>
                 </tr>
-                <?php
-                if ($v[0]->legalitas_pt == '') {
-                    ?>
                     <tr>
                         <td>Legalitas PT</td>
                         <td>
-                            <input type="file" name="legal_pt" accept="image/*">
+							<img src="<?php echo(!empty($v[0]->legalitas_pt) ? $v[0]->url_pt : base_url() . "assets/themes/v1/img/No_Image_Available.png") ?>" alt="" class="pp-profil viewimgpt" style="border-radius: unset;background:whitesmoke;">
+							<?php
+								if ($v[0]->legalitas_pt == '') {
+							?>
+									<input id="legal_pt" type="file" name="legal_pt" accept="image/*">
+							<?php
+								}
+							?>
                             <span class='err msglegal_pt'></span>
                         </td>
                     </tr>
-                    <?php
-                }
-
-                if ($v[0]->legalitas_kemenham == '') {
-                    ?>
                     <tr>
                         <td>Legalitas Kemenham</td>
                         <td>
-                            <input type="file" name="legal_kemenham" accept="image/*">
+							<img src="<?php echo(!empty($v[0]->legalitas_kemenham) ? $v[0]->url_kemenham : base_url() . "assets/themes/v1/img/No_Image_Available.png") ?>" alt="" class="pp-profil viewimgkemenham" style="border-radius: unset;background:whitesmoke;">
+							<?php
+								if ($v[0]->legalitas_kemenham == '') {
+							?>
+									<input id="legal_kemenham" type="file" name="legal_kemenham" accept="image/*">
+							<?php
+								}
+							?>
                             <span class='err msglegal_kemenham'></span>
                         </td>
                     </tr>
-                    <?php
-                }
-
-                if ($v[0]->legalitas_npwp == '') {
-                    ?>
                     <tr>
                         <td>Legalitas NPWP</td>
                         <td>
-                            <input type="file" name="legal_npwp" accept="image/*">
+							<img src="<?php echo(!empty($v[0]->legalitas_npwp) ? $v[0]->url_npwp : base_url() . "assets/themes/v1/img/No_Image_Available.png") ?>" alt="" class="pp-profil viewimgnpwp" style="border-radius: unset;background:whitesmoke;">
+							<?php
+								if ($v[0]->legalitas_npwp == '') {
+							?>
+									<input id="legal_npwp" type="file" name="legal_npwp" accept="image/*">
+							<?php
+								}
+							?>
                             <span class='err msglegal_npwp'></span>
                         </td>
                     </tr>
-                    <?php
-                }
-
-                if ($v[0]->legalitas_dirut == '') {
-                    ?>
                     <tr>
                         <td>Legalitas Dirut</td>
                         <td>
-                            <input type="file" name="legal_dirut" accept="image/*">
+							<img src="<?php echo(!empty($v[0]->legalitas_dirut) ? $v[0]->url_dirut : base_url() . "assets/themes/v1/img/No_Image_Available.png") ?>" alt="" class="pp-profil viewimgdirut" style="border-radius: unset;background:whitesmoke;">
+							<?php
+								if ($v[0]->legalitas_dirut == '') {
+							?>
+									<input id="legal_dirut" type="file" name="legal_dirut" accept="image/*">
+							<?php
+								}
+							?>
                             <span class='err msglegal_dirut'></span>
                         </td>
                     </tr>
-                    <?php
-                }
-                ?>
                 <tr>
                     <td colspan="2" class="tx-c">
                         <button class="klik-dsn">Simpan</button>
@@ -232,6 +239,65 @@ if ($klubdetail) {
 
         $("#file_pic").change(function () {
             readURL(this);
+        });
+		
+		function readURLPT(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.viewimgkemenham').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#legal_kemenham").change(function () {
+            readURLPT(this);
+        });
+		
+		function readURLKEMENHAM(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.viewimgpt').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#legal_pt").change(function () {
+            readURLKEMENHAM(this);
+        });
+		function readURLNPWP(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.viewimgnpwp').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#legal_npwp").change(function () {
+            readURLNPWP(this);
+        });
+		
+		function readURLDIRUT(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.viewimgdirut').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#legal_dirut").change(function () {
+            readURLDIRUT(this);
         });
 
         $('#birthdate').datepicker({

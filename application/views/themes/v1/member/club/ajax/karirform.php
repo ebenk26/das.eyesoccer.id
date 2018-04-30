@@ -5,7 +5,7 @@
         <input type="hidden" name="fn" class="cinput" value="clubcareeract">
         <input type="hidden" name="act" class="cinput" value="<?php echo ($career) ? 1 : 0; ?>">
         <input type="hidden" name="id" class="cinput" value="<?php echo ($career) ? $career->id_career : ''; ?>">
-        <div class="ff-12 mg-t5 mg-b15">Perhatian: Data yang bertanda <span class="cl-red">*</span> harus diisi</div>
+        <div class="ff-12 mg-t5 mg-b15" style="font-weight:bold"><span class="cl-red">*</span> harus diisi</div>
         <table>
             <tr>
                 <td>Bulan <span class="cl-red">*</span></td>
