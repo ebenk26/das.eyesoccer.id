@@ -6,8 +6,11 @@
 		// print_r($dt);
 ?>
 <style>
-div.user-data{background-color:#00000005}
+/* div.user-data{background-color:#00000005} */
 div.user-data:hover{background-color:#ff990026}
+.td-3-8 tr td{
+	padding: 3px 8px;
+}
 </style>
 		<div class="head" style="border-radius: 8px 8px 0px 0px;height: 210px;min-height:  unset;">
 			<div class="container tx-c">
@@ -17,7 +20,7 @@ div.user-data:hover{background-color:#ff990026}
 			</div>
 				<h2 class="tx-c h2-pemain-top-head"><?php echo $dt->name;?></h2>
 				<?php if($dt->id_competition == 4){?>
-				<a href="<?php echo ($this->session->member ? base_url().'member/regis_player' : base_url().'member/?from=member/regis_player')?>"><span class="button-open sbpbtn unset-btn-white" style="max-height: unset;box-shadow: 1px 2px 3px 1px #0357b5;border-radius: 30px;max-width: max-content;font-size: .8em;">Daftarkan Sebagai Pemain <?php echo $dt->name;?></span></a>
+				<a href="<?php echo ($this->session->member ? base_url().'member/regis_player' : base_url().'member/?from=member/regis_player')?>"><span class="button-open sbpbtn unset-btn-white" style="max-height: unset;box-shadow: 1px 2px 3px 1px #0357b5;border-radius: 30px;max-width: max-content;font-size: .8em;">Daftar Sebagai Pemain <?php echo $dt->name;?></span></a>
 				<?php }?>
 				<div class="container over-x">
 							<div id="boxtab" class="container tab-sub-menu w-max m-0" style="float: unset;position: relative;bottom: unset;margin-top: 20px;">
@@ -62,14 +65,20 @@ div.user-data:hover{background-color:#ff990026}
 				foreach($dt->players as $players){
 			?>
 			<div class="user-data">
-				<div class="subhead">
-					<div class="img-radius">
-						<img src="<?php echo $players->url_pic;?>" alt="<?php echo $players->name;?>">
-					</div>
-					<h3><?php echo $players->name;?></h3>
-					<b>#<?php echo $players->back_number;?></b> <?php echo $players->club;?>
+				<div class="img-radius" style="width:  80px;height: 80px;float:  left;margin:  10px;">
+					<img src="<?php echo $players->url_pic;?>" alt="<?php echo $players->name;?>">
 				</div>
-				<table>
+				<table class="td-3-8" style="width: 180px;float:  left;margin: 10px -10px;">
+					<tr>
+						<td style="font-size: 1.1em;font-weight: 600;">
+						<?php echo $players->name;?> / #<?php echo $players->back_number;?>
+						</td>
+					</tr>
+					<tr>
+						<td>
+						<?php echo $players->club;?>
+						</td>
+					</tr>
 					<?php
 						$pos1=$players->position_a;
 						$pos2=$players->position_b;
@@ -77,7 +86,6 @@ div.user-data:hover{background-color:#ff990026}
 						$L_pos1="Posisi";
 						echo	
 							"<tr>
-								<td>".$L_pos1."</td>
 								<td>".$pos1."</td>
 							</tr>
 							<tr>";
@@ -87,11 +95,9 @@ div.user-data:hover{background-color:#ff990026}
 						$L_pos2="Posisi 2";
 						echo	
 							"<tr>
-								<td>".$L_pos1."</td>
 								<td>".$pos1."></td>
 							</tr>
 							<tr>
-								<td>".$L_pos2."</td>
 								<td>".$pos2."</td>
 							</tr>";
 						}	
@@ -138,7 +144,7 @@ div.user-data:hover{background-color:#ff990026}
 		</div>
 		
 		<div id="tab-suporter" class="container" style="display:none;">
-			<div class="user-data">
+			<div class="container">
 				<div class="container pemain-detailll">
 				<?php
 					$i = 0;
@@ -182,15 +188,16 @@ div.user-data:hover{background-color:#ff990026}
 			</div>
 		</div>
 		<div id="tab-galeri" class="container" style="display:none;">
-			<div class="user-data">
+			
 				<?php
 					foreach($dt->gallery as $gallery){
 				?>
-						<img style="width:90%;" src="<?php echo $gallery->url_pic;?>" alt="foto club">
+					<div class="user-data">
+						<img style="width: 100%;box-shadow: 0 1px 11px -5px #727277;border-radius: 5px;" src="<?php echo $gallery->url_pic;?>" alt="foto club">
+					</div>
 				<?php
 					}
 				?>
-			</div>
 		</div>
 			<?php
 	}
